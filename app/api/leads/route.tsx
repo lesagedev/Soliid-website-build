@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { initDatabase } from "@/lib/database"
+import { getLeads, saveLeads } from "@/lib/json-storage"
 import { sendEmail } from "@/lib/email"
 
 export async function POST(request: NextRequest) {
@@ -8,19 +8,24 @@ export async function POST(request: NextRequest) {
     const { type, name, email, phone, projectDescription, calculationData } = body
 
     // Validate required fields
-    if (!type || !name || !email || !phone) {
+    if (!type || !name || !phone) {
       return NextResponse.json({ error: "Champs requis manquants" }, { status: 400 })
     }
 
-    // Initialize database
-    const db = await initDatabase()
+    const leads = await getLeads()
+    const newLead = {
+      id: Date.now().toString(),
+      type,
+      name,
+      email: email || "",
+      phone,
+      project_description: projectDescription || "",
+      calculation_data: JSON.stringify(calculationData),
+      created_at: new Date().toISOString(),
+    }
 
-    // Insert lead into database
-    const leadId = await db.run(
-      `INSERT INTO leads (type, name, email, phone, project_description, calculation_data, created_at)
-       VALUES (?, ?, ?, ?, ?, ?, datetime('now'))`,
-      [type, name, email, phone, projectDescription || "", JSON.stringify(calculationData)],
-    )
+    leads.push(newLead)
+    await saveLeads(leads)
 
     // Prepare email content
     const emailSubject = `Nouvelle demande de devis - ${type === "parpaings" ? "Parpaings" : "Pavés"}`
@@ -93,7 +98,7 @@ export async function POST(request: NextRequest) {
       // Continue even if email fails
     }
 
-    return NextResponse.json({ success: true, leadId: leadId.lastID })
+    return NextResponse.json({ success: true, leadId: newLead.id })
   } catch (error) {
     console.error("Erreur API leads:", error)
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 })

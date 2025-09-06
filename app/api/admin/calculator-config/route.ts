@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { getDatabase } from "@/lib/database"
+import { getCalculatorConfigs, saveCalculatorConfigs } from "@/lib/json-storage"
 import { getAdminFromCookies } from "@/lib/auth"
 
 export async function GET() {
@@ -9,11 +9,7 @@ export async function GET() {
       return NextResponse.json({ error: "Non autorisé" }, { status: 401 })
     }
 
-    const db = await getDatabase()
-    const configs = await db.all(`
-      SELECT * FROM calculator_configs 
-      ORDER BY type, name
-    `)
+    const configs = await getCalculatorConfigs()
 
     return NextResponse.json(configs)
   } catch (error) {
@@ -35,17 +31,24 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Champs manquants" }, { status: 400 })
     }
 
-    const db = await getDatabase()
-    const result = await db.run(
-      `
-      INSERT INTO calculator_configs (type, name, dimensions, price, coverage, description, created_at)
-      VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
-    `,
-      [type, name, dimensions, price, coverage, description || ""],
-    )
+    const configs = await getCalculatorConfigs()
+    const newConfig = {
+      id: Date.now().toString(),
+      type,
+      name,
+      dimensions,
+      price,
+      coverage,
+      description: description || "",
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    }
+
+    configs.push(newConfig)
+    await saveCalculatorConfigs(configs)
 
     return NextResponse.json({
-      id: result.lastID,
+      id: newConfig.id,
       message: "Configuration ajoutée avec succès",
     })
   } catch (error) {
@@ -67,15 +70,25 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "Champs manquants" }, { status: 400 })
     }
 
-    const db = await getDatabase()
-    await db.run(
-      `
-      UPDATE calculator_configs 
-      SET type = ?, name = ?, dimensions = ?, price = ?, coverage = ?, description = ?, updated_at = datetime('now')
-      WHERE id = ?
-    `,
-      [type, name, dimensions, price, coverage, description || "", id],
-    )
+    const configs = await getCalculatorConfigs()
+    const configIndex = configs.findIndex((config) => config.id === id)
+
+    if (configIndex === -1) {
+      return NextResponse.json({ error: "Configuration non trouvée" }, { status: 404 })
+    }
+
+    configs[configIndex] = {
+      ...configs[configIndex],
+      type,
+      name,
+      dimensions,
+      price,
+      coverage,
+      description: description || "",
+      updated_at: new Date().toISOString(),
+    }
+
+    await saveCalculatorConfigs(configs)
 
     return NextResponse.json({ message: "Configuration mise à jour avec succès" })
   } catch (error) {
@@ -98,8 +111,14 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: "ID manquant" }, { status: 400 })
     }
 
-    const db = await getDatabase()
-    await db.run("DELETE FROM calculator_configs WHERE id = ?", [id])
+    const configs = await getCalculatorConfigs()
+    const filteredConfigs = configs.filter((config) => config.id !== id)
+
+    if (filteredConfigs.length === configs.length) {
+      return NextResponse.json({ error: "Configuration non trouvée" }, { status: 404 })
+    }
+
+    await saveCalculatorConfigs(filteredConfigs)
 
     return NextResponse.json({ message: "Configuration supprimée avec succès" })
   } catch (error) {

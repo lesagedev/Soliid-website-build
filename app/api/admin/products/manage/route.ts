@@ -1,17 +1,12 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { initDatabase } from "@/lib/database"
+import { getProducts, saveProducts } from "@/lib/json-storage"
 
 export async function GET() {
   try {
-    const db = await initDatabase()
+    const products = await getProducts()
+    const filteredProducts = products.filter((p) => p.type !== "configuration")
 
-    const products = await db.all(`
-      SELECT * FROM products 
-      WHERE type != 'configuration'
-      ORDER BY type, name
-    `)
-
-    return NextResponse.json({ products })
+    return NextResponse.json({ products: filteredProducts })
   } catch (error) {
     console.error("Erreur récupération produits:", error)
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 })
@@ -21,24 +16,27 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const productData = await request.json()
-    const db = await initDatabase()
 
-    const result = await db.run(
-      `INSERT INTO products (type, name, length, width, height, price, description, image_url, is_active, created_at, updated_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, datetime('now'), datetime('now'))`,
-      [
-        productData.type,
-        productData.name,
-        productData.length,
-        productData.width,
-        productData.height,
-        productData.price,
-        productData.description,
-        productData.image_url || null,
-      ],
-    )
+    const products = await getProducts()
+    const newProduct = {
+      id: Date.now().toString(),
+      type: productData.type,
+      name: productData.name,
+      length: productData.length,
+      width: productData.width,
+      height: productData.height,
+      price: productData.price,
+      description: productData.description,
+      image_url: productData.image_url || null,
+      is_active: true,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    }
 
-    return NextResponse.json({ success: true, id: result.lastInsertRowid })
+    products.push(newProduct)
+    await saveProducts(products)
+
+    return NextResponse.json({ success: true, id: newProduct.id })
   } catch (error) {
     console.error("Erreur création produit:", error)
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 })
@@ -48,24 +46,28 @@ export async function POST(request: NextRequest) {
 export async function PUT(request: NextRequest) {
   try {
     const productData = await request.json()
-    const db = await initDatabase()
 
-    await db.run(
-      `UPDATE products 
-       SET type = ?, name = ?, length = ?, width = ?, height = ?, price = ?, description = ?, image_url = ?, updated_at = datetime('now')
-       WHERE id = ?`,
-      [
-        productData.type,
-        productData.name,
-        productData.length,
-        productData.width,
-        productData.height,
-        productData.price,
-        productData.description,
-        productData.image_url || null,
-        productData.id,
-      ],
-    )
+    const products = await getProducts()
+    const productIndex = products.findIndex((p) => p.id === productData.id)
+
+    if (productIndex === -1) {
+      return NextResponse.json({ error: "Produit non trouvé" }, { status: 404 })
+    }
+
+    products[productIndex] = {
+      ...products[productIndex],
+      type: productData.type,
+      name: productData.name,
+      length: productData.length,
+      width: productData.width,
+      height: productData.height,
+      price: productData.price,
+      description: productData.description,
+      image_url: productData.image_url || null,
+      updated_at: new Date().toISOString(),
+    }
+
+    await saveProducts(products)
 
     return NextResponse.json({ success: true })
   } catch (error) {
@@ -77,9 +79,15 @@ export async function PUT(request: NextRequest) {
 export async function DELETE(request: NextRequest) {
   try {
     const { id } = await request.json()
-    const db = await initDatabase()
 
-    await db.run(`DELETE FROM products WHERE id = ?`, [id])
+    const products = await getProducts()
+    const filteredProducts = products.filter((p) => p.id !== id)
+
+    if (filteredProducts.length === products.length) {
+      return NextResponse.json({ error: "Produit non trouvé" }, { status: 404 })
+    }
+
+    await saveProducts(filteredProducts)
 
     return NextResponse.json({ success: true })
   } catch (error) {

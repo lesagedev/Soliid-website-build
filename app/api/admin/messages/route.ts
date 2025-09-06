@@ -1,14 +1,9 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { initDatabase } from "@/lib/database"
+import { getMessages, saveMessages } from "@/lib/json-storage"
 
 export async function GET() {
   try {
-    const db = await initDatabase()
-
-    const messages = await db.all(`
-      SELECT * FROM contact_messages 
-      ORDER BY created_at DESC
-    `)
+    const messages = await getMessages()
 
     return NextResponse.json({ messages })
   } catch (error) {
@@ -25,9 +20,15 @@ export async function PATCH(request: NextRequest) {
       return NextResponse.json({ error: "Paramètres manquants" }, { status: 400 })
     }
 
-    const db = await initDatabase()
+    const messages = await getMessages()
+    const messageIndex = messages.findIndex((m) => m.id === messageId)
 
-    await db.run(`UPDATE contact_messages SET status = ? WHERE id = ?`, [status, messageId])
+    if (messageIndex === -1) {
+      return NextResponse.json({ error: "Message non trouvé" }, { status: 404 })
+    }
+
+    messages[messageIndex].status = status
+    await saveMessages(messages)
 
     return NextResponse.json({ success: true })
   } catch (error) {

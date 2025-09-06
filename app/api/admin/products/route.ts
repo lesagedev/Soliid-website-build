@@ -1,17 +1,28 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { initDatabase } from "@/lib/database"
+import { getProducts, saveProducts } from "@/lib/json-storage"
 
 export async function POST(request: NextRequest) {
   try {
     const config = await request.json()
-    const db = await initDatabase()
 
-    // Store configuration in database
-    await db.run(
-      `INSERT OR REPLACE INTO products (id, type, config, updated_at)
-       VALUES (1, 'configuration', ?, datetime('now'))`,
-      [JSON.stringify(config)],
-    )
+    const products = await getProducts()
+    const configProduct = products.find((p) => p.type === "configuration")
+
+    if (configProduct) {
+      configProduct.config = JSON.stringify(config)
+      configProduct.updated_at = new Date().toISOString()
+    } else {
+      products.push({
+        id: "config-1",
+        type: "configuration",
+        name: "Product Configuration",
+        config: JSON.stringify(config),
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      })
+    }
+
+    await saveProducts(products)
 
     return NextResponse.json({ success: true })
   } catch (error) {
@@ -22,19 +33,12 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   try {
-    const db = await initDatabase()
+    const products = await getProducts()
+    const configProduct = products.find((p) => p.type === "configuration")
 
-    const result = await db.get(`
-      SELECT config FROM products 
-      WHERE type = 'configuration' 
-      ORDER BY updated_at DESC 
-      LIMIT 1
-    `)
-
-    if (result) {
-      return NextResponse.json({ config: JSON.parse(result.config) })
+    if (configProduct && configProduct.config) {
+      return NextResponse.json({ config: JSON.parse(configProduct.config) })
     } else {
-      // Return default configuration
       return NextResponse.json({
         config: {
           parpaings: {

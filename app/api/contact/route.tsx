@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { initDatabase } from "@/lib/database"
+import { getMessages, saveMessages } from "@/lib/json-storage"
 import { sendEmail } from "@/lib/email"
 
 export async function POST(request: NextRequest) {
@@ -12,15 +12,22 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Champs requis manquants" }, { status: 400 })
     }
 
-    // Initialize database
-    const db = await initDatabase()
+    const messages = await getMessages()
+    const newMessage = {
+      id: Date.now().toString(),
+      name,
+      email,
+      phone: phone || "",
+      company: company || "",
+      subject: subject || "",
+      message,
+      project_type: projectType || "",
+      status: "new",
+      created_at: new Date().toISOString(),
+    }
 
-    // Insert contact message
-    const messageId = await db.run(
-      `INSERT INTO contact_messages (name, email, phone, company, subject, message, project_type, created_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))`,
-      [name, email, phone || "", company || "", subject || "", message, projectType || ""],
-    )
+    messages.push(newMessage)
+    await saveMessages(messages)
 
     // Send notification email to admin
     try {
@@ -66,7 +73,7 @@ export async function POST(request: NextRequest) {
       // Continue even if email fails
     }
 
-    return NextResponse.json({ success: true, messageId: messageId.lastID })
+    return NextResponse.json({ success: true, messageId: newMessage.id })
   } catch (error) {
     console.error("Erreur API contact:", error)
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 })

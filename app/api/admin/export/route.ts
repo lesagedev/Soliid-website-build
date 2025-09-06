@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { initDatabase } from "@/lib/database"
+import { getLeads } from "@/lib/json-storage"
 
 export async function POST(request: NextRequest) {
   try {
@@ -9,11 +9,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Type d'export non supporté" }, { status: 400 })
     }
 
-    const db = await initDatabase()
-    const leads = await db.all(`
-      SELECT * FROM leads 
-      ORDER BY created_at DESC
-    `)
+    const leads = await getLeads()
 
     // Create CSV content
     const headers = [

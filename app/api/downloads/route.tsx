@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { initDatabase } from "@/lib/database"
+import { getDownloads, saveDownloads } from "@/lib/json-storage"
 import { sendEmail } from "@/lib/email"
 
 export async function POST(request: NextRequest) {
@@ -12,15 +12,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Champs requis manquants" }, { status: 400 })
     }
 
-    // Initialize database
-    const db = await initDatabase()
+    const downloads = await getDownloads()
+    const newDownload = {
+      id: Date.now().toString(),
+      download_id: downloadId,
+      name,
+      email,
+      phone: phone || "",
+      company: company || "",
+      created_at: new Date().toISOString(),
+    }
 
-    // Insert download record
-    await db.run(
-      `INSERT INTO downloads (download_id, name, email, phone, company, created_at)
-       VALUES (?, ?, ?, ?, ?, datetime('now'))`,
-      [downloadId, name, email, phone || "", company || ""],
-    )
+    downloads.push(newDownload)
+    await saveDownloads(downloads)
 
     // Send confirmation email to user
     try {
