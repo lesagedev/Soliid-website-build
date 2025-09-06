@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "type": "parpaings",
+    "name": "Parpaing Standard 20x20x40",
+    "dimensions": "20x20x40 cm",
+    "price": 350,
+    "description": "Parpaing standard pour construction résidentielle et commerciale",
+    "image": "/placeholder.svg?height=300&width=400&text=Parpaing+Standard",
+    "created_at": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "type": "parpaings",
+    "name": "Parpaing Creux 15x20x40",
+    "dimensions": "15x20x40 cm",
+    "price": 300,
+    "description": "Parpaing creux léger pour cloisons intérieures",
+    "image": "/placeholder.svg?height=300&width=400&text=Parpaing+Creux",
+    "created_at": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "type": "parpaings",
+    "name": "Parpaing Plein 20x20x40",
+    "dimensions": "20x20x40 cm",
+    "price": 400,
+    "description": "Parpaing plein haute résistance pour structures portantes",
+    "image": "/placeholder.svg?height=300&width=400&text=Parpaing+Plein",
+    "created_at": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 4,
+    "type": "paves",
+    "name": "Pavé Autobloquant Rectangulaire",
+    "dimensions": "20x10x6 cm",
+    "price": 2500,
+    "description": "Pavé autobloquant pour allées et parkings",
+    "image": "/placeholder.svg?height=300&width=400&text=Pavé+Rectangulaire",
+    "created_at": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 5,
+    "type": "paves",
+    "name": "Pavé Décoratif Hexagonal",
+    "dimensions": "25x25x6 cm",
+    "price": 3000,
+    "description": "Pavé hexagonal décoratif pour espaces extérieurs",
+    "image": "/placeholder.svg?height=300&width=400&text=Pavé+Hexagonal",
+    "created_at": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 6,
+    "type": "paves",
+    "name": "Pavé Carré Classique",
+    "dimensions": "20x20x6 cm",
+    "price": 2800,
+    "description": "Pavé carré classique pour terrasses et cours",
+    "image": "/placeholder.svg?height=300&width=400&text=Pavé+Carré",
+    "created_at": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 7,
+    "type": "bordures",
+    "name": "Bordure T1 Standard",
+    "dimensions": "100x15x25 cm",
+    "price": 1200,
+    "description": "Bordure T1 pour délimitation de trottoirs",
+    "image": "/placeholder.svg?height=300&width=400&text=Bordure+T1",
+    "created_at": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 8,
+    "type": "bordures",
+    "name": "Bordure T2 Renforcée",
+    "dimensions": "100x20x30 cm",
+    "price": 1500,
+    "description": "Bordure T2 renforcée pour voiries urbaines",
+    "image": "/placeholder.svg?height=300&width=400&text=Bordure+T2",
+    "created_at": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 9,
+    "type": "bordures",
+    "name": "Bordure Jardinière",
+    "dimensions": "50x15x20 cm",
+    "price": 800,
+    "description": "Bordure décorative pour aménagement paysager",
+    "image": "/placeholder.svg?height=300&width=400&text=Bordure+Jardinière",
+    "created_at": "2024-01-01T00:00:00.000Z"
+  }
+]

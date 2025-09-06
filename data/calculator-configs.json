@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "product_type": "parpaings",
+    "name": "Standard 20x20x40",
+    "price_per_unit": 350,
+    "coverage_per_m2": 12.5,
+    "dimensions": "20x20x40 cm"
+  },
+  {
+    "id": 2,
+    "product_type": "paves",
+    "name": "Autobloquant 20x10",
+    "price_per_unit": 2500,
+    "coverage_per_m2": 50,
+    "dimensions": "20x10x6 cm"
+  },
+  {
+    "id": 3,
+    "product_type": "bordures",
+    "name": "T1 Standard",
+    "price_per_unit": 1200,
+    "coverage_per_m2": 10,
+    "dimensions": "100x15x25 cm"
+  }
+]
