@@ -17,29 +17,68 @@ interface ParpaingType {
   dimensions: string
   price: number
   coverage: number // m² par parpaing
+  gamme: string
 }
 
 const parpaingTypes: ParpaingType[] = [
+  // Standard Premium
   {
-    id: "20x20x40",
-    name: "Parpaing 20x20x40",
-    dimensions: "40cm × 20cm × 20cm",
+    id: "sp-15",
+    name: "Standard Premium 15cm",
+    dimensions: "50cm × 20cm × 15cm",
     price: 350,
-    coverage: 0.08, // 0.4m × 0.2m = 0.08m²
+    coverage: 0.1, // 0.5m × 0.2m = 0.1m²
+    gamme: "Standard Premium",
   },
   {
-    id: "15x20x40",
-    name: "Parpaing 15x20x40",
-    dimensions: "40cm × 20cm × 15cm",
-    price: 300,
-    coverage: 0.08,
+    id: "sp-20",
+    name: "Standard Premium 20cm",
+    dimensions: "50cm × 20cm × 20cm",
+    price: 400,
+    coverage: 0.1,
+    gamme: "Standard Premium",
   },
   {
-    id: "10x20x40",
-    name: "Parpaing 10x20x40",
-    dimensions: "40cm × 20cm × 10cm",
-    price: 250,
-    coverage: 0.08,
+    id: "sp-hourdis",
+    name: "Standard Premium Hourdis",
+    dimensions: "50cm × 20cm × Hourdis",
+    price: 450,
+    coverage: 0.1,
+    gamme: "Standard Premium",
+  },
+  // Hydro Premium
+  {
+    id: "shp-15",
+    name: "Hydro Premium 15cm",
+    dimensions: "50cm × 20cm × 15cm",
+    price: 380,
+    coverage: 0.1,
+    gamme: "Hydro Premium",
+  },
+  {
+    id: "shp-20",
+    name: "Hydro Premium 20cm",
+    dimensions: "50cm × 20cm × 20cm",
+    price: 430,
+    coverage: 0.1,
+    gamme: "Hydro Premium",
+  },
+  // Premium Haute Performance
+  {
+    id: "php-15",
+    name: "Premium Haute Performance 15cm",
+    dimensions: "50cm × 20cm × 15cm",
+    price: 450,
+    coverage: 0.1,
+    gamme: "Premium Haute Performance",
+  },
+  {
+    id: "php-20",
+    name: "Premium Haute Performance 20cm",
+    dimensions: "50cm × 20cm × 20cm",
+    price: 500,
+    coverage: 0.1,
+    gamme: "Premium Haute Performance",
   },
 ]
 
@@ -47,7 +86,6 @@ export default function ParpaingsCalculator() {
   const [dimensions, setDimensions] = useState({
     length: "",
     height: "",
-    thickness: "",
   })
   const [selectedType, setSelectedType] = useState<string>("")
   const [leadForm, setLeadForm] = useState({
@@ -133,7 +171,7 @@ export default function ParpaingsCalculator() {
         })
         // Reset form
         setLeadForm({ name: "", email: "", phone: "", projectDescription: "" })
-        setDimensions({ length: "", height: "", thickness: "" })
+        setDimensions({ length: "", height: "" })
         setSelectedType("")
         setCalculation(null)
         setShowLeadForm(false)
@@ -151,6 +189,18 @@ export default function ParpaingsCalculator() {
     }
   }
 
+  // Group parpaings by gamme for better organization
+  const parpaingsByGamme = parpaingTypes.reduce(
+    (acc, parpaing) => {
+      if (!acc[parpaing.gamme]) {
+        acc[parpaing.gamme] = []
+      }
+      acc[parpaing.gamme].push(parpaing)
+      return acc
+    },
+    {} as Record<string, ParpaingType[]>,
+  )
+
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       {/* Calculator Form */}
@@ -163,7 +213,7 @@ export default function ParpaingsCalculator() {
           <CardDescription>Renseignez les dimensions de votre mur pour calculer vos besoins.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="length">Longueur du mur (m)</Label>
               <Input
@@ -184,16 +234,6 @@ export default function ParpaingsCalculator() {
                 onChange={(e) => setDimensions({ ...dimensions, height: e.target.value })}
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="thickness">Épaisseur (optionnel)</Label>
-              <Input
-                id="thickness"
-                type="number"
-                placeholder="Ex: 0.2"
-                value={dimensions.thickness}
-                onChange={(e) => setDimensions({ ...dimensions, thickness: e.target.value })}
-              />
-            </div>
           </div>
 
           <div className="space-y-2">
@@ -203,15 +243,20 @@ export default function ParpaingsCalculator() {
                 <SelectValue placeholder="Sélectionnez le type de parpaing" />
               </SelectTrigger>
               <SelectContent>
-                {parpaingTypes.map((type) => (
-                  <SelectItem key={type.id} value={type.id}>
-                    <div className="flex items-center justify-between w-full">
-                      <span>{type.name}</span>
-                      <Badge variant="outline" className="ml-2">
-                        {type.price} FCFA
-                      </Badge>
-                    </div>
-                  </SelectItem>
+                {Object.entries(parpaingsByGamme).map(([gamme, parpaings]) => (
+                  <div key={gamme}>
+                    <div className="px-2 py-1 text-sm font-semibold text-muted-foreground border-b">{gamme}</div>
+                    {parpaings.map((type) => (
+                      <SelectItem key={type.id} value={type.id}>
+                        <div className="flex items-center justify-between w-full">
+                          <span>{type.name}</span>
+                          <Badge variant="outline" className="ml-2">
+                            {type.dimensions}
+                          </Badge>
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </div>
                 ))}
               </SelectContent>
             </Select>
@@ -234,7 +279,7 @@ export default function ParpaingsCalculator() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="text-center p-4 bg-background rounded-lg">
                 <div className="text-2xl font-bold text-foreground">{calculation.quantity}</div>
                 <div className="text-sm text-muted-foreground">Parpaings nécessaires</div>
@@ -243,14 +288,10 @@ export default function ParpaingsCalculator() {
                 <div className="text-2xl font-bold text-foreground">{calculation.surface.toFixed(1)} m²</div>
                 <div className="text-sm text-muted-foreground">Surface à couvrir</div>
               </div>
-              <div className="text-center p-4 bg-background rounded-lg">
-                <div className="text-2xl font-bold text-primary">{calculation.totalCost.toLocaleString()} FCFA</div>
-                <div className="text-sm text-muted-foreground">Coût estimé</div>
-              </div>
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <AlertCircle className="h-4 w-4" />
-              Prix indicatifs hors transport et pose. Demandez un devis personnalisé pour un prix exact.
+              Estimation basée sur les dimensions fournies. Demandez un devis personnalisé pour un calcul précis.
             </div>
           </CardContent>
         </Card>
