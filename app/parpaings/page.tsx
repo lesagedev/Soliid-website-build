@@ -11,39 +11,56 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Parpaings de Qualité au Cameroun | Soliid - Construction Facile",
   description:
-    "Découvrez notre gamme complète de parpaings pour vos projets de construction au Cameroun. Parpaings 20x20x40, 15x20x40, 10x20x40. Qualité garantie, livraison rapide à Douala et dans tout le Cameroun.",
+    "Découvrez notre gamme complète de parpaings Soliid by Buildermats pour vos projets de construction au Cameroun. Standard Premium, Hydro Premium, Premium Haute Performance. Qualité garantie, livraison rapide à Douala et dans tout le Cameroun.",
   keywords:
-    "parpaings, parpaing Cameroun, construction Cameroun, matériaux construction Douala, parpaing 20x20x40, construire au Cameroun, béton préfabriqué",
+    "parpaings, parpaing Cameroun, construction Cameroun, matériaux construction Douala, Soliid, Buildermats, construire au Cameroun, béton préfabriqué",
 }
 
 export default function ParpaingsPage() {
   const parpaingTypes = [
     {
-      name: "Parpaing Standard 20x20x40",
-      dimensions: "40cm × 20cm × 20cm",
-      price: "350 FCFA",
-      description: "Idéal pour les murs porteurs et structures principales",
-      features: ["Résistance élevée", "Isolation thermique", "Durabilité garantie"],
-      usage: "Murs porteurs, fondations, structures principales",
-      image: "/parpaing-20x20x40-standard-construction.png",
+      name: "Standard Premium (SP)",
+      dimensions: "50cm × 20cm × 15cm / 20cm",
+      weight: "21,60 kg ~ 25,60 kg",
+      resistance: "4 MPa",
+      description:
+        "Idéal pour les murs porteurs, fondations et structures principales. Allient résistance, précision et durabilité.",
+      features: ["Résistance élevée", "Isolation thermique", "Durabilité garantie", "Finition régulière et esthétique"],
+      usage: "Murs porteurs, fondations, structures principales, cloisons",
+      variants: ["15cm", "20cm", "Hourdis"],
+      image: "/parpaings-standard-premium-soliid-construction.jpg",
     },
     {
-      name: "Parpaing Standard 15x20x40",
-      dimensions: "40cm × 20cm × 15cm",
-      price: "300 FCFA",
-      description: "Parfait pour les cloisons intérieures et séparations",
-      features: ["Léger et maniable", "Isolation acoustique", "Finition soignée"],
-      usage: "Cloisons intérieures, séparations, murs non porteurs",
-      image: "/parpaing-15x20x40-interior-walls.png",
+      name: "Hydro Premium (SHP)",
+      dimensions: "50cm × 20cm × 15cm / 20cm",
+      weight: "21,60 kg ~ 25,60 kg",
+      resistance: "4 MPa",
+      description: "Spécialement conçus pour offrir une résistance renforcée à l'humidité et aux intempéries.",
+      features: [
+        "Protection hydrofuge intégrée",
+        "Résistance aux intempéries",
+        "Longévité accrue",
+        "Protection contre l'infiltration d'eau",
+      ],
+      usage: "Cloisons intérieures, séparations, murs non porteurs, zones humides",
+      variants: ["15cm", "20cm"],
+      image: "/parpaings-hydro-premium-soliid-resistance-humidite.jpg",
     },
     {
-      name: "Parpaing Standard 10x20x40",
-      dimensions: "40cm × 20cm × 10cm",
-      price: "250 FCFA",
-      description: "Optimal pour les cloisons légères et aménagements",
-      features: ["Ultra léger", "Pose rapide", "Économique"],
-      usage: "Cloisons légères, aménagements intérieurs",
-      image: "/parpaing-10x20x40-light-partitions.png",
+      name: "Premium Haute Performance (PHP)",
+      dimensions: "50cm × 20cm × 15cm / 20cm",
+      weight: "25,60 kg ~ 30,20 kg",
+      resistance: "6 MPa",
+      description: "L'excellence en matière de construction. Technologie avancée et matériaux de qualité supérieure.",
+      features: [
+        "Solidité supérieure",
+        "Haute performance thermique et acoustique",
+        "Finition soignée",
+        "Précision dimensionnelle optimale",
+      ],
+      usage: "Projets exigeants, ouvrages robustes et sûrs, constructions haute performance",
+      variants: ["15cm", "20cm"],
+      image: "/parpaings-premium-haute-performance-soliid-excelle.jpg",
     },
   ]
 
@@ -81,14 +98,14 @@ export default function ParpaingsPage() {
             <div className="space-y-6">
               <div className="space-y-4">
                 <Badge variant="secondary" className="w-fit">
-                  Matériaux de Construction
+                  Soliid by Buildermats
                 </Badge>
                 <h1 className="text-4xl lg:text-5xl font-bold text-foreground leading-tight text-balance">
-                  Parpaings de qualité pour vos <span className="text-primary">constructions</span>
+                  Parpaings Soliid de qualité pour vos <span className="text-primary">constructions</span>
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed text-pretty">
-                  Découvrez notre gamme complète de parpaings adaptés à tous vos projets de construction au Cameroun.
-                  Qualité, résistance et durabilité garanties.
+                  Découvrez nos 3 gammes de parpaings Soliid adaptés à tous vos projets de construction au Cameroun.
+                  Standard Premium, Hydro Premium et Premium Haute Performance.
                 </p>
               </div>
 
@@ -111,7 +128,7 @@ export default function ParpaingsPage() {
             <div className="relative">
               <div className="aspect-square bg-muted rounded-2xl overflow-hidden">
                 <Image
-                  src="/parpaings-construction-materials-cameroon.png"
+                  src="/parpaings-soliid-buildermats-construction-cameroun.jpg"
                   alt="Parpaings Soliid pour construction au Cameroun"
                   width={600}
                   height={600}
@@ -127,9 +144,12 @@ export default function ParpaingsPage() {
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">Notre gamme de parpaings</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">
+              Nos 3 gammes de parpaings Soliid
+            </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-              Trois formats standards pour répondre à tous vos besoins de construction, du résidentiel au commercial.
+              Standard Premium, Hydro Premium et Premium Haute Performance pour répondre à tous vos besoins de
+              construction.
             </p>
           </div>
 
@@ -148,9 +168,19 @@ export default function ParpaingsPage() {
                   </div>
                   <div className="space-y-2">
                     <CardTitle className="text-xl text-foreground">{parpaing.name}</CardTitle>
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-col gap-2">
                       <Badge variant="outline">{parpaing.dimensions}</Badge>
-                      <span className="text-lg font-semibold text-primary">{parpaing.price}</span>
+                      <div className="flex gap-2 flex-wrap">
+                        {parpaing.variants.map((variant, idx) => (
+                          <Badge key={idx} variant="secondary" className="text-xs">
+                            {variant}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      <span className="font-medium">Poids:</span> {parpaing.weight} |{" "}
+                      <span className="font-medium">Résistance:</span> {parpaing.resistance}
                     </div>
                   </div>
                   <CardDescription className="text-muted-foreground">{parpaing.description}</CardDescription>
@@ -214,77 +244,82 @@ export default function ParpaingsPage() {
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">Spécifications techniques</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">
+              Spécifications techniques Soliid
+            </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-              Nos parpaings respectent les normes internationales de construction.
+              Nos parpaings Soliid respectent les normes internationales de construction et sont adaptés au climat
+              camerounais.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-foreground">Caractéristiques générales</h3>
+                <h3 className="text-2xl font-semibold text-foreground">Caractéristiques par gamme</h3>
                 <ul className="space-y-3 text-muted-foreground">
                   <li className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                     <span>
-                      <strong>Résistance à la compression :</strong> Minimum 5 MPa
+                      <strong>Standard Premium :</strong> 4 MPa - Murs porteurs et fondations
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                     <span>
-                      <strong>Absorption d'eau :</strong> Maximum 15%
+                      <strong>Hydro Premium :</strong> 4 MPa - Protection hydrofuge intégrée
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                     <span>
-                      <strong>Résistance au gel :</strong> Adaptée au climat tropical
+                      <strong>Premium Haute Performance :</strong> 6 MPa - Excellence et durabilité
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                     <span>
-                      <strong>Conductivité thermique :</strong> 0,8 W/m.K
+                      <strong>Format standard :</strong> 50cm de longueur pour une pose optimisée
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                     <span>
-                      <strong>Densité :</strong> 1800 kg/m³
+                      <strong>Qualité Buildermats :</strong> Plus de 15 ans d'expertise
                     </span>
                   </li>
                 </ul>
               </div>
 
-              <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-foreground">Avantages construction</h3>
-                <ul className="space-y-3 text-muted-foreground">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Pose rapide grâce aux dimensions standardisées</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Excellente adhérence avec les mortiers</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Résistance aux termites et insectes</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Incombustible et résistant au feu</span>
-                  </li>
-                </ul>
+              <div className="space-y-6">
+                <div className="space-y-4">
+                  <h3 className="text-2xl font-semibold text-foreground">Avantages construction</h3>
+                  <ul className="space-y-3 text-muted-foreground">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                      <span>Pose rapide grâce aux dimensions standardisées</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                      <span>Excellente adhérence avec les mortiers</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                      <span>Résistance aux termites et insectes</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                      <span>Incombustible et résistant au feu</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
 
             <div className="relative">
               <div className="aspect-square bg-muted rounded-2xl overflow-hidden">
                 <Image
-                  src="/technical-specifications-parpaings-quality.png"
+                  src="/specifications-techniques-parpaings-soliid-qualite.jpg"
                   alt="Spécifications techniques parpaings Soliid"
                   width={500}
                   height={500}
