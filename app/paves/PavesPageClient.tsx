@@ -6,214 +6,347 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Calculator, CheckCircle, Palette, Shield, Droplets, Wrench, ArrowRight, Eye } from "lucide-react"
+import {Calculator, CheckCircle, Building, Shield, Thermometer, Zap, ArrowRight, Download} from "lucide-react"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import ProductModal from "@/components/product-modal"
+import QuoteButton from "@/components/quote-button";
 
 export default function PavesPageClient() {
-  const [selectedProduct, setSelectedProduct] = useState<any>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [selectedGamme, setSelectedGamme] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const paves6 = [
+      {
+        name: "Soliid Benoue",
+        dimensions: "6cm × 20cm × 10cm",
+        weight: "3,3 kg",
+        resistance: "3 MPa (B30)",
+        description:
+          "Pavé de grande dimension pour revêtement de sol (cours, trottoir). Format généreux idéal pour les particuliers.",
+        features: ["Format généreux 10×20cm", "Résistance B30", "Idéal cours et trottoirs", "Pose rapide"],
+        usage: "Cours de maisons, terrasses, cheminements piétons",
+        image: "/paves/couverture-paves-benoue.jpg",
+        images: [
+          "/paves/couverture-paves-benoue.jpg",
+        ],
+        technicalDetails: [
+          "Classe de résistance B30",
+          "Résistance à la compression 3 MPa",
+          "Absorption d'eau < 6%",
+          "Résistance au gel-dégel",
+          "Dimensions précises ±2mm",
+        ],
+        applications: [
+          "Cours de maisons individuelles",
+          "Trottoirs et cheminements piétons",
+          "Terrasses et patios",
+          "Zones de stationnement léger",
+        ],
+      },
+      {
+        name: "Soliid Sanaga",
+        dimensions: "6cm × 23cm × 14cm",
+        weight: "3,2 kg",
+        resistance: "3 MPa (B30)",
+        description:
+          "Pavé compact pour revêtement de sol (cours, trottoir). Design moderne et pose facilitée.",
+        features: ["Format compact 14×23cm", "Résistance B30", "Pose facilitée", "Design moderne"],
+        usage: "Allées piétonnes, bordures décoratives, petites surfaces",
+        image: "/paves/couverture-paves-sanaga.jpg",
+        images: [
+          "/paves/couverture-paves-sanaga.jpg",
+        ],
+        technicalDetails: [
+          "Classe de résistance B30",
+          "Résistance à la compression 3 MPa",
+          "Format compact et maniable",
+          "Excellent drainage",
+          "Résistance aux intempéries",
+        ],
+        applications: [
+          "Allées piétonnes",
+          "Bordures décoratives",
+          "Petites surfaces",
+          "Aménagements paysagers",
+        ],
+      },
+      {
+        name: "Soliid Nde",
+        dimensions: "6cm × 25cm × 22,7cm",
+        weight: "3,8 kg",
+        resistance: "3 MPa (B30)",
+        description:
+          "Pavé rectangulaire pour revêtement de sol (cours, trottoir). Esthétique soignée et polyvalent.",
+        features: ["Format rectangulaire 22,7×25cm", "Résistance B30", "Polyvalent", "Esthétique soignée"],
+        usage: "Terrasses résidentielles, espaces commerciaux, zones piétonnes",
+        image: "/paves/couverture-paves-nde.jpg",
+        images: [
+          "/paves/couverture-paves-nde.jpg",
+        ],
+        technicalDetails: [
+          "Classe de résistance B30",
+          "Résistance à la compression 3 MPa",
+          "Format rectangulaire optimisé",
+          "Surface antidérapante",
+          "Durabilité exceptionnelle",
+        ],
+        applications: [
+          "Terrasses résidentielles",
+          "Espaces commerciaux",
+          "Zones piétonnes",
+          "Aménagements urbains",
+        ],
+      },
+      {
+        name: "Soliid Wouri",
+        dimensions: "6cm × 20cm × 18,6cm",
+        weight: "3,3 kg",
+        resistance: "3 MPa (B30)",
+        description:
+          "Pavé carré pour revêtement de sol (cours, trottoir). Design équilibré et pose harmonieuse.",
+        features: ["Format carré 18,6×20cm", "Résistance B30", "Design équilibré", "Pose harmonieuse"],
+        usage: "Cours intérieures, jardins, cheminements piétons",
+        image: "/paves/couverture-paves-wouri.jpg",
+        images: [
+          "/paves/couverture-paves-wouri.jpg",
+        ],
+        technicalDetails: [
+          "Classe de résistance B30",
+          "Résistance à la compression 3 MPa",
+          "Format carré équilibré",
+          "Joints optimisés",
+          "Facilité d'entretien",
+        ],
+        applications: [
+          "Cours intérieures",
+          "Jardins et espaces verts",
+          "Cheminements piétons",
+          "Zones de détente",
+        ],
+      },
+    ];
+  const paves8 = {
+    name: "Soliid SaWa P8",
+    dimensions: "8cm × 19cm × 18cm",
+    weight: "3,5 kg",
+    resistance: "3,6 MPa (B36)",
+    description: "Pavé de route épaisseur 8cm pour revêtement routier et circulation modérée.",
+    features: ["Épaisseur renforcée 8cm", "Résistance B36", "Usage routier", "Trafic modéré"],
+    usage: "Routes secondaires, voies d'accès, parkings",
+    image: "/paves/couverture-paves-p8.png",
+    images: [
+      "/paves/couverture-paves-p8.png",
+      "/paves/couverture-paves-p8-2.png",
+    ],
+    technicalDetails: [
+      "Classe de résistance B36",
+      "Résistance à la compression 3,6 MPa",
+      "Épaisseur routière 8cm",
+      "Résistance à l'usure",
+      "Stabilité dimensionnelle",
+    ],
+    applications: [
+      "Routes secondaires",
+      "Voies d'accès",
+      "Parkings",
+      "Zones de circulation légère",
+    ],
+  };
+  const paves13 = {
+    name: "Soliid CMR P13",
+    dimensions: "13cm × 27,5cm × 25cm",
+    weight: "17 kg",
+    resistance: "3,6 MPa (B36)",
+    description: "Pavé de route épaisseur 13cm pour revêtement routier intensif et trafic lourd.",
+    features: ["Très haute résistance", "Format robuste 25×27,5cm", "Trafic intense", "Épaisseur 13cm"],
+    usage: "Routes principales, zones industrielles, trafic lourd",
+    image: "/paves/couverture-paves-p13.jpg",
+    images: [
+      "/paves/couverture-paves-p13.jpg",
+    ],
+    technicalDetails: [
+      "Classe de résistance B36",
+      "Résistance à la compression 3,6 MPa",
+      "Épaisseur routière intensive 13cm",
+      "Résistance au trafic lourd",
+      "Longévité exceptionnelle",
+    ],
+    applications: [
+      "Routes principales",
+      "Zones industrielles",
+      "Aires de stationnement poids lourds",
+      "Infrastructures portuaires",
+    ],
+  };
   const paveTypes = [
     {
-      name: "Soliid Benoue",
-      dimensions: "100cm × 200cm × 6cm",
-      weight: "3,3 kg",
+      name: "Pavés Standard Confort",
+      dimensions: "Épaisseur 6cm",
+      weight: "3,2 kg ~ 3,8 kg",
       resistance: "3 MPa (B30)",
-      description: "Pavé de grande dimension pour revêtement de sol (cours, trottoir)",
-      features: ["Format généreux 100×200cm", "Résistance B30", "Idéal cours et trottoirs", "Pose rapide"],
-      usage: "Revêtement de sol, cours, trottoirs",
-      image: "/placeholder.svg?height=250&width=400&text=Pavé+Benoue+Soliid",
+      description:
+        "Pavés esthétiques pour particuliers et petits promoteurs. Formes et couleurs variées pour valoriser votre patrimoine immobilier.",
+      features: ["Esthétique variée", "Anti-dérapant", "Confort et sécurité", "Valorisation immobilière"],
+      usage: "Cours, terrasses, allées résidentielles",
+      price: "6 000 – 6 500 FCFA/m²",
+      variants: paves6,
+      image: "/paves/couverture-paves-pose-paves-pietonnier.jpg",
       images: [
-        "/placeholder.svg?height=400&width=400&text=Pavé+Benoue+Soliid",
-        "/placeholder.svg?height=400&width=400&text=Installation+Benoue",
-        "/placeholder.svg?height=400&width=400&text=Résultat+Benoue",
+        "/placeholder-11wsf.png",
+        "/placeholder-11wsf.png",
+        "/placeholder-11wsf.png",
       ],
       technicalDetails: [
         "Classe de résistance B30",
-        "Résistance à la compression 3 MPa",
         "Absorption d'eau < 6%",
         "Résistance au gel-dégel",
+        "Surface antidérapante",
         "Dimensions précises ±2mm",
       ],
       applications: [
         "Cours de maisons individuelles",
-        "Trottoirs et cheminements piétons",
         "Terrasses et patios",
+        "Allées piétonnes",
         "Zones de stationnement léger",
       ],
     },
     {
-      name: "Soliid Sanaga",
-      dimensions: "14cm × 23cm × 6cm",
-      weight: "3,2 kg",
-      resistance: "3 MPa (B30)",
-      description: "Pavé compact pour revêtement de sol (cours, trottoir)",
-      features: ["Format compact 14×23cm", "Résistance B30", "Pose facilitée", "Design moderne"],
-      usage: "Revêtement de sol, cours, trottoirs",
-      image: "/placeholder.svg?height=250&width=400&text=Pavé+Sanaga+Soliid",
-      images: [
-        "/placeholder.svg?height=400&width=400&text=Pavé+Sanaga+Soliid",
-        "/placeholder.svg?height=400&width=400&text=Installation+Sanaga",
-        "/placeholder.svg?height=400&width=400&text=Résultat+Sanaga",
-      ],
-      technicalDetails: [
-        "Classe de résistance B30",
-        "Résistance à la compression 3 MPa",
-        "Format compact et maniable",
-        "Excellent drainage",
-        "Résistance aux intempéries",
-      ],
-      applications: ["Allées piétonnes", "Bordures décoratives", "Petites surfaces", "Aménagements paysagers"],
-    },
-    {
-      name: "Soliid Nde",
-      dimensions: "22,7cm × 25cm × 6cm",
-      weight: "3,8 kg",
-      resistance: "3 MPa (B30)",
-      description: "Pavé rectangulaire pour revêtement de sol (cours, trottoir)",
-      features: ["Format rectangulaire 22,7×25cm", "Résistance B30", "Polyvalent", "Esthétique soignée"],
-      usage: "Revêtement de sol, cours, trottoirs",
-      image: "/placeholder.svg?height=250&width=400&text=Pavé+Nde+Soliid",
-      images: [
-        "/placeholder.svg?height=400&width=400&text=Pavé+Nde+Soliid",
-        "/placeholder.svg?height=400&width=400&text=Installation+Nde",
-        "/placeholder.svg?height=400&width=400&text=Résultat+Nde",
-      ],
-      technicalDetails: [
-        "Classe de résistance B30",
-        "Résistance à la compression 3 MPa",
-        "Format rectangulaire optimisé",
-        "Surface antidérapante",
-        "Durabilité exceptionnelle",
-      ],
-      applications: ["Terrasses résidentielles", "Espaces commerciaux", "Zones piétonnes", "Aménagements urbains"],
-    },
-    {
-      name: "Soliid Wouri",
-      dimensions: "18,6cm × 20cm × 6cm",
-      weight: "3,3 kg",
-      resistance: "3 MPa (B30)",
-      description: "Pavé carré pour revêtement de sol (cours, trottoir)",
-      features: ["Format carré 18,6×20cm", "Résistance B30", "Design équilibré", "Pose harmonieuse"],
-      usage: "Revêtement de sol, cours, trottoirs",
-      image: "/placeholder.svg?height=250&width=400&text=Pavé+Wouri+Soliid",
-      images: [
-        "/placeholder.svg?height=400&width=400&text=Pavé+Wouri+Soliid",
-        "/placeholder.svg?height=400&width=400&text=Installation+Wouri",
-        "/placeholder.svg?height=400&width=400&text=Résultat+Wouri",
-      ],
-      technicalDetails: [
-        "Classe de résistance B30",
-        "Résistance à la compression 3 MPa",
-        "Format carré équilibré",
-        "Joints optimisés",
-        "Facilité d'entretien",
-      ],
-      applications: ["Cours intérieures", "Jardins et espaces verts", "Cheminements piétons", "Zones de détente"],
-    },
-    {
-      name: "Soliid P8",
-      dimensions: "18cm × 19cm × 8cm",
-      weight: "3,5 kg",
+      name: "Pavés Routiers Haute Performance",
+      dimensions: "Épaisseur 8cm et 13cm",
+      weight: "3,5 kg ~ 17 kg",
       resistance: "3,6 MPa (B36)",
-      description: "Pavé de route épaisseur 8cm pour revêtement routier",
-      features: ["Épaisseur renforcée 8cm", "Résistance B36", "Usage routier", "Trafic modéré"],
-      usage: "Revêtement de route, zones de circulation",
-      image: "/placeholder.svg?height=250&width=400&text=Pavé+P8+Route+Soliid",
+      description: "Pavés haute résistance pour trafic lourd. Conçus pour les grands projets BTP, zones industrielles et infrastructures.",
+      features: [
+        "Résistance au trafic lourd",
+        "Longévité supérieure",
+        "Sécurité garantie",
+        "Fiabilité éprouvée",
+      ],
+      usage: "Routes, zones industrielles, entrepôts",
+      price: "12 000 – 16 000 FCFA/m²",
+      variants: [ paves8, paves13 ],
+      image: "/paves/couverture-paves-footer.png",
       images: [
-        "/placeholder.svg?height=400&width=400&text=Pavé+P8+Route+Soliid",
-        "/placeholder.svg?height=400&width=400&text=Installation+P8",
-        "/placeholder.svg?height=400&width=400&text=Route+P8",
+        "/placeholder-11wsf.png",
+        "/placeholder-11wsf.png",
+        "/placeholder-11wsf.png",
       ],
       technicalDetails: [
         "Classe de résistance B36",
         "Résistance à la compression 3,6 MPa",
-        "Épaisseur routière 8cm",
-        "Résistance à l'usure",
-        "Stabilité dimensionnelle",
-      ],
-      applications: ["Routes secondaires", "Voies d'accès", "Parkings", "Zones de circulation légère"],
-    },
-    {
-      name: "Soliid P13",
-      dimensions: "25cm × 27,5cm × 13cm",
-      weight: "17 kg",
-      resistance: "3,6 MPa (B36)",
-      description: "Pavé de route épaisseur 13cm pour revêtement routier intensif",
-      features: ["Très haute résistance", "Format robuste 25×27,5cm", "Trafic intense", "Épaisseur 13cm"],
-      usage: "Revêtement de route, trafic lourd",
-      image: "/placeholder.svg?height=250&width=400&text=Pavé+P13+Route+Intensive+Soliid",
-      images: [
-        "/placeholder.svg?height=400&width=400&text=Pavé+P13+Route+Intensive+Soliid",
-        "/placeholder.svg?height=400&width=400&text=Installation+P13",
-        "/placeholder.svg?height=400&width=400&text=Route+P13+Intensive",
-      ],
-      technicalDetails: [
-        "Classe de résistance B36",
-        "Résistance à la compression 3,6 MPa",
-        "Épaisseur routière intensive 13cm",
         "Résistance au trafic lourd",
         "Longévité exceptionnelle",
+        "Stabilité dimensionnelle",
       ],
       applications: [
-        "Routes principales",
+        "Routes principales et secondaires",
         "Zones industrielles",
-        "Aires de stationnement poids lourds",
-        "Infrastructures portuaires",
+        "Aires de stationnement",
+        "Infrastructures lourdes",
       ],
     },
-  ]
+    {
+      name: "Pavés Premium Drainant",
+      dimensions: "Épaisseur 6cm, 8cm et 13cm",
+      weight: "3,2 kg ~ 17 kg",
+      resistance: "3 à 3,6 MPa",
+      description: "Pavés techniques pour projets urbains. Drainage efficace et respect des normes pour une gestion optimale des eaux pluviales.",
+      features: [
+        "Normes techniques respectées",
+        "Drainage efficace",
+        "Gestion eaux pluviales",
+        "Image moderne urbaine",
+      ],
+      usage: "Projets urbains, municipalités, aménagements",
+      price: "7 500 – 17 000 FCFA/m²",
+      variants: [ ...paves6, paves8, paves13 ],
+      image: "/paves/couverture-paves.jpg",
+      images: [
+        "/placeholder-11wsf.png",
+        "/placeholder-11wsf.png",
+        "/placeholder-11wsf.png",
+      ],
+      technicalDetails: [
+        "Perméabilité élevée",
+        "Gestion eaux pluviales",
+        "Conformité normes urbaines",
+        "Résistance adaptée à l'usage",
+        "Innovation environnementale",
+      ],
+      applications: [
+        "Projets urbains municipaux",
+        "Zones piétonnes drainantes",
+        "Parkings perméables",
+        "Infrastructure environnementale",
+      ],
+    },
+  ];
 
-  const handleProductClick = (product: any) => {
-    setSelectedProduct(product)
+  const getRelatedProducts = (currentProduct: any, currentGamme: string) => {
+    const gamme = paveTypes.find(g => g.name === currentGamme)
+    if (!gamme) return []
+
+    return gamme.variants
+      .filter(variant => variant.name !== currentProduct.name)
+      .map(variant => {
+        const gammeName = getGammeName(currentGamme)
+        return {
+          id: `${variant.name}-${currentGamme}`,
+          name: variant.name,
+          data: {
+            ...variant,
+            name: `${variant.name} ${gammeName}`
+          }
+        }
+      })
+  }
+
+  const getGammeName = (parentName: string) => {
+    if (parentName.includes('(PSC)')) return 'Standard Confort'
+    if (parentName.includes('(PRHP)')) return 'Routiers Haute Performance'
+    if (parentName.includes('(PPD)')) return 'Premium Drainant'
+    return ''
+  }
+
+  const handleProductClick = (product: any, parentGamme: string) => {
+    const gammeName = getGammeName(parentGamme)
+
+    const productWithGamme = {
+      ...product,
+      name: `${product.name} ${gammeName}`
+    }
+
+    setSelectedProduct(productWithGamme)
+    setSelectedGamme(parentGamme)
     setIsModalOpen(true)
+  }
+
+  const handleProductChange = (productData: any) => {
+    setSelectedProduct(productData)
   }
 
   const advantages = [
     {
-      icon: Palette,
-      title: "Gamme Complète Soliid",
-      description: "6 modèles différents adaptés à tous vos besoins d'aménagement extérieur.",
+      icon: Building,
+      title: "Gamme Complète",
+      description: "3 gammes de pavés pour tous vos besoins : confort, performance routière et drainage urbain.",
+    },
+    {
+      icon: Thermometer,
+      title: "Adaptés au Climat",
+      description: "Résistants aux conditions climatiques du Cameroun avec drainage optimisé.",
+    },
+    {
+      icon: Zap,
+      title: "Installation Facile",
+      description: "Dimensions standardisées pour une pose rapide et un résultat professionnel.",
     },
     {
       icon: Shield,
-      title: "Résistance Exceptionnelle",
-      description: "Conçus pour résister au trafic et aux conditions climatiques du Cameroun.",
-    },
-    {
-      icon: Droplets,
-      title: "Qualité Buildermats",
-      description: "Plus de 15 ans d'expertise dans la préfabrication de matériaux de construction.",
-    },
-    {
-      icon: Wrench,
-      title: "Entretien Minimal",
-      description: "Surface résistante nécessitant peu d'entretien au fil des années.",
-    },
-  ]
-
-  const applications = [
-    {
-      title: "Pavés 6cm - Piétonnier",
-      description: "Benoue, Sanaga, Nde, Wouri pour cours et trottoirs",
-      image: "/placeholder.svg?key=piet6cm",
-    },
-    {
-      title: "Pavés 8cm - Route Légère",
-      description: "P8 pour revêtement de route et circulation modérée",
-      image: "/placeholder.svg?key=route8cm",
-    },
-    {
-      title: "Pavés 13cm - Route Intensive",
-      description: "P13 pour revêtement routier et trafic lourd",
-      image: "/placeholder.svg?key=route13cm",
-    },
-    {
-      title: "Aménagements Mixtes",
-      description: "Combinaisons créatives pour projets sur mesure",
-      image: "/placeholder.svg?key=mixte",
+      title: "Qualité Soliid",
+      description: "Plus de 15 ans d'expertise Buildermats pour des matériaux durables et fiables.",
     },
   ]
 
@@ -231,38 +364,48 @@ export default function PavesPageClient() {
                   Soliid by Buildermats
                 </Badge>
                 <h1 className="text-4xl lg:text-5xl font-bold text-foreground leading-tight text-balance">
-                  Pavés Soliid pour vos <span className="text-primary">espaces extérieurs</span>
+                  Pavés premium <span className="text-primary">Soliid</span>
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed text-pretty">
-                  Transformez vos allées, terrasses et routes avec notre gamme complète de 6 pavés Soliid. De 6cm à 13cm
-                  d'épaisseur pour tous vos projets d'aménagement au Cameroun.
+                  Découvrez nos 3 gammes de pavés : Standard Confort, Routiers Haute Performance et Premium Drainant. Pour tous vos projets d'aménagement extérieur et d'infrastructure urbaine.
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-                  <Link href="/calculateurs">
-                    <Calculator className="mr-2 h-5 w-5" />
-                    Calculer mes besoins
+                  <Link href="/ressources">
+                    <Download className="mr-2 h-5 w-5" />
+                    Télécharger nos guides
                   </Link>
                 </Button>
-                <Button asChild variant="outline" size="lg">
-                  <Link href="/contact">
-                    Demander un devis
+                <QuoteButton  variant="outline" size="lg">
+                  Demander un devis
                     <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
+                </QuoteButton>
               </div>
             </div>
 
             <div className="relative">
               <div className="aspect-square bg-muted rounded-2xl overflow-hidden">
                 <Image
-                  src="/placeholder.svg?key=paveshero"
+                  src="/paves/couverture-paves.png"
                   alt="Pavés Soliid pour aménagement au Cameroun"
                   width={600}
                   height={600}
                   className="w-full h-full object-cover"
+                />
+              </div>
+
+
+              {/* M.SOLIID Mascot Overlay */}
+              <div className="absolute bottom-0 right-4 w-48 h-64 sm:w-56 sm:h-72 lg:w-64 lg:h-80">
+                <Image
+                  src="/home/mascot-soliid-paves.png"
+                  alt="M.SOLIID - Mascotte expert en parpaings"
+                  width={256}
+                  height={320}
+                  className="w-full h-full object-contain object-bottom drop-shadow-2xl"
+                  priority
                 />
               </div>
             </div>
@@ -275,26 +418,25 @@ export default function PavesPageClient() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">
-              Notre gamme complète de pavés Soliid
+              Les Pavés Soliid
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-              6 modèles de pavés pour tous vos besoins : piétonnier (6cm), route légère (8cm) et route intensive (13cm).
+              3 gammes de pavés pour répondre à tous vos besoins d'aménagement : résidentiel, routier et urbain drainant.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {paveTypes.map((pave, index) => (
               <Card
                 key={index}
-                className="group hover:shadow-lg transition-all duration-300 border-border cursor-pointer"
+                className="group hover:shadow-lg transition-all duration-300 border-border"
               >
                 <CardHeader className="space-y-4">
                   <div
-                    className="aspect-video bg-muted rounded-lg overflow-hidden cursor-pointer"
-                    onClick={() => handleProductClick(pave)}
+                    className="aspect-video bg-muted rounded-lg overflow-hidden"
                   >
                     <Image
-                      src={pave.image || "/placeholder.svg"}
+                      src={pave.image || "/placeholder-11wsf.png"}
                       alt={pave.name}
                       width={400}
                       height={250}
@@ -303,20 +445,26 @@ export default function PavesPageClient() {
                   </div>
                   <div className="space-y-2">
                     <CardTitle
-                      className="text-xl text-foreground cursor-pointer hover:text-primary transition-colors"
-                      onClick={() => handleProductClick(pave)}
+                      className="text-xl text-foreground transition-colors"
                     >
                       {pave.name}
                     </CardTitle>
                     <div className="flex flex-col gap-2">
-                      <Badge variant="outline">{pave.dimensions}</Badge>
-                      <div className="text-sm text-muted-foreground">
-                        <span className="font-medium">Poids:</span> {pave.weight} |{" "}
-                        <span className="font-medium">Résistance:</span> {pave.resistance}
+                      <div className="flex gap-2 flex-wrap">
+                        {pave.variants.map((variant, idx) => (
+                          <Button
+                            key={idx}
+                            className="flex-1 text-sm border cursor-pointer border-primary bg-primary-foreground text-primary hover:text-primary-foreground"
+                            size="sm"
+                            onClick={() => handleProductClick(variant, pave.name)}
+                          >
+                            {variant.name.replace('Soliid ', '')}
+                          </Button>
+                        ))}
                       </div>
                     </div>
                   </div>
-                  <CardDescription className="text-muted-foreground">{pave.description}</CardDescription>
+                  <CardDescription className="text-muted-foreground text-justify">{pave.description}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
@@ -335,18 +483,10 @@ export default function PavesPageClient() {
                     <p className="text-sm text-muted-foreground">{pave.usage}</p>
                   </div>
                   <div className="flex gap-2">
-                    <Button
-                      variant="outline"
-                      className="flex-1 bg-transparent"
-                      onClick={() => handleProductClick(pave)}
-                    >
-                      <Eye className="mr-2 h-4 w-4" />
-                      Voir plus
-                    </Button>
                     <Button asChild className="flex-1">
                       <Link href="/calculateurs">
                         <Calculator className="mr-2 h-4 w-4" />
-                        Calculer
+                        Calculer mes besoins
                       </Link>
                     </Button>
                   </div>
@@ -357,50 +497,15 @@ export default function PavesPageClient() {
         </div>
       </section>
 
-      {/* Applications */}
+      {/* Advantages */}
       <section className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">Applications par épaisseur</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-              Chaque épaisseur de pavé Soliid correspond à un usage spécifique.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {applications.map((application, index) => (
-              <Card
-                key={index}
-                className="group hover:shadow-lg transition-all duration-300 border-border overflow-hidden"
-              >
-                <div className="aspect-video bg-muted overflow-hidden">
-                  <Image
-                    src={application.image || "/placeholder.svg"}
-                    alt={application.title}
-                    width={500}
-                    height={300}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <CardHeader>
-                  <CardTitle className="text-xl text-foreground">{application.title}</CardTitle>
-                  <CardDescription className="text-muted-foreground">{application.description}</CardDescription>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Advantages */}
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">
-              Pourquoi choisir nos pavés Soliid ?
+              Pourquoi choisir nos pavés ?
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-              Des avantages concrets pour vos projets d'aménagement extérieur au Cameroun.
+              Les avantages des pavés SOLIID pour tous vos projets d'aménagement.
             </p>
           </div>
 
@@ -414,90 +519,6 @@ export default function PavesPageClient() {
                 <p className="text-muted-foreground text-sm leading-relaxed">{advantage.description}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Technical Info */}
-      <section className="py-20 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">
-                  Spécifications techniques Soliid
-                </h2>
-                <p className="text-xl text-muted-foreground text-pretty">
-                  Nos pavés Soliid respectent les normes de qualité les plus strictes.
-                </p>
-              </div>
-
-              <div className="space-y-4">
-                <h3 className="text-xl font-semibold text-foreground">Caractéristiques par gamme</h3>
-                <ul className="space-y-3 text-muted-foreground">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>
-                      <strong>Pavés 6cm (Benoue, Sanaga, Nde, Wouri) :</strong> 3 MPa - Classe B30
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>
-                      <strong>Pavés route (P8, P13) :</strong> 3,6 MPa - Classe B36
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>
-                      <strong>Usage piétonnier :</strong> Épaisseur 6cm pour cours et trottoirs
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>
-                      <strong>Usage routier :</strong> Épaisseurs 8cm et 13cm pour circulation
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>
-                      <strong>Qualité Buildermats :</strong> Plus de 15 ans d'expertise
-                    </span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="space-y-4">
-                <h3 className="text-xl font-semibold text-foreground">Installation</h3>
-                <ul className="space-y-3 text-muted-foreground">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Pose sur lit de sable compacté</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Joints sablés pour stabilité optimale</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Possibilité de dépose et repose</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="aspect-square bg-muted rounded-2xl overflow-hidden">
-                <Image
-                  src="/placeholder.svg?key=techpaves"
-                  alt="Spécifications techniques pavés Soliid"
-                  width={500}
-                  height={500}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -538,6 +559,9 @@ export default function PavesPageClient() {
           onClose={() => setIsModalOpen(false)}
           product={selectedProduct}
           calculatorLink="/calculateurs"
+          relatedProducts={getRelatedProducts(selectedProduct, selectedGamme)}
+          onProductChange={handleProductChange}
+          currentProductName={selectedProduct.name}
         />
       )}
 

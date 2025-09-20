@@ -6,14 +6,11 @@ import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Phone, Mail, MapPin, Clock, MessageSquare, Send } from "lucide-react"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import { useToast } from "@/hooks/use-toast"
+import { useEffect } from "react"
 
 export default function ContactPageClient() {
   const [formData, setFormData] = useState({
@@ -27,6 +24,26 @@ export default function ContactPageClient() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
+
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.src = 'https://tally.so/widgets/embed.js'
+    script.async = true
+    document.head.appendChild(script)
+
+    script.onload = () => {
+      if ((window as any).Tally) {
+        (window as any).Tally.loadEmbeds()
+      }
+    }
+
+    return () => {
+      // Nettoyer le script lors du démontage
+      if (document.head.contains(script)) {
+        document.head.removeChild(script)
+      }
+    }
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -114,105 +131,25 @@ export default function ContactPageClient() {
                 </p>
               </div>
 
-              <Card>
+              <Card className={"border-primary"}>
                 <CardHeader>
                   <CardTitle>Formulaire de contact</CardTitle>
                   <CardDescription>Tous les champs marqués d'un * sont obligatoires</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="name">Nom complet *</Label>
-                        <Input
-                          id="name"
-                          placeholder="Votre nom"
-                          value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email *</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          placeholder="votre@email.com"
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="phone">Téléphone</Label>
-                        <Input
-                          id="phone"
-                          placeholder="+237 6XX XXX XXX"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="company">Entreprise</Label>
-                        <Input
-                          id="company"
-                          placeholder="Nom de votre entreprise"
-                          value={formData.company}
-                          onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="projectType">Type de projet</Label>
-                        <Select
-                          value={formData.projectType}
-                          onValueChange={(value) => setFormData({ ...formData, projectType: value })}
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Sélectionnez le type" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="residential">Construction résidentielle</SelectItem>
-                            <SelectItem value="commercial">Construction commerciale</SelectItem>
-                            <SelectItem value="renovation">Rénovation</SelectItem>
-                            <SelectItem value="landscaping">Aménagement extérieur</SelectItem>
-                            <SelectItem value="other">Autre</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="subject">Sujet</Label>
-                        <Input
-                          id="subject"
-                          placeholder="Objet de votre message"
-                          value={formData.subject}
-                          onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="message">Message *</Label>
-                      <Textarea
-                        id="message"
-                        placeholder="Décrivez votre projet ou votre demande..."
-                        rows={5}
-                        value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        required
-                      />
-                    </div>
-
-                    <Button type="submit" disabled={isSubmitting} className="w-full" size="lg">
-                      <Send className="mr-2 h-5 w-5" />
-                      {isSubmitting ? "Envoi en cours..." : "Envoyer le message"}
-                    </Button>
-                  </form>
+                  <div className="w-full">
+                    <iframe
+                      data-tally-src="https://tally.so/embed/3q6Gd2?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+                      loading="lazy"
+                      width="100%"
+                      height="589"
+                      frameBorder={0}
+                      marginHeight={0}
+                      marginWidth={0}
+                      title="Formulaire de contact"
+                      className="w-full min-h-[589px]"
+                    />
+                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -236,8 +173,8 @@ export default function ContactPageClient() {
                         <h3 className="font-semibold text-foreground">Téléphone</h3>
                         <p className="text-muted-foreground">Appelez-nous directement</p>
                         <div className="space-y-1">
-                          <p className="font-medium">+237 675 887 676</p>
-                          <p className="font-medium">+237 656 770 009</p>
+                          <a href="tel:+237675887676" className="font-medium hover:underline">+237 675 887 676</a><br/>
+                          <a href="tel:+237656770009" className="font-medium hover:underline">+237 656 770 009</a>
                         </div>
                       </div>
                     </div>
@@ -282,14 +219,13 @@ export default function ContactPageClient() {
                         <p className="text-muted-foreground">Écrivez-nous directement</p>
                         <div className="space-y-1">
                           <p className="font-medium">contact@buildermats.com</p>
-                          <p className="font-medium">ventes@buildermats.com</p>
                         </div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="hover:shadow-lg transition-shadow">
+                {/*<Card className="hover:shadow-lg transition-shadow">
                   <CardContent className="p-6">
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
@@ -318,10 +254,10 @@ export default function ContactPageClient() {
                         <p className="text-muted-foreground">Nos heures d'ouverture</p>
                         <div className="space-y-1 text-sm">
                           <p>
-                            <strong>Lun - Ven:</strong> 7h00 - 17h00
+                            <strong>Lun - Ven:</strong> 08h00 - 17h00
                           </p>
                           <p>
-                            <strong>Samedi:</strong> 8h00 - 12h00
+                            <strong>Samedi:</strong> 08h00 - 12h00
                           </p>
                           <p>
                             <strong>Dimanche:</strong> Fermé
@@ -330,11 +266,11 @@ export default function ContactPageClient() {
                       </div>
                     </div>
                   </CardContent>
-                </Card>
+                </Card>*/}
               </div>
 
               {/* Map placeholder */}
-              <Card>
+              {/*<Card>
                 <CardContent className="p-0">
                   <div className="aspect-video bg-muted rounded-lg overflow-hidden">
                     <Image
@@ -346,7 +282,7 @@ export default function ContactPageClient() {
                     />
                   </div>
                 </CardContent>
-              </Card>
+              </Card>*/}
             </div>
           </div>
         </div>

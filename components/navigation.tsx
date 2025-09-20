@@ -5,14 +5,32 @@ import Image from "next/image"
 import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Phone, Mail } from "lucide-react"
+import {Menu, X, Phone, Mail, Download, ArrowRight} from "lucide-react"
+import { useTally } from "@/hooks/useTally"
+import QuoteButton from "@/components/quote-button";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const pathname = usePathname()
+  const { openPopup } = useTally('waWV4W') // Utilisation du nouveau hook avec le formId
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
+
+  const handleQuoteClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    openPopup({
+      layout: 'modal',
+      width: 600,
+      hideTitle: false,
+      overlay: true,
+      hiddenFields: {
+        source: 'navigation',
+        page: pathname,
+        ref: 'quote_request'
+      }
+    })
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,7 +51,7 @@ export default function Navigation() {
 
   const getLinkClasses = (href: string) => {
     const baseClasses = "transition-colors font-medium"
-    const activeClasses = "text-primary border-b-2 border-primary"
+    const activeClasses = "text-primary border-b-1 border-primary"
     const inactiveClasses = "text-foreground hover:text-primary"
 
     return `${baseClasses} ${isActiveLink(href) ? activeClasses : inactiveClasses}`
@@ -50,7 +68,7 @@ export default function Navigation() {
   return (
     <nav
       className={`bg-white/80 backdrop-blur-md shadow-sm border-b border-border/50 sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled ? "shadow-md bg-white/90 backdrop-blur-lg border-border/70" : ""
+        isScrolled ? "shadow-md bg-white/50 backdrop-blur-sm border-border/70" : ""
       }`}
     >
       {/* Top bar with contact info */}
@@ -82,7 +100,7 @@ export default function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-soliid-slr3MBUIxiYuUJXz5xOLDtHSAYxyIe.png"
+              src="/logo/logo-soliid.png"
               alt="Soliid Logo"
               width={120}
               height={40}
@@ -104,12 +122,31 @@ export default function Navigation() {
             <Link href="/bordures" className={getLinkClasses("/bordures")}>
               Bordures
             </Link>
-            <Link href="/calculateurs" className={getLinkClasses("/calculateurs")}>
-              Calculateurs
+
+            <Link
+              href="/ressources"
+              className={`
+                ${getLinkClasses("/ressources")}
+                group relative overflow-hidden
+                hover:animate-pulse
+                transform
+                transition-all duration-300 ease-in-out
+                before:absolute before:inset-0 before:bg-gradient-to-r
+                before:from-primary/10 before:to-transparent
+                before:opacity-0 before:hover:opacity-100
+                before:transition-opacity before:duration-300
+                before:rounded-md before:-z-10
+              `}
+            >
+              <span className="relative flex items-center gap-2">
+                <Download className="h-4 w-4 animate-bounce transition-all duration-300 text-primary" />
+                <span className="relative">
+                  Ressources
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+                </span>
+              </span>
             </Link>
-            <Link href="/telechargements" className={getLinkClasses("/telechargements")}>
-              Guides
-            </Link>
+
             <Link href="/contact" className={getLinkClasses("/contact")}>
               Contact
             </Link>
@@ -117,14 +154,12 @@ export default function Navigation() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button
-              asChild
-              className={`bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 ${
-                isScrolled ? "h-9 text-sm" : "h-10"
-              }`}
-            >
-              <Link href="/calculateurs">Demander un devis</Link>
-            </Button>
+            <QuoteButton className={`bg-primary hover:bg-primary/90 cursor-pointer text-primary-foreground transition-all duration-300 ${
+              isScrolled ? "h-9 text-sm" : "h-10"
+            }`}>
+              Demander un devis
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </QuoteButton>
           </div>
 
           {/* Mobile menu button */}
@@ -156,27 +191,33 @@ export default function Navigation() {
               <Link href="/bordures" className={getMobileLinkClasses("/bordures")} onClick={() => setIsMenuOpen(false)}>
                 Bordures
               </Link>
+
               <Link
-                href="/calculateurs"
-                className={getMobileLinkClasses("/calculateurs")}
+                href="/ressources"
+                className={`
+                  ${getMobileLinkClasses("/ressources")}
+                  group flex items-center gap-2
+                  hover:animate-pulse
+                  transform
+                  transition-all duration-300 ease-in-out
+                `}
                 onClick={() => setIsMenuOpen(false)}
               >
-                Calculateurs
+                <Download className="h-4 w-4 text-primary animate-bounce transition-all duration-300" />
+                Ressources
               </Link>
-              <Link
-                href="/telechargements"
-                className={getMobileLinkClasses("/telechargements")}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Guides
-              </Link>
+
               <Link href="/contact" className={getMobileLinkClasses("/contact")} onClick={() => setIsMenuOpen(false)}>
                 Contact
               </Link>
-              <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground mt-4">
-                <Link href="/calculateurs" onClick={() => setIsMenuOpen(false)}>
-                  Demander un devis
-                </Link>
+              <Button
+                onClick={(e) => {
+                  handleQuoteClick(e)
+                  setIsMenuOpen(false)
+                }}
+                className="bg-primary hover:bg-primary/90 text-primary-foreground mt-4"
+              >
+                Demander un devis
               </Button>
             </div>
           </div>

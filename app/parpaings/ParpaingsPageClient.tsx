@@ -6,13 +6,15 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Calculator, CheckCircle, Building, Shield, Thermometer, Zap, ArrowRight, Eye } from "lucide-react"
+import {Calculator, CheckCircle, Building, Shield, Thermometer, Zap, ArrowRight, Eye, Download} from "lucide-react"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import ProductModal from "@/components/product-modal"
+import QuoteButton from "@/components/quote-button";
 
 export default function ParpaingsPageClient() {
   const [selectedProduct, setSelectedProduct] = useState<any>(null)
+  const [selectedGamme, setSelectedGamme] = useState<string>("")
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const parpaingTypes = [
@@ -22,11 +24,96 @@ export default function ParpaingsPageClient() {
       weight: "21,60 kg ~ 25,60 kg",
       resistance: "4 MPa",
       description:
-        "Idéal pour les murs porteurs, fondations et structures principales. Allient résistance, précision et durabilité.",
-      features: ["Résistance élevée", "Isolation thermique", "Durabilité garantie", "Finition régulière et esthétique"],
-      usage: "Murs porteurs, fondations, structures principales, cloisons",
-      variants: ["15cm", "20cm", "Hourdis"],
-      image: "/parpaings-standard-premium-soliid-construction.jpg",
+        "Idéal pour les murs porteurs et structures principales, Les parpaings Standard Premium de la marque SOLIID allient résistance, précision et durabilité.",
+      features: ["Résistance élevée 4 Mpa", "Durabilité garantie", "Finition régulière et esthétique"],
+      usage: "Fondations, murs porteurs, cloisons",
+      variants: [
+        {
+          name: "Parpaing 15",
+          dimensions: "15cm × 20cm × 50cm",
+          weight: "25,60 kg",
+          resistance: "4 MPa",
+          description:
+            "Idéal pour les murs porteurs et structures principales, Les parpaings Standard Premium de la marque SOLIID allient résistance, précision et durabilité.",
+          features: ["Résistance élevée 4 Mpa", "Durabilité garantie", "Finition régulière et esthétique"],
+          usage: "Murs porteurs, fondations, structures principales, cloisons",
+          image: "/parpaing/couverture-parpaings.png",
+          images: [
+            "/parpaing/parpaing-1550.png",
+            "/parpaing/parpaing-1550-util.jpeg",
+          ],
+          technicalDetails: [
+            "Conformité aux normes NF EN 771-3",
+            "Absorption d'eau < 10%",
+            "Résistance au gel-dégel",
+            "Conductivité thermique λ = 0,9 W/m.K",
+            "Densité : 1800 kg/m³",
+          ],
+          applications: [
+            "Construction de maisons individuelles",
+            "Bâtiments collectifs et commerciaux",
+            "Murs de soutènement",
+            "Fondations et soubassements",
+          ],
+        },
+        {
+          name: "Parpaing 20",
+          dimensions: "20cm × 20cm × 50cm",
+          weight: "25,60 kg",
+          resistance: "4 MPa",
+          description:
+            "Idéal pour les murs porteurs et structures principales, Les parpaings Standard Premium de la marque SOLIID allient résistance, précision et durabilité.",
+          features: ["Résistance élevée", "Isolation thermique", "Durabilité garantie", "Finition régulière et esthétique"],
+          usage: "Murs porteurs, fondations, structures principales, cloisons",
+          image: "/parpaing/couverture-parpaings.png",
+          images: [
+            "/parpaing/parpaing-2050.jpg",
+            "/parpaing/parpaing-2050-util.jpeg"
+          ],
+          technicalDetails: [
+            "Conformité aux normes NF EN 771-3",
+            "Absorption d'eau < 10%",
+            "Résistance au gel-dégel",
+            "Conductivité thermique λ = 0,9 W/m.K",
+            "Densité : 1800 kg/m³",
+          ],
+          applications: [
+            "Construction de maisons individuelles",
+            "Bâtiments collectifs et commerciaux",
+            "Murs de soutènement",
+            "Fondations et soubassements",
+          ],
+        },
+        {
+          name: "Hourdis",
+          dimensions: "20cm × 20cm × 50cm",
+          weight: "21,60 kg",
+          resistance: "4 MPa",
+          description:
+            "Idéal pour les murs porteurs et structures principales, Les parpaings Standard Premium de la marque SOLIID allient résistance, précision et durabilité.",
+          features: ["Résistance élevée", "Isolation thermique", "Durabilité garantie", "Finition régulière et esthétique"],
+          usage: "Murs porteurs, fondations, structures principales, cloisons",
+          image: "/parpaing/couverture-parpaings.png",
+          images: [
+            "/parpaing/hourdis.png",
+            "/parpaing/hourdis-util.png",
+          ],
+          technicalDetails: [
+            "Conformité aux normes NF EN 771-3",
+            "Absorption d'eau < 10%",
+            "Résistance au gel-dégel",
+            "Conductivité thermique λ = 0,9 W/m.K",
+            "Densité : 1800 kg/m³",
+          ],
+          applications: [
+            "Construction de maisons individuelles",
+            "Bâtiments collectifs et commerciaux",
+            "Murs de soutènement",
+            "Fondations et soubassements",
+          ],
+        },
+      ],
+      image: "/parpaing/couverture-parpaings.png",
       images: [
         "/parpaings-standard-premium-soliid-construction.jpg",
         "/parpaings-soliid-buildermats-construction-cameroun.jpg",
@@ -47,20 +134,84 @@ export default function ParpaingsPageClient() {
       ],
     },
     {
-      name: "Hydro Premium (SHP)",
+      name: "Standard Hydro Premium (SHP)",
       dimensions: "50cm × 20cm × 15cm / 20cm",
       weight: "21,60 kg ~ 25,60 kg",
       resistance: "4 MPa",
-      description: "Spécialement conçus pour offrir une résistance renforcée à l'humidité et aux intempéries.",
+      description: "Les parpaings Standard Hydro Premium SOLIID sont spécialement conçus pour offrir une résistance renforcée à l'humidité et aux intempéries.",
       features: [
-        "Protection hydrofuge intégrée",
-        "Résistance aux intempéries",
-        "Longévité accrue",
-        "Protection contre l'infiltration d'eau",
+        "Hydrofuge",
+        "Résistance élevée 4 Mpa",
+        "Durabilité garantie",
       ],
-      usage: "Cloisons intérieures, séparations, murs non porteurs, zones humides",
-      variants: ["15cm", "20cm"],
-      image: "/parpaings-hydro-premium-soliid-resistance-humidite.jpg",
+      usage: "Fondations, murs exterieurs, salle d'eau",
+      variants: [
+        {
+          name: "Parpaing 15",
+          dimensions: "20cm × 20cm × 50cm",
+          weight: "21,60 kg",
+          resistance: "4 MPa",
+          description: "Les parpaings Standard Hydro Premium SOLIID sont spécialement conçus pour offrir une résistance renforcée à l'humidité et aux intempéries.",
+          features: [
+            "Protection hydrofuge intégrée",
+            "Résistance aux intempéries",
+            "Longévité accrue",
+            "Protection contre l'infiltration d'eau",
+          ],
+          usage: "Cloisons intérieures, séparations, murs non porteurs, zones humides",
+          image: "/parpaing/couverture-parpaings-3.png",
+          images: [
+            "/parpaing/parpaing-1550.png",
+            "/parpaing/parpaing-1550-util.jpeg",
+          ],
+          technicalDetails: [
+            "Traitement hydrofuge dans la masse",
+            "Résistance à l'humidité renforcée",
+            "Protection anti-remontées capillaires",
+            "Perméabilité à la vapeur d'eau optimisée",
+            "Résistance aux cycles humidification-séchage",
+          ],
+          applications: [
+            "Salles de bains et cuisines",
+            "Caves et sous-sols",
+            "Murs exposés aux intempéries",
+            "Zones à forte humidité",
+          ],
+        },
+        {
+          name: "Parpaing 20",
+          dimensions: "20cm × 20cm × 50cm",
+          weight: "25,60 kg",
+          resistance: "4 MPa",
+          description: "Les parpaings Standard Hydro Premium SOLIID sont spécialement conçus pour offrir une résistance renforcée à l'humidité et aux intempéries.",
+          features: [
+            "Protection hydrofuge intégrée",
+            "Résistance aux intempéries",
+            "Longévité accrue",
+            "Protection contre l'infiltration d'eau",
+          ],
+          usage: "Cloisons intérieures, séparations, murs non porteurs, zones humides",
+          image: "/parpaing/couverture-parpaings-3.png",
+          images: [
+            "/parpaing/parpaing-2050.jpg",
+            "/parpaing/parpaing-2050-util.jpeg"
+          ],
+          technicalDetails: [
+            "Traitement hydrofuge dans la masse",
+            "Résistance à l'humidité renforcée",
+            "Protection anti-remontées capillaires",
+            "Perméabilité à la vapeur d'eau optimisée",
+            "Résistance aux cycles humidification-séchage",
+          ],
+          applications: [
+            "Salles de bains et cuisines",
+            "Caves et sous-sols",
+            "Murs exposés aux intempéries",
+            "Zones à forte humidité",
+          ],
+        },
+      ],
+      image: "/parpaing/couverture-parpaings-3.png",
       images: [
         "/parpaings-hydro-premium-soliid-resistance-humidite.jpg",
         "/parpaings-soliid-buildermats-construction-cameroun.jpg",
@@ -82,19 +233,115 @@ export default function ParpaingsPageClient() {
     },
     {
       name: "Premium Haute Performance (PHP)",
-      dimensions: "50cm × 20cm × 15cm / 20cm",
-      weight: "25,60 kg ~ 30,20 kg",
+      dimensions: "50cm × 20cm × 15cm",
+      weight: "25,60 kg",
       resistance: "6 MPa",
-      description: "L'excellence en matière de construction. Technologie avancée et matériaux de qualité supérieure.",
+      description: "Les parpaings Premium Haute Performance SOLIID sont conçus avec une résistance mécanique exceptionnelle et une resistance à l'humidité ",
       features: [
-        "Solidité supérieure",
-        "Haute performance thermique et acoustique",
-        "Finition soignée",
-        "Précision dimensionnelle optimale",
+        "Haute performance 6 Mpa",
+        "Hydrofuge",
+        "Utilisable en zone sismique",
       ],
-      usage: "Projets exigeants, ouvrages robustes et sûrs, constructions haute performance",
-      variants: ["15cm", "20cm"],
-      image: "/parpaings-premium-haute-performance-soliid-excelle.jpg",
+      usage: "Projets exigeants",
+      variants: [
+        {
+          name: "Parpaing 15",
+          dimensions: "15cm × 20cm × 50cm",
+          weight: "25,60 kg",
+          resistance: "6 MPa",
+          description: "Les parpaings Premium Haute Performance SOLIID sont conçus avec une résistance mécanique exceptionnelle et une durabilité accrue.",
+          features: [
+            "Solidité supérieure",
+            "Haute performance thermique et acoustique",
+            "Finition soignée",
+            "Précision dimensionnelle optimale",
+          ],
+          usage: "Projets exigeants, ouvrages robustes et sûrs, constructions haute performance",
+          image: "/parpaing/couverture-parpaings-4.png",
+          images: [
+            "/parpaing/parpaing-1550.png",
+            "/parpaing/parpaing-1550-util.jpeg",
+          ],
+          technicalDetails: [
+            "Résistance mécanique exceptionnelle 6 MPa",
+            "Isolation thermique renforcée",
+            "Isolation acoustique supérieure",
+            "Précision dimensionnelle ±1mm",
+            "Durabilité garantie 50 ans",
+          ],
+          applications: [
+            "Bâtiments haute performance énergétique",
+            "Constructions parasismiques",
+            "Ouvrages d'art et infrastructures",
+            "Projets architecturaux exigeants",
+          ],
+        },
+        {
+          name: "Parpaing 20",
+          dimensions: "20cm × 20cm × 50cm",
+          weight: "30,20 kg",
+          resistance: "6 MPa",
+          description: "Les parpaings Premium Haute Performance SOLIID sont conçus avec une résistance mécanique exceptionnelle et une durabilité accrue.",
+          features: [
+            "Solidité supérieure",
+            "Haute performance thermique et acoustique",
+            "Finition soignée",
+            "Précision dimensionnelle optimale",
+          ],
+          usage: "Projets exigeants, ouvrages robustes et sûrs, constructions haute performance",
+          image: "/parpaing/couverture-parpaings-4.png",
+          images: [
+            "/parpaing/parpaing-2050.jpg",
+            "/parpaing/parpaing-2050-util.jpeg"
+          ],
+          technicalDetails: [
+            "Résistance mécanique exceptionnelle 6 MPa",
+            "Isolation thermique renforcée",
+            "Isolation acoustique supérieure",
+            "Précision dimensionnelle ±1mm",
+            "Durabilité garantie 50 ans",
+          ],
+          applications: [
+            "Bâtiments haute performance énergétique",
+            "Constructions parasismiques",
+            "Ouvrages d'art et infrastructures",
+            "Projets architecturaux exigeants",
+          ],
+        },
+        {
+          name: "Hourdis",
+          dimensions: "15cm × 20cm × 50cm",
+          weight: "25,60 kg",
+          resistance: "6 MPa",
+          description: "Les parpaings Premium Haute Performance SOLIID sont conçus avec une résistance mécanique exceptionnelle et une durabilité accrue.",
+          features: [
+            "Solidité supérieure",
+            "Haute performance thermique et acoustique",
+            "Finition soignée",
+            "Précision dimensionnelle optimale",
+          ],
+          usage: "Projets exigeants, ouvrages robustes et sûrs, constructions haute performance",
+          image: "/parpaing/couverture-parpaings-4.png",
+          images: [
+            "/parpaing/hourdis.png",
+            "/parpaing/hourdis-util.png",
+          ],
+          technicalDetails: [
+            "Résistance mécanique exceptionnelle 6 MPa",
+            "Isolation thermique renforcée",
+            "Isolation acoustique supérieure",
+            "Précision dimensionnelle ±1mm",
+            "Durabilité garantie 50 ans",
+          ],
+          applications: [
+            "Bâtiments haute performance énergétique",
+            "Constructions parasismiques",
+            "Ouvrages d'art et infrastructures",
+            "Projets architecturaux exigeants",
+          ],
+        },
+      ],
+      image: "/parpaing/couverture-parpaings-4.png",
       images: [
         "/parpaings-premium-haute-performance-soliid-excelle.jpg",
         "/parpaings-soliid-buildermats-construction-cameroun.jpg",
@@ -114,33 +361,71 @@ export default function ParpaingsPageClient() {
         "Projets architecturaux exigeants",
       ],
     },
-  ]
+  ];
 
-  const handleProductClick = (product: any) => {
-    setSelectedProduct(product)
+  const getRelatedProducts = (currentProduct: any, currentGamme: string) => {
+    const gamme = parpaingTypes.find(g => g.name === currentGamme)
+    if (!gamme) return []
+
+    return gamme.variants
+      .filter(variant => variant.name !== currentProduct.name)
+      .map(variant => {
+        const gammeName = getGammeName(currentGamme)
+        return {
+          id: `${variant.name}-${currentGamme}`,
+          name: variant.name,
+          data: {
+            ...variant,
+            name: `${variant.name} ${gammeName}`
+          }
+        }
+      })
+  }
+
+  const getGammeName = (parentName: string) => {
+    if (parentName.includes('(SP)')) return 'Standard Premium'
+    if (parentName.includes('(SHP)')) return 'Standard Hydro Premium'
+    if (parentName.includes('(PHP)')) return 'Premium Haute Performance'
+    return ''
+  }
+
+  const handleProductClick = (product: any, parentGamme: string) => {
+    const gammeName = getGammeName(parentGamme)
+
+    const productWithGamme = {
+      ...product,
+      name: `${product.name} ${gammeName}`
+    }
+
+    setSelectedProduct(productWithGamme)
+    setSelectedGamme(parentGamme)
     setIsModalOpen(true)
+  }
+
+  const handleProductChange = (productData: any) => {
+    setSelectedProduct(productData)
   }
 
   const advantages = [
     {
       icon: Building,
       title: "Résistance Exceptionnelle",
-      description: "Nos parpaings résistent aux contraintes mécaniques et aux intempéries du climat camerounais.",
+      description: "Nos parpaings résistent aux contraintes mécaniques éleveées et respectent les normes internationales.",
     },
     {
       icon: Thermometer,
-      title: "Isolation Thermique",
-      description: "Excellente isolation pour maintenir une température confortable dans vos constructions.",
+      title: "Blocs Hydrofuges",
+      description: "Adaptés aux climats humides, ",
+    },
+    {
+      icon: Zap,
+      title: "Pose Rapide",
+      description: "Dimensions standardisées, réduction du temps de pose et de l'épaisseur du crépissage.",
     },
     {
       icon: Shield,
       title: "Durabilité Garantie",
       description: "Matériaux de qualité supérieure pour des constructions qui durent dans le temps.",
-    },
-    {
-      icon: Zap,
-      title: "Pose Rapide",
-      description: "Dimensions standardisées pour une construction efficace et des économies de temps.",
     },
   ]
 
@@ -158,38 +443,47 @@ export default function ParpaingsPageClient() {
                   Soliid by Buildermats
                 </Badge>
                 <h1 className="text-4xl lg:text-5xl font-bold text-foreground leading-tight text-balance">
-                  Parpaings Soliid de qualité pour vos <span className="text-primary">constructions</span>
+                  Parpaings premium <span className="text-primary">Soliid</span>
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed text-pretty">
-                  Découvrez nos 3 gammes de parpaings Soliid adaptés à tous vos projets de construction au Cameroun.
-                  Standard Premium, Hydro Premium et Premium Haute Performance.
+                  Découvrez nos 3 gammes de parpaings : Standard Premium, Standard Hydro Premium et Premium Haute Performance, Pour vos projets de construction de résidences individuelles, immeubles, projets immobiliers divers.
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-                  <Link href="/calculateurs">
-                    <Calculator className="mr-2 h-5 w-5" />
-                    Calculer mes besoins
+                  <Link href="/ressources">
+                    <Download className="mr-2 h-5 w-5" />
+                    Télécharger nos guides
                   </Link>
                 </Button>
-                <Button asChild variant="outline" size="lg">
-                  <Link href="/contact">
-                    Demander un devis
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
+                <QuoteButton  variant="outline" size="lg">
+                  Demander un devis
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </QuoteButton>
               </div>
             </div>
 
             <div className="relative">
               <div className="aspect-square bg-muted rounded-2xl overflow-hidden">
                 <Image
-                  src="/parpaings-soliid-buildermats-construction-cameroun.jpg"
+                  src="/parpaing/couverture-parpaings-2.png"
                   alt="Parpaings Soliid pour construction au Cameroun"
                   width={600}
                   height={600}
                   className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* M.SOLIID Mascot Overlay */}
+              <div className="absolute bottom-0 right-4 w-48 h-64 sm:w-56 sm:h-72 lg:w-64 lg:h-80">
+                <Image
+                  src="/home/mascot-soliid.png"
+                  alt="M.SOLIID - Mascotte expert en parpaings"
+                  width={256}
+                  height={320}
+                  className="w-full h-full object-contain object-bottom drop-shadow-2xl"
+                  priority
                 />
               </div>
             </div>
@@ -202,10 +496,10 @@ export default function ParpaingsPageClient() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">
-              Nos 3 gammes de parpaings Soliid
+              Les Parpaings Soliid
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-              Standard Premium, Hydro Premium et Premium Haute Performance pour répondre à tous vos besoins de
+              Parpaings 15 en 50 cm, Parpaings 20 en 50 cm, Hourdis épaisseur 15 en 50 cm  pour répondre à tous vos besoins de
               construction.
             </p>
           </div>
@@ -214,12 +508,11 @@ export default function ParpaingsPageClient() {
             {parpaingTypes.map((parpaing, index) => (
               <Card
                 key={index}
-                className="group hover:shadow-lg transition-all duration-300 border-border cursor-pointer"
+                className="group hover:shadow-lg transition-all duration-300 border-border"
               >
                 <CardHeader className="space-y-4">
                   <div
-                    className="aspect-video bg-muted rounded-lg overflow-hidden cursor-pointer"
-                    onClick={() => handleProductClick(parpaing)}
+                    className="aspect-video bg-muted rounded-lg overflow-hidden"
                   >
                     <Image
                       src={parpaing.image || "/placeholder.svg"}
@@ -231,27 +524,26 @@ export default function ParpaingsPageClient() {
                   </div>
                   <div className="space-y-2">
                     <CardTitle
-                      className="text-xl text-foreground cursor-pointer hover:text-primary transition-colors"
-                      onClick={() => handleProductClick(parpaing)}
+                      className="text-xl text-foreground transition-colors"
                     >
                       {parpaing.name}
                     </CardTitle>
                     <div className="flex flex-col gap-2">
-                      <Badge variant="outline">{parpaing.dimensions}</Badge>
                       <div className="flex gap-2 flex-wrap">
                         {parpaing.variants.map((variant, idx) => (
-                          <Badge key={idx} variant="secondary" className="text-xs">
-                            {variant}
-                          </Badge>
+                          <Button
+                            key={idx}
+                            className="flex-1 text-sm border cursor-pointer border-primary bg-primary-foreground text-primary hover:text-primary-foreground"
+                            size="sm"
+                            onClick={() => handleProductClick(variant, parpaing.name)}
+                          >
+                            {variant.name}
+                          </Button>
                         ))}
                       </div>
                     </div>
-                    <div className="text-sm text-muted-foreground">
-                      <span className="font-medium">Poids:</span> {parpaing.weight} |{" "}
-                      <span className="font-medium">Résistance:</span> {parpaing.resistance}
-                    </div>
                   </div>
-                  <CardDescription className="text-muted-foreground">{parpaing.description}</CardDescription>
+                  <CardDescription className="text-muted-foreground text-justify">{parpaing.description}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
@@ -270,18 +562,10 @@ export default function ParpaingsPageClient() {
                     <p className="text-sm text-muted-foreground">{parpaing.usage}</p>
                   </div>
                   <div className="flex gap-2">
-                    <Button
-                      variant="outline"
-                      className="flex-1 bg-transparent"
-                      onClick={() => handleProductClick(parpaing)}
-                    >
-                      <Eye className="mr-2 h-4 w-4" />
-                      Voir plus
-                    </Button>
                     <Button asChild className="flex-1">
                       <Link href="/calculateurs">
                         <Calculator className="mr-2 h-4 w-4" />
-                        Calculer
+                        Calculer mes besoins
                       </Link>
                     </Button>
                   </div>
@@ -300,7 +584,7 @@ export default function ParpaingsPageClient() {
               Pourquoi choisir nos parpaings ?
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-              Des avantages concrets pour vos projets de construction au Cameroun.
+              Les avantages des parpaings SOLIID.
             </p>
           </div>
 
@@ -314,97 +598,6 @@ export default function ParpaingsPageClient() {
                 <p className="text-muted-foreground text-sm leading-relaxed">{advantage.description}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Technical Specifications */}
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">
-              Spécifications techniques Soliid
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-              Nos parpaings Soliid respectent les normes internationales de construction et sont adaptés au climat
-              camerounais.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-foreground">Caractéristiques par gamme</h3>
-                <ul className="space-y-3 text-muted-foreground">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>
-                      <strong>Standard Premium :</strong> 4 MPa - Murs porteurs et fondations
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>
-                      <strong>Hydro Premium :</strong> 4 MPa - Protection hydrofuge intégrée
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>
-                      <strong>Premium Haute Performance :</strong> 6 MPa - Excellence et durabilité
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>
-                      <strong>Format standard :</strong> 50cm de longueur pour une pose optimisée
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>
-                      <strong>Qualité Buildermats :</strong> Plus de 15 ans d'expertise
-                    </span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="space-y-6">
-                <div className="space-y-4">
-                  <h3 className="text-2xl font-semibold text-foreground">Avantages construction</h3>
-                  <ul className="space-y-3 text-muted-foreground">
-                    <li className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span>Pose rapide grâce aux dimensions standardisées</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span>Excellente adhérence avec les mortiers</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span>Résistance aux termites et insectes</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span>Incombustible et résistant au feu</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="aspect-square bg-muted rounded-2xl overflow-hidden">
-                <Image
-                  src="/specifications-techniques-parpaings-soliid-qualite.jpg"
-                  alt="Spécifications techniques parpaings Soliid"
-                  width={500}
-                  height={500}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -445,6 +638,9 @@ export default function ParpaingsPageClient() {
           onClose={() => setIsModalOpen(false)}
           product={selectedProduct}
           calculatorLink="/calculateurs"
+          relatedProducts={getRelatedProducts(selectedProduct, selectedGamme)}
+          onProductChange={handleProductChange}
+          currentProductName={selectedProduct.name}
         />
       )}
 

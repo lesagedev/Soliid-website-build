@@ -4,9 +4,15 @@ import { useState } from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ChevronLeft, ChevronRight, Download, Calculator, CheckCircle, X } from "lucide-react"
+import { ChevronLeft, ChevronRight, Download, Calculator, CheckCircle, X, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+
+interface RelatedProduct {
+  id: string
+  name: string
+  data: any
+}
 
 interface ProductModalProps {
   isOpen: boolean
@@ -25,9 +31,12 @@ interface ProductModalProps {
     applications: string[]
   }
   calculatorLink: string
+  relatedProducts?: RelatedProduct[]
+  onProductChange?: (productData: any) => void
+  currentProductName?: string
 }
 
-export default function ProductModal({ isOpen, onClose, product, calculatorLink }: ProductModalProps) {
+export default ({isOpen, onClose, product, calculatorLink, relatedProducts = [], onProductChange, currentProductName}: ProductModalProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const nextImage = () => {
@@ -38,12 +47,37 @@ export default function ProductModal({ isOpen, onClose, product, calculatorLink 
     setCurrentImageIndex((prev) => (prev - 1 + product.images.length) % product.images.length)
   }
 
+  const handleProductNavigation = (productData: any) => {
+    if (onProductChange) {
+      onProductChange(productData)
+      setCurrentImageIndex(0)
+    }
+  }
+
   const handleDownloadTechnicalSheet = () => {
-    // Simulate PDF download
     const link = document.createElement("a")
     link.href = `/fiches-techniques/${product.name.toLowerCase().replace(/\s+/g, "-")}.pdf`
     link.download = `Fiche-technique-${product.name.replace(/\s+/g, "-")}.pdf`
     link.click()
+  }
+
+  const extractProductBaseName = (fullName: string) => {
+    return fullName
+      .replace(/\s+Standard Premium$/i, '')
+      .replace(/\s+Standard Hydro Premium$/i, '')
+      .replace(/\s+Premium Haute Performance$/i, '')
+      .trim()
+  }
+
+  const isCurrentProduct = (relatedProductName: string) => {
+    if (!currentProductName) return false
+
+    const currentBaseName = extractProductBaseName(currentProductName)
+    const relatedBaseName = extractProductBaseName(relatedProductName)
+    const productBaseName = extractProductBaseName(product.name)
+
+    return relatedBaseName === currentBaseName ||
+      relatedBaseName === productBaseName
   }
 
   return (
@@ -66,7 +100,7 @@ export default function ProductModal({ isOpen, onClose, product, calculatorLink 
         </div>
 
         <div className="p-6">
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {/* Image Carousel */}
             <div className="space-y-6">
               <div className="relative aspect-square bg-muted rounded-xl overflow-hidden shadow-lg">
@@ -81,22 +115,21 @@ export default function ProductModal({ isOpen, onClose, product, calculatorLink 
                     <Button
                       variant="secondary"
                       size="icon"
-                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white shadow-lg"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/50 hover:bg-white shadow-lg"
                       onClick={prevImage}
                     >
-                      <ChevronLeft className="h-5 w-5" />
+                      <ChevronLeft className="h-5 w-5 text-primary" />
                     </Button>
                     <Button
                       variant="secondary"
                       size="icon"
-                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white shadow-lg"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/50 hover:bg-white shadow-lg"
                       onClick={nextImage}
                     >
-                      <ChevronRight className="h-5 w-5" />
+                      <ChevronRight className="h-5 w-5 text-primary" />
                     </Button>
                   </>
                 )}
-                {/* Image counter */}
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white px-3 py-1 rounded-full text-sm">
                   {currentImageIndex + 1} / {product.images.length}
                 </div>
@@ -126,9 +159,33 @@ export default function ProductModal({ isOpen, onClose, product, calculatorLink 
                   ))}
                 </div>
               )}
+
+              {/* Product Navigation */}
+              {relatedProducts.length > 0 && (
+                <div className="space-y-3">
+                  <h4 className="font-medium text-foreground">Voir aussi dans cette gamme :</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {relatedProducts.map((relatedProduct) => {
+                      const isCurrent = isCurrentProduct(relatedProduct.data.name);
+
+                      return !isCurrent && (
+                        <Button
+                          key={relatedProduct.id}
+                          variant="outline"
+                          onClick={() => handleProductNavigation(relatedProduct.data)}
+                          className="hover:bg-primary hover:text-primary-foreground transition-colors"
+                        >
+                          <ArrowRight className="h-3 w-3 mr-1" />
+                          {relatedProduct.name}
+                        </Button>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Product Details */}
+            {/* Product Details - rest remains unchanged */}
             <div className="space-y-8">
               {/* Basic Info */}
               <div className="space-y-4">
@@ -159,7 +216,7 @@ export default function ProductModal({ isOpen, onClose, product, calculatorLink 
               {/* Description */}
               <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-foreground">Description</h3>
-                <p className="text-muted-foreground leading-relaxed">{product.description}</p>
+                <p className="text-muted-foreground text-justify leading-relaxed">{product.description}</p>
               </div>
 
               {/* Features */}
@@ -208,13 +265,11 @@ export default function ProductModal({ isOpen, onClose, product, calculatorLink 
 
               {/* Action Buttons */}
               <div className="flex flex-col gap-4 pt-6 border-t">
-                <Button
-                  onClick={handleDownloadTechnicalSheet}
-                  variant="outline"
-                  className="w-full h-12 text-base bg-transparent"
-                >
-                  <Download className="mr-3 h-5 w-5" />
-                  Télécharger la fiche technique
+                <Button variant="outline" asChild className="w-full h-12 text-base bg-transparent">
+                  <Link href="/ressources">
+                    <Download className="mr-3 h-5 w-5" />
+                    Télécharger la fiche technique
+                  </Link>
                 </Button>
                 <Button asChild className="w-full h-12 text-base">
                   <Link href={calculatorLink}>

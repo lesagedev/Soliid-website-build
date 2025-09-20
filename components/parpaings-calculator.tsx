@@ -8,8 +8,9 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
-import { Calculator, Send, CheckCircle, AlertCircle } from "lucide-react"
+import {Calculator, Send, CheckCircle, AlertCircle, Phone} from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
+import QuoteButton from "@/components/quote-button";
 
 interface ParpaingType {
   id: string
@@ -307,49 +308,10 @@ export default function ParpaingsCalculator() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Nom complet *</Label>
-                <Input
-                  id="name"
-                  placeholder="Votre nom"
-                  value={leadForm.name}
-                  onChange={(e) => setLeadForm({ ...leadForm, name: e.target.value })}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="phone">Téléphone *</Label>
-                <Input
-                  id="phone"
-                  placeholder="+237 6XX XXX XXX"
-                  value={leadForm.phone}
-                  onChange={(e) => setLeadForm({ ...leadForm, phone: e.target.value })}
-                />
-              </div>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">Email (optionnel)</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="votre@email.com"
-                value={leadForm.email}
-                onChange={(e) => setLeadForm({ ...leadForm, email: e.target.value })}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="project">Description du projet (optionnel)</Label>
-              <Textarea
-                id="project"
-                placeholder="Décrivez brièvement votre projet de construction..."
-                value={leadForm.projectDescription}
-                onChange={(e) => setLeadForm({ ...leadForm, projectDescription: e.target.value })}
-              />
-            </div>
-            <Button onClick={submitLead} disabled={isSubmitting} className="w-full" size="lg">
-              <Send className="mr-2 h-5 w-5" />
-              {isSubmitting ? "Envoi en cours..." : "Demander mon devis gratuit"}
-            </Button>
+            <QuoteButton  className="w-full" size="lg">
+              <Phone className="mr-2 h-5 w-5"/>
+              Demander mon devis gratuitement
+            </QuoteButton>
           </CardContent>
         </Card>
       )}

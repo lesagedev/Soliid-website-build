@@ -12,15 +12,15 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-soliid-slr3MBUIxiYuUJXz5xOLDtHSAYxyIe.png"
+              src="/logo/logo-soliid.png"
               alt="Soliid Logo"
               width={120}
               height={40}
               className="h-10 w-auto"
             />
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Soliid™ est une marque exploitée par la société Buildermats. Votre partenaire de confiance pour la
-              préfabrication au Cameroun.
+            <p className="text-muted-foreground text-sm leading-relaxed text-justify">
+              Soliid™ est une marque détenue et exploitée par Buildermats Industrie SARL,
+              immatriculée au Registre de Commerce sous le numéro <span className={"font-semibold"}>CM-DLA-01-2025-B1300928</span>.
             </p>
             <div className="flex gap-4">
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
@@ -63,21 +63,21 @@ export default function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h3 className="font-semibold text-foreground">Autres Produits</h3>
+            <h3 className="font-semibold text-foreground">Lien Utiles</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
-                  Produits sur mesure
+                <Link href="https://tally.so/r/waWV4W" className="text-muted-foreground hover:text-primary transition-colors">
+                  Obtenir un devis Personnalisé
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
-                  Éléments décoratifs
+                  Discuter avec un expert
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
-                  Solutions spéciales
+                  Prendre rendez-vous
                 </Link>
               </li>
             </ul>
@@ -87,24 +87,29 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="font-semibold text-foreground">Contact</h3>
             <div className="space-y-3 text-sm">
-              <div className="flex items-start gap-2">
+              {/*<div className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
                 <span className="text-muted-foreground">
-                  Akwa, Rue Drout Face collège Emilie SAKER, Douala Cameroun
+                  Face Grand MALL, Douala Cameroun
                 </span>
-              </div>
+              </div>*/}
               <div className="flex items-center gap-2">
                 <Phone className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                 <div className="text-muted-foreground">
-                  <div>+237 675 887 676</div>
-                  <div>+237 656 770 009</div>
+                  <div>
+                    <a href="tel:+237675887676" className="hover:underline">+237 675 887 676</a>
+                  </div>
+                  <div>
+                    <a href="tel:+237656770009" className="hover:underline">+237 656 770 009</a>
+                  </div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                 <div className="text-muted-foreground">
-                  <div>contact@buildermats.com</div>
-                  <div>ventes@buildermats.com</div>
+                  <div>
+                    <a href="mailto:contact@buildermats.com" className="hover:underline">contact@buildermats.com</a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -112,7 +117,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {currentYear} Soliid™ - Buildermats. Tous droits réservés. Construire facile au Cameroun.</p>
+          <p>&copy; {currentYear} Soliid™ - Tous droits réservés. Préfabriqués Industriels.</p>
         </div>
       </div>
     </footer>
