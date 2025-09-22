@@ -5,7 +5,7 @@ export const analytics = Analytics({
   app: 'soliid-site',
   plugins: [
     googleAnalytics({
-      trackingId: 'G-N6J9T9TV4G'
+      measurementIds: ['G-N6J9T9TV4G'],
     })
   ]
 })
