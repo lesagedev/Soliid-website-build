@@ -7,6 +7,7 @@ import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import {SpeedInsights} from '@vercel/speed-insights/next'
 import AnalyticsProvider from '@/components/AnalyticsProvider'
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata: Metadata = {
   title: "Soliid - Préfabrication de Parpaings, Pavés et Bordures",
@@ -127,6 +128,7 @@ export default function RootLayout({
             `,
       }}
     />
+    <Analytics />
     <SpeedInsights />
     </body>
     </html>
