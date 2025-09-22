@@ -5,11 +5,12 @@ import "./globals.css"
 import WhatsAppFloat from "@/components/whatsapp-float"
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import {SpeedInsights} from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   title: "Soliid - Préfabrication de Parpaings, Pavés et Bordures",
   description:
-    "Soliid, votre partenaire de confiance pour la préfabrication de parpaings, pavés et bordures au Cameroun. Construire facile avec nos solutions de qualité à Douala et dans tout le Cameroun.",
+    "Soliid, votre partenaire de confiance pour la préfabrication de parpaings, pavés et bordures. Construire facile avec nos solutions de qualité à Douala et dans tout le Cameroun.",
   keywords:
     "parpaings, pavés, bordures, préfabrication, construction, Cameroun, Douala, construire, matériaux de construction, béton",
   authors: [{name: "Soliid"}],
@@ -82,6 +83,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
     <head>
+      <link rel="icon" href="/logo/favicon.ico" type="image/png" sizes="32x32" />
       <Script src="https://tally.so/widgets/embed.js" strategy="beforeInteractive"/>
     </head>
     <body className="font-sans antialiased">
@@ -100,10 +102,10 @@ export default function RootLayout({
       theme="light"
     />
     <Script
-          id="botsonic-chatbot"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
+      id="botsonic-chatbot"
+      strategy="afterInteractive"
+      dangerouslySetInnerHTML={{
+        __html: `
               (function (w, d, s, o, f, js, fjs) {
                 w["botsonic_widget"] = o;
                 w[o] = w[o] || function () {
@@ -121,8 +123,9 @@ export default function RootLayout({
                 token: "59bacca3-ad0f-454e-bda5-70a1d199a0c5",
               });
             `,
-          }}
-        />
+      }}
+    />
+    <SpeedInsights />
     </body>
     </html>
   )

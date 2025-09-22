@@ -1,6 +1,5 @@
 "use client"
 
-import {useState} from "react"
 import Image from "next/image"
 import {Button} from "@/components/ui/button"
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card"
@@ -155,16 +154,65 @@ const downloads: DownloadItem[] = [
     tags: ["catalogue", "bordures", "trottoir", "voirie", "aménagement"],
     image: "/ressources/catalogue-bordures.png",
     popular: false
-  }
+  },
+  {
+    id: "guide-parpaings-hydrofuges-milieu-humide",
+    title: "Guide Parpaings Hydrofuges : Bâtir Durable en Milieu Humide",
+    description: "Guide complet pour construire avec des parpaings hydrofuges en zones humides : avantages, techniques de pose et études de cas.",
+    type: "guide",
+    category: "parpaing",
+    fileSize: "3.5 MB",
+    pages: 12,
+    link: "/ressources/parpaings-hydrofuges-batir-durable-en-milieu-humide.pdf",
+    tags: ["guide", "hydrofuge", "construction-humide", "durabilité", "techniques"],
+    image: "/ressources/guide-parpaings-hydrofuges.png",
+    popular: true
+  },
+  {
+    id: "guide-choisir-materiaux-qualite",
+    title: "Guide : Comment Choisir des Matériaux de Qualité",
+    description: "Guide pratique pour sélectionner les bons matériaux de construction : critères de qualité, normes et conseils d'experts.",
+    type: "guide",
+    category: "parpaing",
+    fileSize: "2.8 MB",
+    pages: 7,
+    link: "/ressources/je-construis-comment-choisir-des-materiaux-de-qualite.pdf",
+    tags: ["guide", "qualité", "choix-materiaux", "conseils", "normes"],
+    image: "/ressources/guide-choix-materiaux.png",
+    popular: true
+  },
+  {
+    id: "guide-poser-paves-etape-par-etape",
+    title: "Guide Pratique : Comment Poser les Pavés Étape par Étape",
+    description: "Guide complet de pose de pavés : préparation, techniques professionnelles, finitions et entretien pour un résultat parfait.",
+    type: "guide",
+    category: "pave",
+    fileSize: "4.2 MB",
+    pages: 11,
+    link: "/ressources/guide-pratique-comment-poser-les-paves-etape-par-etape.pdf",
+    tags: ["guide", "pose-paves", "techniques", "tutoriel", "amenagement"],
+    image: "/ressources/guide-poser-paves.png",
+    popular: true
+  },
+  {
+    id: "guide-bien-choisir-ses-paves",
+    title: "Guide : Bien Choisir ses Pavés",
+    description: "Guide comparatif pour choisir les pavés adaptés : types, épaisseurs, usages spécifiques et conseils techniques.",
+    type: "guide",
+    category: "pave",
+    fileSize: "3.1 MB",
+    pages: 10,
+    link: "/ressources/bien-choisir-ses-paves.pdf",
+    tags: ["guide", "choix-paves", "comparatif", "technique", "applications"],
+    image: "/ressources/guide-choisir-paves.png",
+    popular: false
+  },
 ];
 
 export default function TelechargementsClient() {
-  const [selectedDownload, setSelectedDownload] = useState<DownloadItem | null>(null)
   const {openPopup, closePopup} = useTally('wzlEPE')
 
   const handleDownloadClick = (download: DownloadItem) => {
-    setSelectedDownload(download)
-
     openPopup({
       layout: 'modal',
       width: 600,
@@ -180,9 +228,8 @@ export default function TelechargementsClient() {
         fileType: getTypeLabel(download.type),
         category: getCategoryLabel(download.category)
       },
-      onSubmit: (payload: any) => {
-        closePopup()
-        console.log('Form submitted with payload:', payload);
+      onSubmit: () => {
+        closePopup();
 
         const message = `Votre document "${download.title}" vous sera envoyé par WhatsApp dans quelques instants.`;
 
@@ -194,12 +241,7 @@ export default function TelechargementsClient() {
           pauseOnHover: true,
           draggable: true,
         });
-
-        setSelectedDownload(null)
       },
-      onClose: () => {
-        setSelectedDownload(null)
-      }
     })
   }
 
