@@ -2,29 +2,14 @@
 
 import type React from "react"
 
-import { useState } from "react"
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Phone, Mail, MapPin, Clock, MessageSquare, Send } from "lucide-react"
+import { Phone, Mail, MessageSquare } from "lucide-react"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
-import { useToast } from "@/hooks/use-toast"
 import { useEffect } from "react"
 
 export default function ContactPageClient() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    subject: "",
-    message: "",
-    projectType: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const { toast } = useToast()
-
   useEffect(() => {
     const script = document.createElement('script')
     script.src = 'https://tally.so/widgets/embed.js'
@@ -36,66 +21,7 @@ export default function ContactPageClient() {
         (window as any).Tally.loadEmbeds()
       }
     }
-
-    return () => {
-      // Nettoyer le script lors du démontage
-      if (document.head.contains(script)) {
-        document.head.removeChild(script)
-      }
-    }
   }, [])
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-
-    if (!formData.name || !formData.email || !formData.message) {
-      toast({
-        title: "Informations manquantes",
-        description: "Veuillez remplir tous les champs obligatoires.",
-        variant: "destructive",
-      })
-      return
-    }
-
-    setIsSubmitting(true)
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
-
-      if (response.ok) {
-        toast({
-          title: "Message envoyé !",
-          description: "Nous vous répondrons dans les plus brefs délais.",
-        })
-        // Reset form
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          company: "",
-          subject: "",
-          message: "",
-          projectType: "",
-        })
-      } else {
-        throw new Error("Erreur lors de l'envoi")
-      }
-    } catch (error) {
-      toast({
-        title: "Erreur",
-        description: "Une erreur est survenue. Veuillez réessayer.",
-        variant: "destructive",
-      })
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
 
   const whatsappNumber = "+237675887676"
   const whatsappMessage = encodeURIComponent(

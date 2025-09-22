@@ -1,18 +1,24 @@
 "use client"
 
-import { useState } from "react"
+import {useEffect, useState} from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import {Calculator, ArrowRight, Truck, Shield, Zap, Download} from "lucide-react"
+import {ArrowRight, Truck, Shield, Zap, Download} from "lucide-react"
 import ProductModal from "@/components/product-modal"
 import Image from "next/image";
 import QuoteButton from "@/components/quote-button";
+import { trackEvent } from '@/lib/analytics'
+
 
 export default function BorduresPageClient() {
   const [selectedProduct, setSelectedProduct] = useState<any>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  useEffect(() => {
+    trackEvent.pageView('Paves')
+  }, []);
 
   const bordures = [
     {

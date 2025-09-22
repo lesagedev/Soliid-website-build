@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@analytics/google-analytics':
+        specifier: ^1.1.0
+        version: 1.1.0
       '@next/third-parties':
         specifier: ^15.5.3
         version: 15.5.3(next@15.4.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
@@ -62,6 +65,9 @@ importers:
       '@vercel/speed-insights':
         specifier: ^1.2.0
         version: 1.2.0(next@15.4.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
+      analytics:
+        specifier: ^0.8.19
+        version: 0.8.19(@types/dlv@1.1.5)
       bcryptjs:
         specifier: latest
         version: 3.0.2
@@ -142,6 +148,30 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@analytics/cookie-utils@0.2.14':
+    resolution: {integrity: sha512-x51x2cLqvP5Fb1ydgNvTCX+SVv0ALK/yTNwp/53++yk4kLhxb850krWtQ4aASN0612oXrIGotwfmdJIttnLiPQ==}
+
+  '@analytics/core@0.13.2':
+    resolution: {integrity: sha512-ejvfoPP8TEh2hA2szMEq9c4TdeX8FAeY1j/7MxJVZjzDaq8BDHOyaAAQzTFiLMHvV0WcU2YC0smJ5Ids5Ll5ng==}
+
+  '@analytics/global-storage-utils@0.1.9':
+    resolution: {integrity: sha512-+xm6CDnWsVOQIKkqbPRPRdYDXKk3PNgr/bCZWSI+7tEDT5PCDgI0QSBZe+FqCVkCRtTkgOrjFOY7wOM8Gq+ndA==}
+
+  '@analytics/google-analytics@1.1.0':
+    resolution: {integrity: sha512-i8uGyELMtwEUAf3GNWNLNBzhRvReDn1RUxvMdMhjUA7+GNGxPOM4kkzFfv3giQXKNxTEjfsh75kqNcscbJsuaA==}
+
+  '@analytics/localstorage-utils@0.1.12':
+    resolution: {integrity: sha512-BL3vuZUwWgMqdkQsE0GKsED5SPLC6daI4K4LE0a/BkKv+4Cae5JLLqpO5gju2HUGOjJxIvw8U/G5EcglNY5+1w==}
+
+  '@analytics/session-storage-utils@0.0.9':
+    resolution: {integrity: sha512-fhP9QCpyq45rZKsXaAxyz+VTmOUWljIW08CWSkFzpwOHkDM4Xy5tymc1YcWqSBBaLjHldo3HlY4qfqEIS4Aj1A==}
+
+  '@analytics/storage-utils@0.4.4':
+    resolution: {integrity: sha512-873P4wDIunbOnBqADc2AhTVsLbluUv1dP6k9UrK8FIeV8WXv5+fG12HdwwaniUIxq6QLgZJfKEaCwtWSKrrV0g==}
+
+  '@analytics/type-utils@0.6.4':
+    resolution: {integrity: sha512-Ou1gQxFakOWLcPnbFVsrPb8g1wLLUZYYJXDPjHkG07+5mustGs5yqACx42UAu4A6NszNN6Z5gGxhyH45zPWRxw==}
 
   '@babel/runtime@7.28.4':
     resolution: {integrity: sha512-Q/N6JNWvIvPnLDvjlE1OUBLPQHH6l3CltCEsHIujp45zQUSSh8K+gHnaEX45yAT1nyngnINhvWtzN+Nb9D8RAQ==}
@@ -1011,6 +1041,9 @@ packages:
   '@tybys/wasm-util@0.10.0':
     resolution: {integrity: sha512-VyyPYFlOMNylG45GoAe0xDoLwWuowvf92F9kySqzYh8vmYm7D2u4iUJKa1tOUpS70Ku13ASrOkS4ScXFsTaCNQ==}
 
+  '@types/dlv@1.1.5':
+    resolution: {integrity: sha512-JHOWNfiWepAhfwlSw17kiWrWrk6od2dEQgHltJw9AS0JPFoLZJBge5+Dnil2NfdjAvJ/+vGSX60/BRW20PpUXw==}
+
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
@@ -1221,6 +1254,14 @@ packages:
 
   ajv@6.12.6:
     resolution: {integrity: sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==}
+
+  analytics-utils@1.1.1:
+    resolution: {integrity: sha512-nRybjTpRAcHVhWb1cvYaOLJaI3R79r8XjMbu5c0wd2jKmANNqSrYwybiU0X3mp+CQQdm4YiAggTXb2cIA8XhUg==}
+    peerDependencies:
+      '@types/dlv': ^1.0.0
+
+  analytics@0.8.19:
+    resolution: {integrity: sha512-JFgasxpWFiAoqm5UHaGQv9j9OGz+f1KAeQkABYr3Z7YGhiqhQrBpPhIVAIEyttBRJZmew1QwMhN9/bOGGBnpJA==}
 
   ansi-styles@4.3.0:
     resolution: {integrity: sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==}
@@ -1442,6 +1483,9 @@ packages:
 
   detect-node-es@1.1.0:
     resolution: {integrity: sha512-ypdmJU/TbBby2Dxibuv7ZLW3Bs1QEmM7nHjEANfohJLvE0XVujisn1qPJcZxg+qDucsr+bP6fLD1rPS3AhJ7EQ==}
+
+  dlv@1.1.3:
+    resolution: {integrity: sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==}
 
   doctrine@2.1.0:
     resolution: {integrity: sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==}
@@ -2666,6 +2710,42 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.30
 
+  '@analytics/cookie-utils@0.2.14':
+    dependencies:
+      '@analytics/global-storage-utils': 0.1.9
+
+  '@analytics/core@0.13.2(@types/dlv@1.1.5)':
+    dependencies:
+      '@analytics/global-storage-utils': 0.1.9
+      '@analytics/type-utils': 0.6.4
+      analytics-utils: 1.1.1(@types/dlv@1.1.5)
+    transitivePeerDependencies:
+      - '@types/dlv'
+
+  '@analytics/global-storage-utils@0.1.9':
+    dependencies:
+      '@analytics/type-utils': 0.6.4
+
+  '@analytics/google-analytics@1.1.0': {}
+
+  '@analytics/localstorage-utils@0.1.12':
+    dependencies:
+      '@analytics/global-storage-utils': 0.1.9
+
+  '@analytics/session-storage-utils@0.0.9':
+    dependencies:
+      '@analytics/global-storage-utils': 0.1.9
+
+  '@analytics/storage-utils@0.4.4':
+    dependencies:
+      '@analytics/cookie-utils': 0.2.14
+      '@analytics/global-storage-utils': 0.1.9
+      '@analytics/localstorage-utils': 0.1.12
+      '@analytics/session-storage-utils': 0.0.9
+      '@analytics/type-utils': 0.6.4
+
+  '@analytics/type-utils@0.6.4': {}
+
   '@babel/runtime@7.28.4': {}
 
   '@emnapi/core@1.5.0':
@@ -3536,6 +3616,8 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
+  '@types/dlv@1.1.5': {}
+
   '@types/estree@1.0.8': {}
 
   '@types/json-schema@7.0.15': {}
@@ -3727,6 +3809,19 @@ snapshots:
       fast-json-stable-stringify: 2.1.0
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
+
+  analytics-utils@1.1.1(@types/dlv@1.1.5):
+    dependencies:
+      '@analytics/type-utils': 0.6.4
+      '@types/dlv': 1.1.5
+      dlv: 1.1.3
+
+  analytics@0.8.19(@types/dlv@1.1.5):
+    dependencies:
+      '@analytics/core': 0.13.2(@types/dlv@1.1.5)
+      '@analytics/storage-utils': 0.4.4
+    transitivePeerDependencies:
+      - '@types/dlv'
 
   ansi-styles@4.3.0:
     dependencies:
@@ -3968,6 +4063,8 @@ snapshots:
     optional: true
 
   detect-node-es@1.1.0: {}
+
+  dlv@1.1.3: {}
 
   doctrine@2.1.0:
     dependencies:

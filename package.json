@@ -9,6 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@analytics/google-analytics": "^1.1.0",
     "@next/third-parties": "^15.5.3",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
@@ -27,6 +28,7 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@types/nodemailer": "^6.4.0",
     "@vercel/speed-insights": "^1.2.0",
+    "analytics": "^0.8.19",
     "bcryptjs": "latest",
     "better-sqlite3": "latest",
     "class-variance-authority": "^0.7.1",

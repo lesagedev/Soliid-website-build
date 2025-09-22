@@ -5,8 +5,8 @@ import "./globals.css"
 import WhatsAppFloat from "@/components/whatsapp-float"
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import {SpeedInsights} from '@vercel/speed-insights/next';
-import { GoogleAnalytics } from '@next/third-parties/google'
+import {SpeedInsights} from '@vercel/speed-insights/next'
+import AnalyticsProvider from '@/components/AnalyticsProvider'
 
 export const metadata: Metadata = {
   title: "Soliid - Préfabrication de Parpaings, Pavés et Bordures",
@@ -90,6 +90,7 @@ export default function RootLayout({
     <body className="font-sans antialiased">
     {children}
     <WhatsAppFloat/>
+    <AnalyticsProvider />
     <ToastContainer
       position="top-right"
       autoClose={5000}
@@ -127,7 +128,6 @@ export default function RootLayout({
       }}
     />
     <SpeedInsights />
-    <GoogleAnalytics gaId="G-N6J9T9TV4G" />
     </body>
     </html>
   )
