@@ -39,7 +39,7 @@ export default function HomePage() {
                   Vos projets, nos solutions de <span className="text-primary">préfabrication</span>
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed text-pretty">
-                  Parpaings, pavés et bordures Premium pour tous vos projets de construction au Cameroun.
+                  Nous disposons de la plus grosse <span className={"font-medium"}>capacité de production</span> de parpaings, pavés et bordures Premium <span className={"font-medium"}> au Cameroun et en  Afrique Centrale</span> pour tous vos projets de construction.
                 </p>
               </div>
 
@@ -195,7 +195,6 @@ export default function HomePage() {
         </div>
       </section>
 
-
       <section className="py-16 bg-muted/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -278,6 +277,10 @@ export default function HomePage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex items-center gap-2 font-medium">
+                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
+                    Capacité de production 20 000 parpaings/Jr
+                  </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
                     Dimensions standards
@@ -322,6 +325,10 @@ export default function HomePage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex items-center gap-2 font-medium">
+                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
+                    Capacité de production 900m² de pavés/Jr
+                  </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
                     Formes variées
@@ -366,6 +373,10 @@ export default function HomePage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex items-center gap-2 font-medium">
+                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
+                    Capacité de production 2 000 ml bordures/Jr
+                  </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
                     Travaux routiers
