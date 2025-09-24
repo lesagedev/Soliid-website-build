@@ -224,7 +224,7 @@ export default function TelechargementsClient() {
         document: download.title,
         file: download.title,
         mediaURL: `https://crm.buildermats.com/media/public${download.link}`,
-        downloadTitle: `Télécharger ${download.title}`,
+        downloadTitle: `${download.title}`,
         fileType: getTypeLabel(download.type),
         category: getCategoryLabel(download.category)
       },

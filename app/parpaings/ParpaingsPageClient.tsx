@@ -1,11 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import {useState} from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import {Button} from "@/components/ui/button"
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card"
+import {Badge} from "@/components/ui/badge"
 import {Calculator, CheckCircle, Building, Shield, Thermometer, Zap, ArrowRight, Eye, Download} from "lucide-react"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
@@ -86,7 +86,7 @@ export default function ParpaingsPageClient() {
         },
         {
           name: "Hourdis",
-          dimensions: "20cm × 20cm × 50cm",
+          dimensions: "15cm × 20cm × 50cm",
           weight: "21,60 kg",
           resistance: "4 MPa",
           description:
@@ -431,7 +431,7 @@ export default function ParpaingsPageClient() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
+      <Navigation/>
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-background to-muted/30 py-16 lg:py-24">
@@ -446,20 +446,22 @@ export default function ParpaingsPageClient() {
                   Parpaings premium <span className="text-primary">Soliid</span>
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed text-pretty">
-                  Découvrez nos 3 gammes de parpaings : Standard Premium, Standard Hydro Premium et Premium Haute Performance, Pour vos projets de construction de résidences individuelles, immeubles, projets immobiliers divers.
+                  Découvrez nos 3 gammes de parpaings : Standard Premium, Standard Hydro Premium et Premium Haute
+                  Performance, Pour vos projets de construction de résidences individuelles, immeubles, projets
+                  immobiliers divers.
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
                   <Link href="/ressources">
-                    <Download className="mr-2 h-5 w-5" />
+                    <Download className="mr-2 h-5 w-5"/>
                     Télécharger nos guides
                   </Link>
                 </Button>
-                <QuoteButton  variant="outline" size="lg">
+                <QuoteButton variant="outline" size="lg">
                   Demander un devis
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-2 h-5 w-5"/>
                 </QuoteButton>
               </div>
             </div>
@@ -491,6 +493,38 @@ export default function ParpaingsPageClient() {
         </div>
       </section>
 
+      {/* Preorder Section */}
+      {/*<section className="py-8 bg-gradient-to-r from-amber-50 to-orange-50 border-y border-amber-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="text-center md:text-left space-y-2">
+              <div className="flex items-center justify-center md:justify-start gap-2">
+                <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
+                <h3 className="text-xl font-semibold text-amber-900">
+                  Précommandez dès maintenant !
+                </h3>
+              </div>
+              <p className="text-amber-800 max-w-2xl">
+                Nos parpaings SOLIID seront disponibles à partir de Janvier 2026.
+                <span className="font-medium"> Précommandez maintenant et bénéficiez d'une réduction exclusive !</span>
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button
+                asChild
+                size="lg"
+                className="bg-amber-600 hover:bg-amber-700 text-white shadow-md"
+              >
+                <Link href="/precommande">
+                  <CheckCircle className="mr-2 h-5 w-5" />
+                  Précommander maintenant
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>*/}
+
       {/* Product Types */}
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -499,7 +533,8 @@ export default function ParpaingsPageClient() {
               Les Parpaings Soliid
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-              Parpaings 15 en 50 cm, Parpaings 20 en 50 cm, Hourdis épaisseur 15 en 50 cm  pour répondre à tous vos besoins de
+              Parpaings 15 en 50 cm, Parpaings 20 en 50 cm, Hourdis épaisseur 15 en 50 cm pour répondre à tous vos
+              besoins de
               construction.
             </p>
           </div>
@@ -512,7 +547,7 @@ export default function ParpaingsPageClient() {
               >
                 <CardHeader className="space-y-4">
                   <div
-                    className="aspect-video bg-muted rounded-lg overflow-hidden"
+                    className="aspect-video bg-muted rounded-lg overflow-hidden relative"
                   >
                     <Image
                       src={parpaing.image || "/placeholder.svg"}
@@ -521,6 +556,12 @@ export default function ParpaingsPageClient() {
                       height={250}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
+                    <div className="absolute top-2 right-2 bg-amber-50 border border-amber-200 text-amber-800 text-xs px-3 py-1.5 rounded-full font-medium shadow-sm">
+                      <span className="flex items-center gap-1.5">
+                        <span className="inline-block w-1.5 h-1.5 bg-amber-700 rounded-full animate-pulse"></span>
+                        Disponible à partir de Janvier 2026
+                      </span>
+                    </div>
                   </div>
                   <div className="space-y-2">
                     <CardTitle
@@ -543,7 +584,8 @@ export default function ParpaingsPageClient() {
                       </div>
                     </div>
                   </div>
-                  <CardDescription className="text-muted-foreground text-justify">{parpaing.description}</CardDescription>
+                  <CardDescription
+                    className="text-muted-foreground text-justify">{parpaing.description}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
@@ -551,7 +593,7 @@ export default function ParpaingsPageClient() {
                     <ul className="space-y-1 text-sm text-muted-foreground">
                       {parpaing.features.map((feature, idx) => (
                         <li key={idx} className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                          <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
                           {feature}
                         </li>
                       ))}
@@ -564,7 +606,7 @@ export default function ParpaingsPageClient() {
                   <div className="flex gap-2">
                     <Button asChild className="flex-1">
                       <Link href="/calculateurs">
-                        <Calculator className="mr-2 h-4 w-4" />
+                        <Calculator className="mr-2 h-4 w-4"/>
                         Calculer mes besoins
                       </Link>
                     </Button>
@@ -592,7 +634,7 @@ export default function ParpaingsPageClient() {
             {advantages.map((advantage, index) => (
               <div key={index} className="text-center space-y-4">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
-                  <advantage.icon className="h-8 w-8 text-primary" />
+                  <advantage.icon className="h-8 w-8 text-primary"/>
                 </div>
                 <h3 className="text-xl font-semibold text-foreground">{advantage.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{advantage.description}</p>
@@ -613,7 +655,7 @@ export default function ParpaingsPageClient() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" variant="secondary">
               <Link href="/calculateurs">
-                <Calculator className="mr-2 h-5 w-5" />
+                <Calculator className="mr-2 h-5 w-5"/>
                 Calculateur parpaings
               </Link>
             </Button>
@@ -625,7 +667,7 @@ export default function ParpaingsPageClient() {
             >
               <Link href="/contact">
                 Demander un devis personnalisé
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-5 w-5"/>
               </Link>
             </Button>
           </div>
@@ -644,7 +686,7 @@ export default function ParpaingsPageClient() {
         />
       )}
 
-      <Footer />
+      <Footer/>
     </div>
   )
 }

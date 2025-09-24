@@ -110,6 +110,14 @@ export default ({isOpen, onClose, product, calculatorLink, relatedProducts = [],
                   fill
                   className="object-cover transition-all duration-300"
                 />
+                {(product.name.toLowerCase().includes("parpaing") || product.name.toLowerCase().includes("hourdis"))  && (
+                  <div className="absolute top-2 right-2 bg-amber-50 border border-amber-200 text-amber-800 text-xs px-3 py-1.5 rounded-full font-medium shadow-sm">
+                      <span className="flex items-center gap-1.5">
+                        <span className="inline-block w-1.5 h-1.5 bg-amber-700 rounded-full animate-pulse"></span>
+                        Disponible à partir de Janvier 2026
+                      </span>
+                  </div>
+                )}
                 {product.images.length > 1 && (
                   <>
                     <Button

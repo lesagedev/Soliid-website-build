@@ -108,7 +108,7 @@ export default function HomePage() {
                   {/* Stats */}
                   <div className="flex items-center gap-4">
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-primary">500+</div>
+                      <div className="text-2xl font-bold text-primary">3500+</div>
                       <div className="text-xs sm:text-sm text-muted-foreground">Projets réalisés</div>
                     </div>
                     <div className="w-px h-12 bg-gradient-to-b from-transparent via-border to-transparent"></div>
@@ -246,7 +246,7 @@ export default function HomePage() {
       </section>
 
       {/* Products Overview */}
-      <section className="py-20 bg-background">
+      <section id={"solutions"} className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">
@@ -262,13 +262,19 @@ export default function HomePage() {
             {/* Parpaings Card */}
             <Card className="group hover:shadow-lg transition-all duration-300 border-border">
               <CardHeader className="space-y-4">
-                <div className="aspect-video bg-muted rounded-lg overflow-hidden flex items-center justify-center">
+                <div className="aspect-video bg-muted rounded-lg overflow-hidden flex items-center justify-center relative">
                   <img
                     src="/parpaing/couverture-parpaings-2.png"
                     alt="Parpaings Soliid Buildermats pour la construction au Cameroun"
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
+                  <div className="absolute top-2 right-2 bg-amber-50 border border-amber-200 text-amber-800 text-xs px-3 py-1.5 rounded-full font-medium shadow-sm">
+                      <span className="flex items-center gap-1.5">
+                        <span className="inline-block w-1.5 h-1.5 bg-amber-700 rounded-full animate-pulse"></span>
+                        Disponible à partir de Janvier 2026
+                      </span>
+                  </div>
                 </div>
                 <CardTitle className="text-xl text-foreground">Parpaings</CardTitle>
                 <CardDescription className="text-muted-foreground text-sm">

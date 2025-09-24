@@ -54,8 +54,6 @@ export default function BorduresPageClient() {
       ],
       images: [
         "/bordures/bordure-p1-allee-pietonne.jpg",
-        "/bordure-p1-installation-facile.jpg",
-        "/bordure-p1-allee-pietonne.jpg",
       ],
     },
     {
@@ -91,8 +89,6 @@ export default function BorduresPageClient() {
       ],
       images: [
         "/bordures/bordure-t2-allee-pietonne.jpg",
-        "/placeholder-11wsf.png",
-        "/placeholder-ftxja.png",
       ],
     },
     {
@@ -128,8 +124,6 @@ export default function BorduresPageClient() {
       ],
       images: [
         "/bordures/bordure-a2-allee-pietonne.jpg",
-        "/bordure-a2-amenagement-prestige.jpg",
-        "/bordure-a2-zone-commerciale.jpg",
       ],
     },
     {
@@ -165,8 +159,6 @@ export default function BorduresPageClient() {
       ],
       images: [
         "/bordures/bordure-cs2-allee-pietonne.jpg",
-        "/bordure-cs2-infrastructure-routiere.jpg",
-        "/bordure-cs2-zone-industrielle.jpg",
       ],
     },
   ]
