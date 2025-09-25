@@ -114,7 +114,7 @@ export default ({isOpen, onClose, product, calculatorLink, relatedProducts = [],
                   <div className="absolute top-2 right-2 bg-amber-50 border border-amber-200 text-amber-800 text-xs px-3 py-1.5 rounded-full font-medium shadow-sm">
                       <span className="flex items-center gap-1.5">
                         <span className="inline-block w-1.5 h-1.5 bg-amber-700 rounded-full animate-pulse"></span>
-                        Disponible à partir de Janvier 2026
+                        Disponible à Douala à partir de Janvier 2026
                       </span>
                   </div>
                 )}

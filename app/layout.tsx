@@ -104,6 +104,29 @@ export default function RootLayout({
       pauseOnHover
       theme="light"
     />
+    <div className="gtranslate_wrapper"></div>
+    <Script
+      id="gtranslate-settings"
+      strategy="afterInteractive"
+      dangerouslySetInnerHTML={{
+        __html: `
+          window.gtranslateSettings = {
+            "default_language": "fr",
+            "native_language_names": true,
+            "detect_browser_language": true,
+            "languages": ["fr", "en", "de", "es", "it", "ar", "tr", "pt"],
+            "switcher_horizontal_position":"right",
+            "wrapper_selector": ".gtranslate_wrapper",
+            "switcher_vertical_position": "top",
+            "float_switcher_open_direction": "bottom"
+          };
+        `,
+      }}
+    />
+    <Script
+      src="https://cdn.gtranslate.net/widgets/latest/float.js"
+      strategy="afterInteractive"
+    />
     <Script
       id="botsonic-chatbot"
       strategy="afterInteractive"
