@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge"
 import {Calculator, Send, CheckCircle, AlertCircle, Phone} from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import QuoteButton from "@/components/quote-button";
+import {toast} from "react-toastify";
 
 interface ParpaingType {
   id: string
@@ -89,20 +90,12 @@ export default function ParpaingsCalculator() {
     height: "",
   })
   const [selectedType, setSelectedType] = useState<string>("")
-  const [leadForm, setLeadForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    projectDescription: "",
-  })
   const [calculation, setCalculation] = useState<{
     quantity: number
     totalCost: number
     surface: number
   } | null>(null)
-  const [isSubmitting, setIsSubmitting] = useState(false)
   const [showLeadForm, setShowLeadForm] = useState(false)
-  const { toast } = useToast()
 
   const calculateParpaings = () => {
     const length = Number.parseFloat(dimensions.length)
@@ -110,11 +103,14 @@ export default function ParpaingsCalculator() {
     const selectedParpaing = parpaingTypes.find((p) => p.id === selectedType)
 
     if (!length || !height || !selectedParpaing) {
-      toast({
-        title: "Erreur de calcul",
-        description: "Veuillez remplir tous les champs requis.",
-        variant: "destructive",
-      })
+      toast.error("Veuillez remplir tous les champs requis.",{
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
       return
     }
 
@@ -128,66 +124,6 @@ export default function ParpaingsCalculator() {
       surface,
     })
     setShowLeadForm(true)
-  }
-
-  const submitLead = async () => {
-    if (!leadForm.name || !leadForm.phone) {
-      toast({
-        title: "Informations manquantes",
-        description: "Veuillez remplir tous les champs obligatoires (nom et téléphone).",
-        variant: "destructive",
-      })
-      return
-    }
-
-    setIsSubmitting(true)
-
-    try {
-      const selectedParpaing = parpaingTypes.find((p) => p.id === selectedType)
-      const response = await fetch("/api/leads", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          type: "parpaings",
-          name: leadForm.name,
-          email: leadForm.email,
-          phone: leadForm.phone,
-          projectDescription: leadForm.projectDescription,
-          calculationData: {
-            parpaingType: selectedParpaing?.name,
-            dimensions,
-            quantity: calculation?.quantity,
-            totalCost: calculation?.totalCost,
-            surface: calculation?.surface,
-          },
-        }),
-      })
-
-      if (response.ok) {
-        toast({
-          title: "Demande envoyée !",
-          description: "Nous vous contacterons dans les plus brefs délais.",
-        })
-        // Reset form
-        setLeadForm({ name: "", email: "", phone: "", projectDescription: "" })
-        setDimensions({ length: "", height: "" })
-        setSelectedType("")
-        setCalculation(null)
-        setShowLeadForm(false)
-      } else {
-        throw new Error("Erreur lors de l'envoi")
-      }
-    } catch (error) {
-      toast({
-        title: "Erreur",
-        description: "Une erreur est survenue. Veuillez réessayer.",
-        variant: "destructive",
-      })
-    } finally {
-      setIsSubmitting(false)
-    }
   }
 
   // Group parpaings by gamme for better organization
@@ -222,7 +158,11 @@ export default function ParpaingsCalculator() {
                 type="number"
                 placeholder="Ex: 10"
                 value={dimensions.length}
-                onChange={(e) => setDimensions({ ...dimensions, length: e.target.value })}
+                onChange={(e) => {
+                  setDimensions({ ...dimensions, length: e.target.value });
+                  setCalculation(null);
+                  setShowLeadForm(false);
+                }}
               />
             </div>
             <div className="space-y-2">
@@ -232,12 +172,16 @@ export default function ParpaingsCalculator() {
                 type="number"
                 placeholder="Ex: 3"
                 value={dimensions.height}
-                onChange={(e) => setDimensions({ ...dimensions, height: e.target.value })}
+                onChange={(e) => {
+                  setDimensions({ ...dimensions, height: e.target.value });
+                  setCalculation(null);
+                  setShowLeadForm(false);
+                }}
               />
             </div>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-2 notranslate">
             <Label>Type de parpaing</Label>
             <Select value={selectedType} onValueChange={setSelectedType}>
               <SelectTrigger>
@@ -263,7 +207,16 @@ export default function ParpaingsCalculator() {
             </Select>
           </div>
 
-          <Button onClick={calculateParpaings} className="w-full" size="lg">
+          <Button
+            onClick={calculateParpaings}
+            className="w-full cursor-pointer"
+            size="lg"
+            disabled={
+              !dimensions.length ||
+              !dimensions.height ||
+              !selectedType
+            }
+          >
             <Calculator className="mr-2 h-5 w-5" />
             Calculer mes besoins
           </Button>
