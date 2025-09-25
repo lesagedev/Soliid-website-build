@@ -104,7 +104,7 @@ export default function RootLayout({
       pauseOnHover
       theme="light"
     />
-    <div className="gtranslate_wrapper"></div>
+    <div className="gtranslate_wrapper notranslate"></div>
     <Script
       id="gtranslate-settings"
       strategy="afterInteractive"
@@ -114,7 +114,7 @@ export default function RootLayout({
             "default_language": "fr",
             "native_language_names": true,
             "detect_browser_language": true,
-            "languages": ["fr", "en", "de", "es", "it", "ar", "tr", "pt"],
+            "languages": ["fr", "en"],
             "switcher_horizontal_position":"right",
             "wrapper_selector": ".gtranslate_wrapper",
             "switcher_vertical_position": "top",
@@ -124,7 +124,7 @@ export default function RootLayout({
       }}
     />
     <Script
-      src="https://cdn.gtranslate.net/widgets/latest/float.js"
+      src="/js/float.js"
       strategy="afterInteractive"
     />
     <Script
@@ -132,23 +132,23 @@ export default function RootLayout({
       strategy="afterInteractive"
       dangerouslySetInnerHTML={{
         __html: `
-              (function (w, d, s, o, f, js, fjs) {
-                w["botsonic_widget"] = o;
-                w[o] = w[o] || function () {
-                  (w[o].q = w[o].q || []).push(arguments);
-                };
-                (js = d.createElement(s)), (fjs = d.getElementsByTagName(s)[0]);
-                js.id = o;
-                js.src = f;
-                js.async = 1;
-                fjs.parentNode.insertBefore(js, fjs);
-              })(window, document, "script", "Botsonic", "https://widget.botsonic.com/CDN/botsonic.min.js");
+          (function (w, d, s, o, f, js, fjs) {
+            w["botsonic_widget"] = o;
+            w[o] = w[o] || function () {
+              (w[o].q = w[o].q || []).push(arguments);
+            };
+            (js = d.createElement(s)), (fjs = d.getElementsByTagName(s)[0]);
+            js.id = o;
+            js.src = f;
+            js.async = 1;
+            fjs.parentNode.insertBefore(js, fjs);
+          })(window, document, "script", "Botsonic", "https://widget.botsonic.com/CDN/botsonic.min.js");
 
-              Botsonic("init", {
-                serviceBaseUrl: "https://api-bot.writesonic.com",
-                token: "59bacca3-ad0f-454e-bda5-70a1d199a0c5",
-              });
-            `,
+          Botsonic("init", {
+            serviceBaseUrl: "https://api-bot.writesonic.com",
+            token: "59bacca3-ad0f-454e-bda5-70a1d199a0c5",
+          });
+        `,
       }}
     />
     <Analytics />

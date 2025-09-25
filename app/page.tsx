@@ -558,7 +558,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto notranslate">
             <div className="text-center p-6 bg-white rounded-lg shadow-sm">
               <MapPin className="h-8 w-8 text-primary mx-auto mb-3"/>
               <h3 className="font-semibold mb-2">Douala</h3>
@@ -573,7 +573,7 @@ export default function HomePage() {
             </div>
             <div className="text-center p-6 bg-white rounded-lg shadow-sm">
               <MapPin className="h-8 w-8 text-primary mx-auto mb-3"/>
-              <h3 className="font-semibold mb-2">Limbe</h3>
+              <h3 className="font-semibold mb-2">Limbé</h3>
             </div>
           </div>
         </div>
