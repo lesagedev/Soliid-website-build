@@ -20,4 +20,3 @@ export const trackEvent = {
   quoteRequest: (product: string) =>
     analytics.track('Quote Requested', { product })
 }
-

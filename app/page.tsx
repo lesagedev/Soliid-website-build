@@ -1,6 +1,6 @@
 import Link from "next/link"
-import {Button} from "@/components/ui/button"
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Calculator,
   Download,
@@ -16,42 +16,44 @@ import {
 } from "lucide-react"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
-import Image from "next/image";
+import Image from "next/image"
 import QuoteButton from "@/components/quote-button"
+import PartnersCarousel from "@/components/PartnersCarousel"
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
-      <Navigation/>
+      <Navigation />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-background to-muted/30 py-20 lg:py-32"
-      >
+      <section className="relative bg-gradient-to-br from-background to-muted/30 py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
-                <div
-                  className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
+                <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
                   Soliid™ - Une marque Buildermats Industrie
                 </div>
                 <h1 className="text-4xl lg:text-6xl font-bold text-foreground leading-tight text-balance">
                   Vos projets, nos solutions de <span className="text-primary">préfabrication</span>
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed text-pretty">
-                  Nous disposons de la plus grosse <span className={"font-medium"}>capacité de production</span> de parpaings, pavés et bordures Premium <span className={"font-medium"}> au Cameroun et en  Afrique Centrale</span> pour tous vos projets de construction.
+                  Nous disposons de la plus grosse <span className={"font-medium"}>capacité de production</span> de
+                  parpaings, pavés et bordures Premium{" "}
+                  <span className={"font-medium"}> au Cameroun et en Afrique Centrale</span> pour tous vos projets de
+                  construction.
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
                   <Link href="/ressources">
-                    <Download className="mr-2 h-5 w-5"/>
+                    <Download className="mr-2 h-5 w-5" />
                     Télécharger nos guides
                   </Link>
                 </Button>
                 <QuoteButton variant="outline" size="lg">
-                  <Phone className="mr-2 h-5 w-5"/>
+                  <Phone className="mr-2 h-5 w-5" />
                   Demander un devis
                 </QuoteButton>
               </div>
@@ -59,15 +61,15 @@ export default function HomePage() {
               {/* Trust indicators */}
               <div className="flex items-center gap-6 pt-4">
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-primary"/>
+                  <CheckCircle className="h-5 w-5 text-primary" />
                   <span className="text-sm text-muted-foreground">Disponibilité</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Truck className="h-5 w-5 text-primary"/>
+                  <Truck className="h-5 w-5 text-primary" />
                   <span className="text-sm text-muted-foreground">Livraison rapide</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Shield className="h-5 w-5 text-primary"/>
+                  <Shield className="h-5 w-5 text-primary" />
                   <span className="text-sm text-muted-foreground">Solidité</span>
                 </div>
               </div>
@@ -83,13 +85,11 @@ export default function HomePage() {
                 />
               </div>
               {/* Floating stats card */}
-              <div
-                className="absolute -bottom-6 -left-6 bg-gradient-to-br from-white to-gray-50 p-6 rounded-2xl shadow-2xl border border-border backdrop-blur-sm">
+              <div className="absolute -bottom-6 -left-6 bg-gradient-to-br from-white to-gray-50 p-6 rounded-2xl shadow-2xl border border-border backdrop-blur-sm">
                 <div className="flex items-center gap-6">
                   {/* Mascot Image */}
                   <div className="relative">
-                    <div
-                      className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-primary/10 to-primary/20 p-1 shadow-lg">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-primary/10 to-primary/20 p-1 shadow-lg">
                       <Image
                         src="/home/mascot-soliid-paves.png"
                         alt="Mascotte M.SOLIID - Expert en construction"
@@ -99,9 +99,8 @@ export default function HomePage() {
                         priority
                       />
                     </div>
-                    <div
-                      className="absolute -top-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
-                      <CheckCircle className="w-3 h-3 text-white"/>
+                    <div className="absolute -top-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
+                      <CheckCircle className="w-3 h-3 text-white" />
                     </div>
                   </div>
 
@@ -130,8 +129,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
-                <div
-                  className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
+                <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
                   <span className="mr-2">🏗️</span>
                   Echangez avec un expert 24h/24
                 </div>
@@ -140,9 +138,8 @@ export default function HomePage() {
                 </h2>
                 <p className="text-lg text-muted-foreground text-justify leading-relaxed">
                   <span className="text-primary font-semibold">M. SOLIID</span>, notre expert, vous accompagne dans tous
-                  vos projets de construction.
-                  Avec son expérience et sa passion pour la qualité, il veille à ce que chaque parpaing,
-                  pavé et bordure réponde aux plus hauts standards.
+                  vos projets de construction. Avec son expérience et sa passion pour la qualité, il veille à ce que
+                  chaque parpaing, pavé et bordure réponde aux plus hauts standards.
                 </p>
               </div>
 
@@ -160,7 +157,7 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
                   <Link href="/contact">
-                    <Phone className="mr-2 h-5 w-5"/>
+                    <Phone className="mr-2 h-5 w-5" />
                     Parler à un expert
                   </Link>
                 </Button>
@@ -249,9 +246,7 @@ export default function HomePage() {
       <section id={"solutions"} className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">
-              Nos solutions
-            </h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">Nos solutions</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
               Des matériaux de construction de Haute Qualité pour tous vos projets : résidentiels, commerciaux,
               industriels & travaux publics.
@@ -270,10 +265,10 @@ export default function HomePage() {
                     loading="lazy"
                   />
                   <div className="absolute top-2 right-2 bg-amber-50 border border-amber-200 text-amber-800 text-xs px-3 py-1.5 rounded-full font-medium shadow-sm">
-                      <span className="flex items-center gap-1.5">
-                        <span className="inline-block w-1.5 h-1.5 bg-amber-700 rounded-full animate-pulse"></span>
-                        Disponible à Douala à partir de Janvier 2026
-                      </span>
+                    <span className="flex items-center gap-1.5">
+                      <span className="inline-block w-1.5 h-1.5 bg-amber-700 rounded-full animate-pulse"></span>
+                      Disponible à Douala à partir de Janvier 2026
+                    </span>
                   </div>
                 </div>
                 <CardTitle className="text-xl text-foreground">Parpaings</CardTitle>
@@ -284,19 +279,19 @@ export default function HomePage() {
               <CardContent className="space-y-4">
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-center gap-2 font-medium">
-                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
+                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
                     Capacité de production 20 000 parpaings/Jr
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
+                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
                     Dimensions standards
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
+                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
                     Résistance élevée
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
+                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
                     Hydrofuge
                   </li>
                 </ul>
@@ -306,7 +301,7 @@ export default function HomePage() {
                   </Button>
                   <Button asChild variant="outline" size="sm">
                     <Link href="/calculateurs">
-                      <Calculator className="h-4 w-4"/>
+                      <Calculator className="h-4 w-4" />
                     </Link>
                   </Button>
                 </div>
@@ -332,19 +327,19 @@ export default function HomePage() {
               <CardContent className="space-y-4">
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-center gap-2 font-medium">
-                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
+                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
                     Capacité de production 900m² de pavés/Jr
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
+                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
                     Formes variées
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
+                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
                     Résistance au trafic
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
+                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
                     Drainant
                   </li>
                 </ul>
@@ -354,7 +349,7 @@ export default function HomePage() {
                   </Button>
                   <Button asChild variant="outline" size="sm">
                     <Link href="/calculateurs">
-                      <Calculator className="h-4 w-4"/>
+                      <Calculator className="h-4 w-4" />
                     </Link>
                   </Button>
                 </div>
@@ -380,19 +375,19 @@ export default function HomePage() {
               <CardContent className="space-y-4">
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-center gap-2 font-medium">
-                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
+                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
                     Capacité de production 2 000 ml bordures/Jr
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
+                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
                     Travaux routiers
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
+                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
                     Installation facile
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
+                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
                     Durabilité garantie
                   </li>
                 </ul>
@@ -402,7 +397,7 @@ export default function HomePage() {
                   </Button>
                   <Button asChild variant="outline" size="sm">
                     <Link href="/calculateurs">
-                      <Calculator className="h-4 w-4"/>
+                      <Calculator className="h-4 w-4" />
                     </Link>
                   </Button>
                 </div>
@@ -426,7 +421,7 @@ export default function HomePage() {
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400"/>
+                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
                 <p className="text-muted-foreground mb-4">
@@ -435,7 +430,7 @@ export default function HomePage() {
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Users className="h-5 w-5 text-primary"/>
+                    <Users className="h-5 w-5 text-primary" />
                   </div>
                   <div>
                     <div className="font-semibold">Jean-Paul Mbarga</div>
@@ -449,7 +444,7 @@ export default function HomePage() {
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400"/>
+                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
                 <p className="text-muted-foreground mb-4">
@@ -458,7 +453,7 @@ export default function HomePage() {
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Users className="h-5 w-5 text-primary"/>
+                    <Users className="h-5 w-5 text-primary" />
                   </div>
                   <div>
                     <div className="font-semibold">Marie Fotso</div>
@@ -472,7 +467,7 @@ export default function HomePage() {
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400"/>
+                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
                 <p className="text-muted-foreground mb-4">
@@ -481,7 +476,7 @@ export default function HomePage() {
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Users className="h-5 w-5 text-primary"/>
+                    <Users className="h-5 w-5 text-primary" />
                   </div>
                   <div>
                     <div className="font-semibold">Alain Nkomo</div>
@@ -508,7 +503,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center space-y-4">
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
-                <Building className="h-8 w-8 text-primary"/>
+                <Building className="h-8 w-8 text-primary" />
               </div>
               <h3 className="text-xl font-semibold text-foreground">Solidité</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
@@ -518,7 +513,7 @@ export default function HomePage() {
 
             <div className="text-center space-y-4">
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
-                <Clock className="h-8 w-8 text-primary"/>
+                <Clock className="h-8 w-8 text-primary" />
               </div>
               <h3 className="text-xl font-semibold text-foreground">Livraison Rapide</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
@@ -528,7 +523,7 @@ export default function HomePage() {
 
             <div className="text-center space-y-4">
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
-                <Shield className="h-8 w-8 text-primary"/>
+                <Shield className="h-8 w-8 text-primary" />
               </div>
               <h3 className="text-xl font-semibold text-foreground">Support Expert</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
@@ -538,7 +533,7 @@ export default function HomePage() {
 
             <div className="text-center space-y-4">
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
-                <Calculator className="h-8 w-8 text-primary"/>
+                <Calculator className="h-8 w-8 text-primary" />
               </div>
               <h3 className="text-xl font-semibold text-foreground">Outils Pratiques</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
@@ -560,19 +555,19 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto notranslate">
             <div className="text-center p-6 bg-white rounded-lg shadow-sm">
-              <MapPin className="h-8 w-8 text-primary mx-auto mb-3"/>
+              <MapPin className="h-8 w-8 text-primary mx-auto mb-3" />
               <h3 className="font-semibold mb-2">Douala</h3>
             </div>
             <div className="text-center p-6 bg-white rounded-lg shadow-sm">
-              <MapPin className="h-8 w-8 text-primary mx-auto mb-3"/>
+              <MapPin className="h-8 w-8 text-primary mx-auto mb-3" />
               <h3 className="font-semibold mb-2">Yaoundé</h3>
             </div>
             <div className="text-center p-6 bg-white rounded-lg shadow-sm">
-              <MapPin className="h-8 w-8 text-primary mx-auto mb-3"/>
+              <MapPin className="h-8 w-8 text-primary mx-auto mb-3" />
               <h3 className="font-semibold mb-2">Kribi</h3>
             </div>
             <div className="text-center p-6 bg-white rounded-lg shadow-sm">
-              <MapPin className="h-8 w-8 text-primary mx-auto mb-3"/>
+              <MapPin className="h-8 w-8 text-primary mx-auto mb-3" />
               <h3 className="font-semibold mb-2">Limbé</h3>
             </div>
           </div>
@@ -589,7 +584,7 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" variant="secondary">
               <Link href="/calculateurs">
-                <Calculator className="mr-2 h-5 w-5"/>
+                <Calculator className="mr-2 h-5 w-5" />
                 Calculer mes besoins
               </Link>
             </Button>
@@ -600,7 +595,7 @@ export default function HomePage() {
               className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent"
             >
               <QuoteButton variant="outline" size="lg">
-                <Phone className="mr-2 h-5 w-5"/>
+                <Phone className="mr-2 h-5 w-5" />
                 Obtenir un devis
               </QuoteButton>
             </Button>
@@ -608,7 +603,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <Footer/>
+      {/* Partners Carousel Section */}
+      <PartnersCarousel />
+
+      <Footer />
     </div>
   )
 }

@@ -1,25 +1,33 @@
 "use client"
 
-import {useState} from "react"
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import {Button} from "@/components/ui/button"
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card"
-import {Badge} from "@/components/ui/badge"
-import {Calculator, CheckCircle, Building, Shield, Thermometer, Zap, ArrowRight, Eye, Download} from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Calculator, CheckCircle, Building, Shield, Thermometer, Zap, ArrowRight, Download } from "lucide-react"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
-import ProductModal from "@/components/product-modal"
-import QuoteButton from "@/components/quote-button";
+import QuoteButton from "@/components/quote-button"
+import { parpaingsData } from "@/lib/product-data"
+import ProductModal from "@/components/ProductModal" // Import ProductModal
 
 export default function ParpaingsPageClient() {
   const [selectedProduct, setSelectedProduct] = useState<any>(null)
   const [selectedGamme, setSelectedGamme] = useState<string>("")
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  const parpaingsByGamme = {
+    "Standard Premium": parpaingsData.filter((p) => p.gamme === "Standard Premium"),
+    "Standard Hydro Premium": parpaingsData.filter((p) => p.gamme === "Standard Hydro Premium"),
+    "Premium Haute Performance": parpaingsData.filter((p) => p.gamme === "Premium Haute Performance"),
+  }
+
   const parpaingTypes = [
     {
       name: "Standard Premium (SP)",
+      gamme: "Standard Premium",
       dimensions: "50cm × 20cm × 15cm / 20cm",
       weight: "21,60 kg ~ 25,60 kg",
       resistance: "4 MPa",
@@ -27,366 +35,58 @@ export default function ParpaingsPageClient() {
         "Idéal pour les murs porteurs et structures principales, Les parpaings Standard Premium de la marque SOLIID allient résistance, précision et durabilité.",
       features: ["Résistance élevée 4 Mpa", "Durabilité garantie", "Finition régulière et esthétique"],
       usage: "Fondations, murs porteurs, cloisons",
-      variants: [
-        {
-          name: "Parpaing 15",
-          dimensions: "15cm × 20cm × 50cm",
-          weight: "25,60 kg",
-          resistance: "4 MPa",
-          description:
-            "Idéal pour les murs porteurs et structures principales, Les parpaings Standard Premium de la marque SOLIID allient résistance, précision et durabilité.",
-          features: ["Résistance élevée 4 Mpa", "Durabilité garantie", "Finition régulière et esthétique"],
-          usage: "Murs porteurs, fondations, structures principales, cloisons",
-          image: "/parpaing/couverture-parpaings.png",
-          images: [
-            "/parpaing/parpaing-1550.png",
-            "/parpaing/parpaing-1550-util.jpeg",
-          ],
-          technicalDetails: [
-            "Conformité aux normes NF EN 771-3",
-            "Absorption d'eau < 10%",
-            "Résistance au gel-dégel",
-            "Conductivité thermique λ = 0,9 W/m.K",
-            "Densité : 1800 kg/m³",
-          ],
-          applications: [
-            "Construction de maisons individuelles",
-            "Bâtiments collectifs et commerciaux",
-            "Murs de soutènement",
-            "Fondations et soubassements",
-          ],
-        },
-        {
-          name: "Parpaing 20",
-          dimensions: "20cm × 20cm × 50cm",
-          weight: "25,60 kg",
-          resistance: "4 MPa",
-          description:
-            "Idéal pour les murs porteurs et structures principales, Les parpaings Standard Premium de la marque SOLIID allient résistance, précision et durabilité.",
-          features: ["Résistance élevée", "Isolation thermique", "Durabilité garantie", "Finition régulière et esthétique"],
-          usage: "Murs porteurs, fondations, structures principales, cloisons",
-          image: "/parpaing/couverture-parpaings.png",
-          images: [
-            "/parpaing/parpaing-2050.jpg",
-            "/parpaing/parpaing-2050-util.jpeg"
-          ],
-          technicalDetails: [
-            "Conformité aux normes NF EN 771-3",
-            "Absorption d'eau < 10%",
-            "Résistance au gel-dégel",
-            "Conductivité thermique λ = 0,9 W/m.K",
-            "Densité : 1800 kg/m³",
-          ],
-          applications: [
-            "Construction de maisons individuelles",
-            "Bâtiments collectifs et commerciaux",
-            "Murs de soutènement",
-            "Fondations et soubassements",
-          ],
-        },
-        {
-          name: "Hourdis",
-          dimensions: "15cm × 20cm × 50cm",
-          weight: "21,60 kg",
-          resistance: "4 MPa",
-          description:
-            "Idéal pour les murs porteurs et structures principales, Les parpaings Standard Premium de la marque SOLIID allient résistance, précision et durabilité.",
-          features: ["Résistance élevée", "Isolation thermique", "Durabilité garantie", "Finition régulière et esthétique"],
-          usage: "Murs porteurs, fondations, structures principales, cloisons",
-          image: "/parpaing/couverture-parpaings.png",
-          images: [
-            "/parpaing/hourdis.png",
-            "/parpaing/hourdis-util.png",
-          ],
-          technicalDetails: [
-            "Conformité aux normes NF EN 771-3",
-            "Absorption d'eau < 10%",
-            "Résistance au gel-dégel",
-            "Conductivité thermique λ = 0,9 W/m.K",
-            "Densité : 1800 kg/m³",
-          ],
-          applications: [
-            "Construction de maisons individuelles",
-            "Bâtiments collectifs et commerciaux",
-            "Murs de soutènement",
-            "Fondations et soubassements",
-          ],
-        },
-      ],
       image: "/parpaing/couverture-parpaings.png",
-      images: [
-        "/parpaings-standard-premium-soliid-construction.jpg",
-        "/parpaings-soliid-buildermats-construction-cameroun.jpg",
-        "/specifications-techniques-parpaings-soliid-qualite.jpg",
-      ],
-      technicalDetails: [
-        "Conformité aux normes NF EN 771-3",
-        "Absorption d'eau < 10%",
-        "Résistance au gel-dégel",
-        "Conductivité thermique λ = 0,9 W/m.K",
-        "Densité : 1800 kg/m³",
-      ],
-      applications: [
-        "Construction de maisons individuelles",
-        "Bâtiments collectifs et commerciaux",
-        "Murs de soutènement",
-        "Fondations et soubassements",
-      ],
     },
     {
       name: "Standard Hydro Premium (SHP)",
+      gamme: "Standard Hydro Premium",
       dimensions: "50cm × 20cm × 15cm / 20cm",
       weight: "21,60 kg ~ 25,60 kg",
       resistance: "4 MPa",
-      description: "Les parpaings Standard Hydro Premium SOLIID sont spécialement conçus pour offrir une résistance renforcée à l'humidité et aux intempéries.",
-      features: [
-        "Hydrofuge",
-        "Résistance élevée 4 Mpa",
-        "Durabilité garantie",
-      ],
+      description:
+        "Les parpaings Standard Hydro Premium SOLIID sont spécialement conçus pour offrir une résistance renforcée à l'humidité et aux intempéries.",
+      features: ["Hydrofuge", "Résistance élevée 4 Mpa", "Durabilité garantie"],
       usage: "Fondations, murs exterieurs, salle d'eau",
-      variants: [
-        {
-          name: "Parpaing 15",
-          dimensions: "20cm × 20cm × 50cm",
-          weight: "21,60 kg",
-          resistance: "4 MPa",
-          description: "Les parpaings Standard Hydro Premium SOLIID sont spécialement conçus pour offrir une résistance renforcée à l'humidité et aux intempéries.",
-          features: [
-            "Protection hydrofuge intégrée",
-            "Résistance aux intempéries",
-            "Longévité accrue",
-            "Protection contre l'infiltration d'eau",
-          ],
-          usage: "Cloisons intérieures, séparations, murs non porteurs, zones humides",
-          image: "/parpaing/couverture-parpaings-3.png",
-          images: [
-            "/parpaing/parpaing-1550.png",
-            "/parpaing/parpaing-1550-util.jpeg",
-          ],
-          technicalDetails: [
-            "Traitement hydrofuge dans la masse",
-            "Résistance à l'humidité renforcée",
-            "Protection anti-remontées capillaires",
-            "Perméabilité à la vapeur d'eau optimisée",
-            "Résistance aux cycles humidification-séchage",
-          ],
-          applications: [
-            "Salles de bains et cuisines",
-            "Caves et sous-sols",
-            "Murs exposés aux intempéries",
-            "Zones à forte humidité",
-          ],
-        },
-        {
-          name: "Parpaing 20",
-          dimensions: "20cm × 20cm × 50cm",
-          weight: "25,60 kg",
-          resistance: "4 MPa",
-          description: "Les parpaings Standard Hydro Premium SOLIID sont spécialement conçus pour offrir une résistance renforcée à l'humidité et aux intempéries.",
-          features: [
-            "Protection hydrofuge intégrée",
-            "Résistance aux intempéries",
-            "Longévité accrue",
-            "Protection contre l'infiltration d'eau",
-          ],
-          usage: "Cloisons intérieures, séparations, murs non porteurs, zones humides",
-          image: "/parpaing/couverture-parpaings-3.png",
-          images: [
-            "/parpaing/parpaing-2050.jpg",
-            "/parpaing/parpaing-2050-util.jpeg"
-          ],
-          technicalDetails: [
-            "Traitement hydrofuge dans la masse",
-            "Résistance à l'humidité renforcée",
-            "Protection anti-remontées capillaires",
-            "Perméabilité à la vapeur d'eau optimisée",
-            "Résistance aux cycles humidification-séchage",
-          ],
-          applications: [
-            "Salles de bains et cuisines",
-            "Caves et sous-sols",
-            "Murs exposés aux intempéries",
-            "Zones à forte humidité",
-          ],
-        },
-      ],
       image: "/parpaing/couverture-parpaings-3.png",
-      images: [
-        "/parpaings-hydro-premium-soliid-resistance-humidite.jpg",
-        "/parpaings-soliid-buildermats-construction-cameroun.jpg",
-        "/specifications-techniques-parpaings-soliid-qualite.jpg",
-      ],
-      technicalDetails: [
-        "Traitement hydrofuge dans la masse",
-        "Résistance à l'humidité renforcée",
-        "Protection anti-remontées capillaires",
-        "Perméabilité à la vapeur d'eau optimisée",
-        "Résistance aux cycles humidification-séchage",
-      ],
-      applications: [
-        "Salles de bains et cuisines",
-        "Caves et sous-sols",
-        "Murs exposés aux intempéries",
-        "Zones à forte humidité",
-      ],
     },
     {
       name: "Premium Haute Performance (PHP)",
+      gamme: "Premium Haute Performance",
       dimensions: "50cm × 20cm × 15cm",
       weight: "25,60 kg",
       resistance: "6 MPa",
-      description: "Les parpaings Premium Haute Performance SOLIID sont conçus avec une résistance mécanique exceptionnelle et une resistance à l'humidité ",
-      features: [
-        "Haute performance 6 Mpa",
-        "Hydrofuge",
-        "Utilisable en zone sismique",
-      ],
+      description:
+        "Les parpaings Premium Haute Performance SOLIID sont conçus avec une résistance mécanique exceptionnelle et une resistance à l'humidité ",
+      features: ["Haute performance 6 Mpa", "Hydrofuge", "Utilisable en zone sismique"],
       usage: "Projets exigeants",
-      variants: [
-        {
-          name: "Parpaing 15",
-          dimensions: "15cm × 20cm × 50cm",
-          weight: "25,60 kg",
-          resistance: "6 MPa",
-          description: "Les parpaings Premium Haute Performance SOLIID sont conçus avec une résistance mécanique exceptionnelle et une durabilité accrue.",
-          features: [
-            "Solidité supérieure",
-            "Haute performance thermique et acoustique",
-            "Finition soignée",
-            "Précision dimensionnelle optimale",
-          ],
-          usage: "Projets exigeants, ouvrages robustes et sûrs, constructions haute performance",
-          image: "/parpaing/couverture-parpaings-4.png",
-          images: [
-            "/parpaing/parpaing-1550.png",
-            "/parpaing/parpaing-1550-util.jpeg",
-          ],
-          technicalDetails: [
-            "Résistance mécanique exceptionnelle 6 MPa",
-            "Isolation thermique renforcée",
-            "Isolation acoustique supérieure",
-            "Précision dimensionnelle ±1mm",
-            "Durabilité garantie 50 ans",
-          ],
-          applications: [
-            "Bâtiments haute performance énergétique",
-            "Constructions parasismiques",
-            "Ouvrages d'art et infrastructures",
-            "Projets architecturaux exigeants",
-          ],
-        },
-        {
-          name: "Parpaing 20",
-          dimensions: "20cm × 20cm × 50cm",
-          weight: "30,20 kg",
-          resistance: "6 MPa",
-          description: "Les parpaings Premium Haute Performance SOLIID sont conçus avec une résistance mécanique exceptionnelle et une durabilité accrue.",
-          features: [
-            "Solidité supérieure",
-            "Haute performance thermique et acoustique",
-            "Finition soignée",
-            "Précision dimensionnelle optimale",
-          ],
-          usage: "Projets exigeants, ouvrages robustes et sûrs, constructions haute performance",
-          image: "/parpaing/couverture-parpaings-4.png",
-          images: [
-            "/parpaing/parpaing-2050.jpg",
-            "/parpaing/parpaing-2050-util.jpeg"
-          ],
-          technicalDetails: [
-            "Résistance mécanique exceptionnelle 6 MPa",
-            "Isolation thermique renforcée",
-            "Isolation acoustique supérieure",
-            "Précision dimensionnelle ±1mm",
-            "Durabilité garantie 50 ans",
-          ],
-          applications: [
-            "Bâtiments haute performance énergétique",
-            "Constructions parasismiques",
-            "Ouvrages d'art et infrastructures",
-            "Projets architecturaux exigeants",
-          ],
-        },
-        {
-          name: "Hourdis",
-          dimensions: "15cm × 20cm × 50cm",
-          weight: "25,60 kg",
-          resistance: "6 MPa",
-          description: "Les parpaings Premium Haute Performance SOLIID sont conçus avec une résistance mécanique exceptionnelle et une durabilité accrue.",
-          features: [
-            "Solidité supérieure",
-            "Haute performance thermique et acoustique",
-            "Finition soignée",
-            "Précision dimensionnelle optimale",
-          ],
-          usage: "Projets exigeants, ouvrages robustes et sûrs, constructions haute performance",
-          image: "/parpaing/couverture-parpaings-4.png",
-          images: [
-            "/parpaing/hourdis.png",
-            "/parpaing/hourdis-util.png",
-          ],
-          technicalDetails: [
-            "Résistance mécanique exceptionnelle 6 MPa",
-            "Isolation thermique renforcée",
-            "Isolation acoustique supérieure",
-            "Précision dimensionnelle ±1mm",
-            "Durabilité garantie 50 ans",
-          ],
-          applications: [
-            "Bâtiments haute performance énergétique",
-            "Constructions parasismiques",
-            "Ouvrages d'art et infrastructures",
-            "Projets architecturaux exigeants",
-          ],
-        },
-      ],
       image: "/parpaing/couverture-parpaings-4.png",
-      images: [
-        "/parpaings-premium-haute-performance-soliid-excelle.jpg",
-        "/parpaings-soliid-buildermats-construction-cameroun.jpg",
-        "/specifications-techniques-parpaings-soliid-qualite.jpg",
-      ],
-      technicalDetails: [
-        "Résistance mécanique exceptionnelle 6 MPa",
-        "Isolation thermique renforcée",
-        "Isolation acoustique supérieure",
-        "Précision dimensionnelle ±1mm",
-        "Durabilité garantie 50 ans",
-      ],
-      applications: [
-        "Bâtiments haute performance énergétique",
-        "Constructions parasismiques",
-        "Ouvrages d'art et infrastructures",
-        "Projets architecturaux exigeants",
-      ],
     },
-  ];
+  ]
 
   const getRelatedProducts = (currentProduct: any, currentGamme: string) => {
-    const gamme = parpaingTypes.find(g => g.name === currentGamme)
+    const gamme = parpaingTypes.find((g) => g.name === currentGamme)
     if (!gamme) return []
 
     return gamme.variants
-      .filter(variant => variant.name !== currentProduct.name)
-      .map(variant => {
+      .filter((variant) => variant.name !== currentProduct.name)
+      .map((variant) => {
         const gammeName = getGammeName(currentGamme)
         return {
           id: `${variant.name}-${currentGamme}`,
           name: variant.name,
           data: {
             ...variant,
-            name: `${variant.name} ${gammeName}`
-          }
+            name: `${variant.name} ${gammeName}`,
+          },
         }
       })
   }
 
   const getGammeName = (parentName: string) => {
-    if (parentName.includes('(SP)')) return 'Standard Premium'
-    if (parentName.includes('(SHP)')) return 'Standard Hydro Premium'
-    if (parentName.includes('(PHP)')) return 'Premium Haute Performance'
-    return ''
+    if (parentName.includes("(SP)")) return "Standard Premium"
+    if (parentName.includes("(SHP)")) return "Standard Hydro Premium"
+    if (parentName.includes("(PHP)")) return "Premium Haute Performance"
+    return ""
   }
 
   const handleProductClick = (product: any, parentGamme: string) => {
@@ -394,7 +94,7 @@ export default function ParpaingsPageClient() {
 
     const productWithGamme = {
       ...product,
-      name: `${product.name} ${gammeName}`
+      name: `${product.name} ${gammeName}`,
     }
 
     setSelectedProduct(productWithGamme)
@@ -410,7 +110,8 @@ export default function ParpaingsPageClient() {
     {
       icon: Building,
       title: "Résistance Exceptionnelle",
-      description: "Nos parpaings résistent aux contraintes mécaniques éleveées et respectent les normes internationales.",
+      description:
+        "Nos parpaings résistent aux contraintes mécaniques éleveées et respectent les normes internationales.",
     },
     {
       icon: Thermometer,
@@ -431,7 +132,7 @@ export default function ParpaingsPageClient() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation/>
+      <Navigation />
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-background to-muted/30 py-16 lg:py-24">
@@ -455,13 +156,13 @@ export default function ParpaingsPageClient() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
                   <Link href="/ressources">
-                    <Download className="mr-2 h-5 w-5"/>
+                    <Download className="mr-2 h-5 w-5" />
                     Télécharger nos guides
                   </Link>
                 </Button>
                 <QuoteButton variant="outline" size="lg">
                   Demander un devis
-                  <ArrowRight className="ml-2 h-5 w-5"/>
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </QuoteButton>
               </div>
             </div>
@@ -529,26 +230,18 @@ export default function ParpaingsPageClient() {
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">
-              Les Parpaings Soliid
-            </h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">Les Parpaings Soliid</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
               Parpaings 15 en 50 cm, Parpaings 20 en 50 cm, Hourdis épaisseur 15 en 50 cm pour répondre à tous vos
-              besoins de
-              construction.
+              besoins de construction.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {parpaingTypes.map((parpaing, index) => (
-              <Card
-                key={index}
-                className="group hover:shadow-lg transition-all duration-300 border-border"
-              >
+              <Card key={index} className="group hover:shadow-lg transition-all duration-300 border-border">
                 <CardHeader className="space-y-4">
-                  <div
-                    className="aspect-video bg-muted rounded-lg overflow-hidden relative"
-                  >
+                  <div className="aspect-video bg-muted rounded-lg overflow-hidden relative">
                     <Image
                       src={parpaing.image || "/placeholder.svg"}
                       alt={parpaing.name}
@@ -564,28 +257,27 @@ export default function ParpaingsPageClient() {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <CardTitle
-                      className="text-xl text-foreground transition-colors"
-                    >
-                      {parpaing.name}
-                    </CardTitle>
+                    <CardTitle className="text-xl text-foreground transition-colors">{parpaing.name}</CardTitle>
                     <div className="flex flex-col gap-2">
                       <div className="flex gap-2 flex-wrap">
-                        {parpaing.variants.map((variant, idx) => (
+                        {parpaingsByGamme[parpaing.gamme as keyof typeof parpaingsByGamme]?.map((product) => (
                           <Button
-                            key={idx}
-                            className="flex-1 text-sm border cursor-pointer border-primary bg-primary-foreground text-primary hover:text-primary-foreground"
+                            key={product.slug}
+                            asChild
+                            className="flex-1 text-sm border border-primary bg-primary-foreground text-primary hover:bg-primary hover:text-primary-foreground"
                             size="sm"
-                            onClick={() => handleProductClick(variant, parpaing.name)}
                           >
-                            {variant.name}
+                            <Link href={`/parpaings/${product.slug}`}>
+                              {product.name.replace(` ${parpaing.gamme}`, "")}
+                            </Link>
                           </Button>
                         ))}
                       </div>
                     </div>
                   </div>
-                  <CardDescription
-                    className="text-muted-foreground text-justify">{parpaing.description}</CardDescription>
+                  <CardDescription className="text-muted-foreground text-justify">
+                    {parpaing.description}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
@@ -593,7 +285,7 @@ export default function ParpaingsPageClient() {
                     <ul className="space-y-1 text-sm text-muted-foreground">
                       {parpaing.features.map((feature, idx) => (
                         <li key={idx} className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-primary flex-shrink-0"/>
+                          <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
                           {feature}
                         </li>
                       ))}
@@ -606,7 +298,7 @@ export default function ParpaingsPageClient() {
                   <div className="flex gap-2">
                     <Button asChild className="flex-1">
                       <Link href="/calculateurs">
-                        <Calculator className="mr-2 h-4 w-4"/>
+                        <Calculator className="mr-2 h-4 w-4" />
                         Calculer mes besoins
                       </Link>
                     </Button>
@@ -634,7 +326,7 @@ export default function ParpaingsPageClient() {
             {advantages.map((advantage, index) => (
               <div key={index} className="text-center space-y-4">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
-                  <advantage.icon className="h-8 w-8 text-primary"/>
+                  <advantage.icon className="h-8 w-8 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold text-foreground">{advantage.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{advantage.description}</p>
@@ -655,7 +347,7 @@ export default function ParpaingsPageClient() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" variant="secondary">
               <Link href="/calculateurs">
-                <Calculator className="mr-2 h-5 w-5"/>
+                <Calculator className="mr-2 h-5 w-5" />
                 Calculateur parpaings
               </Link>
             </Button>
@@ -667,7 +359,7 @@ export default function ParpaingsPageClient() {
             >
               <Link href="/contact">
                 Demander un devis personnalisé
-                <ArrowRight className="ml-2 h-5 w-5"/>
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
           </div>
@@ -686,7 +378,7 @@ export default function ParpaingsPageClient() {
         />
       )}
 
-      <Footer/>
+      <Footer />
     </div>
   )
 }
