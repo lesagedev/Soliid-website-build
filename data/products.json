@@ -1,37 +1,5 @@
 [
   {
-    "id": 1,
-    "type": "parpaings",
-    "name": "Parpaing Standard 20x20x40",
-    "dimensions": "20x20x40 cm",
-    "price": 350,
-    "weight": "21.60 kg",
-    "resistance": "4 MPA",
-    "description": "Idéal pour les murs porteurs, fondations et structures principales. Les parpaings Standard Premium allient résistance, précision et durabilité avec une robustesse optimale et une finition régulière.",
-    "image": "/placeholder.svg?height=300&width=400&text=Parpaing+Standard+Premium+15cm",
-    "created_at": "2024-01-01T00:00:00.000Z"
-  },
-  {
-    "id": 2,
-    "type": "parpaings",
-    "name": "Parpaing Creux 15x20x40",
-    "dimensions": "15x20x40 cm",
-    "price": 300,
-    "description": "Parpaing creux léger pour cloisons intérieures",
-    "image": "/placeholder.svg?height=300&width=400&text=Parpaing+Creux",
-    "created_at": "2024-01-01T00:00:00.000Z"
-  },
-  {
-    "id": 3,
-    "type": "parpaings",
-    "name": "Parpaing Plein 20x20x40",
-    "dimensions": "20x20x40 cm",
-    "price": 400,
-    "description": "Parpaing plein haute résistance pour structures portantes",
-    "image": "/placeholder.svg?height=300&width=400&text=Parpaing+Plein",
-    "created_at": "2024-01-01T00:00:00.000Z"
-  },
-  {
     "id": 4,
     "type": "parpaings",
     "name": "Parpaing Hydro Premium 15cm",

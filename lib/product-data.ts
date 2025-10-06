@@ -46,8 +46,8 @@ export const parpaingsData: ProductData[] = [
     ],
     usage: "Murs porteurs, fondations, structures principales",
     images: [
-      "/parpaings/parpaings-standard-premium-soliid-construction.jpg",
-      "/parpaings/specifications-techniques-parpaings-soliid-qualite.jpg",
+      "/parpaing/parpaing-1550.png",
+      "/parpaing/parpaing-1550-util.jpeg",
     ],
     technicalDetails: [
       "Classe de résistance : 4 MPa",
@@ -83,8 +83,8 @@ export const parpaingsData: ProductData[] = [
     ],
     usage: "Murs porteurs épais, cloisons intérieures, structures renforcées",
     images: [
-      "/parpaings/parpaings-standard-premium-soliid-construction.jpg",
-      "/parpaings/specifications-techniques-parpaings-soliid-qualite.jpg",
+      "/parpaing/parpaing-2050.jpg",
+      "/parpaing/parpaing-2050-util.jpeg",
     ],
     technicalDetails: [
       "Classe de résistance : 4 MPa",
@@ -120,8 +120,8 @@ export const parpaingsData: ProductData[] = [
     ],
     usage: "Planchers, dalles, entre-poutres",
     images: [
-      "/parpaings/parpaings-standard-premium-soliid-construction.jpg",
-      "/parpaings/specifications-techniques-parpaings-soliid-qualite.jpg",
+      "/parpaing/hourdis.png",
+      "/parpaing/hourdis-util.png",
     ],
     technicalDetails: [
       "Poids réduit : 12,50 kg",
@@ -157,8 +157,8 @@ export const parpaingsData: ProductData[] = [
     ],
     usage: "Zones humides, salles d'eau, fondations, murs extérieurs exposés",
     images: [
-      "/parpaings/parpaings-hydro-premium-soliid-resistance-humidite.jpg",
-      "/parpaings/specifications-techniques-parpaings-soliid-qualite.jpg",
+      "/parpaing/parpaing-1550.png",
+      "/parpaing/parpaing-1550-util.jpeg",
     ],
     technicalDetails: [
       "Traitement hydrofuge intégré",
@@ -194,8 +194,8 @@ export const parpaingsData: ProductData[] = [
     ],
     usage: "Murs épais en zones humides, cloisons salles d'eau, structures exposées",
     images: [
-      "/parpaings/parpaings-hydro-premium-soliid-resistance-humidite.jpg",
-      "/parpaings/specifications-techniques-parpaings-soliid-qualite.jpg",
+      "/parpaing/parpaing-2050.jpg",
+      "/parpaing/parpaing-2050-util.jpeg",
     ],
     technicalDetails: [
       "Traitement hydrofuge avancé",
@@ -231,8 +231,8 @@ export const parpaingsData: ProductData[] = [
     ],
     usage: "Projets haut de gamme, bâtiments exigeants, structures de prestige",
     images: [
-      "/parpaings/parpaings-premium-haute-performance-soliid-excellence.jpg",
-      "/parpaings/specifications-techniques-parpaings-soliid-qualite.jpg",
+      "/parpaing/parpaing-1550.png",
+      "/parpaing/parpaing-1550-util.jpeg",
     ],
     technicalDetails: [
       "Résistance : 6 MPa",
@@ -268,8 +268,8 @@ export const parpaingsData: ProductData[] = [
     ],
     usage: "Structures de prestige, bâtiments haute performance, projets d'excellence",
     images: [
-      "/parpaings/parpaings-premium-haute-performance-soliid-excellence.jpg",
-      "/parpaings/specifications-techniques-parpaings-soliid-qualite.jpg",
+      "/parpaing/parpaing-2050.jpg",
+      "/parpaing/parpaing-2050-util.jpeg",
     ],
     technicalDetails: [
       "Résistance : 6 MPa",
@@ -284,6 +284,43 @@ export const parpaingsData: ProductData[] = [
       "Projets architecturaux premium",
       "Construction haut de gamme",
       "Immeubles d'exception",
+    ],
+  },
+  {
+    name: "Hourdis Premium Haute Performance",
+    slug: "hourdis-premium-haute-performance",
+    dimensions: "50 x 20 x 20 cm",
+    weight: "12,50 kg",
+    resistance: "4 MPa",
+    category: "parpaings",
+    gamme: "Premium Haute Performance",
+    description:
+      "Hourdis léger pour planchers et dalles. Solution économique et performante pour vos planchers avec une résistance de 4 MPa.",
+    features: [
+      "Léger : seulement 12,50 kg",
+      "Résistance de 4 MPa",
+      "Facilite la pose des planchers",
+      "Économique",
+      "Gain de temps de construction",
+    ],
+    usage: "Planchers, dalles, entre-poutres",
+    images: [
+      "/parpaing/hourdis.png",
+      "/parpaing/hourdis-util.png",
+    ],
+    technicalDetails: [
+      "Poids réduit : 12,50 kg",
+      "Résistance : 4 MPa",
+      "Dimensions standardisées",
+      "Facilité de manutention",
+      "Compatible systèmes de plancher",
+    ],
+    applications: [
+      "Planchers d'étages",
+      "Dalles de compression",
+      "Entre-poutres",
+      "Construction rapide",
+      "Rénovation de planchers",
     ],
   },
 ]

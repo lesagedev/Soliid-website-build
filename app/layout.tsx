@@ -13,7 +13,7 @@ import { Analytics } from "@vercel/analytics/next"
 export const metadata: Metadata = {
   title: "Soliid - Préfabrication de Parpaings, Pavés et Bordures",
   description:
-    "Soliid, votre partenaire de confiance pour la préfabrication de parpaings, pavés et bordures. Construire facile avec nos solutions de qualité à Douala et dans tout le Cameroun.",
+    "Soliid, votre partenaire de confiance pour la préfabrication de parpaings, pavés et bordures.",
   keywords:
     "parpaings, pavés, bordures, préfabrication, construction, Cameroun, Douala, construire, matériaux de construction, béton",
   authors: [{ name: "Soliid" }],
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     title: "Soliid - Préfabrication de Parpaings, Pavés et Bordures",
     description:
       "Votre partenaire de confiance pour la préfabrication de parpaings et pavés au Cameroun. Construire facile avec nos solutions de qualité.",
-    url: "https://www.soliid-cm.com",
+    url: "https://www.soliid.cm",
     siteName: "Soliid",
     locale: "fr_FR",
     type: "website",
