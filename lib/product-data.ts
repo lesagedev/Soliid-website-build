@@ -45,10 +45,7 @@ export const parpaingsData: ProductData[] = [
       "Excellent rapport qualité-prix",
     ],
     usage: "Murs porteurs, fondations, structures principales",
-    images: [
-      "/parpaing/parpaing-1550.png",
-      "/parpaing/parpaing-1550-util.jpeg",
-    ],
+    images: ["/parpaing/parpaing-1550.png", "/parpaing/parpaing-1550-util.jpeg"],
     technicalDetails: [
       "Classe de résistance : 4 MPa",
       "Absorption d'eau < 10%",
@@ -82,10 +79,7 @@ export const parpaingsData: ProductData[] = [
       "Durabilité garantie",
     ],
     usage: "Murs porteurs épais, cloisons intérieures, structures renforcées",
-    images: [
-      "/parpaing/parpaing-2050.jpg",
-      "/parpaing/parpaing-2050-util.jpeg",
-    ],
+    images: ["/parpaing/parpaing-2050.jpg", "/parpaing/parpaing-2050-util.jpeg"],
     technicalDetails: [
       "Classe de résistance : 4 MPa",
       "Épaisseur : 20 cm",
@@ -119,10 +113,7 @@ export const parpaingsData: ProductData[] = [
       "Gain de temps de construction",
     ],
     usage: "Planchers, dalles, entre-poutres",
-    images: [
-      "/parpaing/hourdis.png",
-      "/parpaing/hourdis-util.png",
-    ],
+    images: ["/parpaing/hourdis.png", "/parpaing/hourdis-util.png"],
     technicalDetails: [
       "Poids réduit : 12,50 kg",
       "Résistance : 4 MPa",
@@ -156,10 +147,7 @@ export const parpaingsData: ProductData[] = [
       "Durabilité exceptionnelle",
     ],
     usage: "Zones humides, salles d'eau, fondations, murs extérieurs exposés",
-    images: [
-      "/parpaing/parpaing-1550.png",
-      "/parpaing/parpaing-1550-util.jpeg",
-    ],
+    images: ["/parpaing/parpaing-1550.png", "/parpaing/parpaing-1550-util.jpeg"],
     technicalDetails: [
       "Traitement hydrofuge intégré",
       "Résistance : 4 MPa",
@@ -193,10 +181,7 @@ export const parpaingsData: ProductData[] = [
       "Résistance aux intempéries",
     ],
     usage: "Murs épais en zones humides, cloisons salles d'eau, structures exposées",
-    images: [
-      "/parpaing/parpaing-2050.jpg",
-      "/parpaing/parpaing-2050-util.jpeg",
-    ],
+    images: ["/parpaing/parpaing-2050.jpg", "/parpaing/parpaing-2050-util.jpeg"],
     technicalDetails: [
       "Traitement hydrofuge avancé",
       "Épaisseur : 20 cm",
@@ -230,10 +215,7 @@ export const parpaingsData: ProductData[] = [
       "Durabilité maximale",
     ],
     usage: "Projets haut de gamme, bâtiments exigeants, structures de prestige",
-    images: [
-      "/parpaing/parpaing-1550.png",
-      "/parpaing/parpaing-1550-util.jpeg",
-    ],
+    images: ["/parpaing/parpaing-1550.png", "/parpaing/parpaing-1550-util.jpeg"],
     technicalDetails: [
       "Résistance : 6 MPa",
       "Performance thermique optimale",
@@ -267,10 +249,7 @@ export const parpaingsData: ProductData[] = [
       "Performance globale optimale",
     ],
     usage: "Structures de prestige, bâtiments haute performance, projets d'excellence",
-    images: [
-      "/parpaing/parpaing-2050.jpg",
-      "/parpaing/parpaing-2050-util.jpeg",
-    ],
+    images: ["/parpaing/parpaing-2050.jpg", "/parpaing/parpaing-2050-util.jpeg"],
     technicalDetails: [
       "Résistance : 6 MPa",
       "Épaisseur : 20 cm",
@@ -304,10 +283,7 @@ export const parpaingsData: ProductData[] = [
       "Gain de temps de construction",
     ],
     usage: "Planchers, dalles, entre-poutres",
-    images: [
-      "/parpaing/hourdis.png",
-      "/parpaing/hourdis-util.png",
-    ],
+    images: ["/parpaing/hourdis.png", "/parpaing/hourdis-util.png"],
     technicalDetails: [
       "Poids réduit : 12,50 kg",
       "Résistance : 4 MPa",
@@ -464,6 +440,85 @@ export const pavesData: ProductData[] = [
       "Infrastructures portuaires",
     ],
   },
+  {
+    name: "Soliid Eco-Drain 6",
+    slug: "soliid-eco-drain-6",
+    dimensions: "6cm × 20cm × 10cm",
+    weight: "3,2 kg",
+    resistance: "3 MPa (B30)",
+    category: "paves",
+    gamme: "Premium Drainant",
+    description:
+      "Pavé drainant écologique pour gestion optimale des eaux pluviales. Idéal pour les projets urbains durables.",
+    features: ["Drainage efficace", "Écologique", "Résistance B30", "Gestion eaux pluviales"],
+    usage: "Projets urbains, parkings écologiques, zones piétonnes",
+    images: ["/paves/couverture-paves-drainant.jpg"],
+    technicalDetails: [
+      "Classe de résistance B30",
+      "Perméabilité optimale",
+      "Respect normes environnementales",
+      "Réduction ruissellement",
+      "Installation facilitée",
+    ],
+    applications: [
+      "Aménagements urbains durables",
+      "Parkings écologiques",
+      "Zones piétonnes drainantes",
+      "Espaces publics modernes",
+    ],
+  },
+  {
+    name: "Soliid Hydro-Pro 8",
+    slug: "soliid-hydro-pro-8",
+    dimensions: "8cm × 20cm × 10cm",
+    weight: "3,5 kg",
+    resistance: "3,6 MPa (B36)",
+    category: "paves",
+    gamme: "Premium Drainant",
+    description: "Pavé drainant haute performance pour circulation modérée. Technologie avancée de drainage.",
+    features: ["Haute perméabilité", "Résistance B36", "Trafic modéré", "Technologie drainage"],
+    usage: "Voies d'accès drainantes, parkings, zones commerciales",
+    images: ["/paves/couverture-paves-drainant-pro.jpg"],
+    technicalDetails: [
+      "Classe de résistance B36",
+      "Épaisseur 8cm renforcée",
+      "Drainage haute performance",
+      "Résistance circulation modérée",
+      "Conformité normes urbaines",
+    ],
+    applications: [
+      "Voies d'accès drainantes",
+      "Parkings commerciaux",
+      "Zones de circulation légère",
+      "Aménagements municipaux",
+    ],
+  },
+  {
+    name: "Soliid Aqua-Max 13",
+    slug: "soliid-aqua-max-13",
+    dimensions: "13cm × 25cm × 22,7cm",
+    weight: "16 kg",
+    resistance: "3,6 MPa (B36)",
+    category: "paves",
+    gamme: "Premium Drainant",
+    description: "Pavé drainant ultra-résistant pour trafic intense. Solution premium pour infrastructures exigeantes.",
+    features: ["Ultra-résistant", "Drainage maximal", "Trafic lourd", "Épaisseur 13cm"],
+    usage: "Routes drainantes, zones industrielles, infrastructures lourdes",
+    images: ["/paves/couverture-paves-drainant-max.jpg"],
+    technicalDetails: [
+      "Classe de résistance B36",
+      "Épaisseur maximale 13cm",
+      "Drainage intensif",
+      "Résistance trafic lourd",
+      "Durabilité exceptionnelle",
+    ],
+    applications: [
+      "Routes principales drainantes",
+      "Zones industrielles écologiques",
+      "Infrastructures portuaires",
+      "Projets urbains majeurs",
+    ],
+  },
 ]
 
 // Bordures data
@@ -578,6 +633,7 @@ export const borduresData: ProductData[] = [
     weight: "70 kg",
     resistance: "6 MPa",
     category: "bordures",
+    gamme: "Premium Drainant",
     description: "Bordure haute performance de classe B60, conçue pour les infrastructures les plus exigeantes.",
     features: [
       "Classe B60 haute performance",

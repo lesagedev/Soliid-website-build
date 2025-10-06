@@ -11,8 +11,21 @@ export default function Footer() {
   const popularBordures = borduresData.slice(0, 2)
 
   return (
-    <footer className="bg-muted/50 border-t border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer className="relative bg-muted/50 border-t border-border overflow-hidden">
+      {/* Background Image with Gradient Overlay */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/factory/usine-soliid.jpg"
+          alt="Usine Soliid Buildermats"
+          fill
+          className="object-cover opacity-10"
+          quality={75}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/95 to-background/80" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
           {/* Company Info */}
           <div className="space-y-4 lg:col-span-2">
