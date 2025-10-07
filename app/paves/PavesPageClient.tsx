@@ -20,6 +20,9 @@ export default function PavesPageClient() {
   const pavesByGamme = {
     "Standard Confort": pavesData.filter((p) => p.gamme === "Standard Confort"),
     "Routiers Haute Performance": pavesData.filter((p) => p.gamme === "Routiers Haute Performance"),
+    "Premium Drainant": pavesData.filter((p) =>
+      ["soliid-benoue", "soliid-sanaga", "soliid-nde", "soliid-wouri", "soliid-cmr-p13", "soliid-sawa-p8"].includes(p.slug)
+    ),
   }
 
   const paveTypes = [
@@ -55,12 +58,7 @@ export default function PavesPageClient() {
       resistance: "3 à 3,6 MPa",
       description:
         "Pavés techniques pour projets urbains. Drainage efficace et respect des normes pour une gestion optimale des eaux pluviales.",
-      features: [
-        "Normes techniques respectées",
-        "Drainage efficace",
-        "Gestion eaux pluviales",
-        "Image moderne urbaine",
-      ],
+      features: ["Normes techniques respectées", "Drainage efficace", "Gestion eaux pluviales", "Image moderne urbaine",],
       usage: "Projets urbains, municipalités, aménagements",
       image: "/paves/couverture-paves.jpg",
     },
@@ -281,19 +279,6 @@ export default function PavesPageClient() {
           </div>
         </div>
       </section>
-
-      {/* Remove modal component as it's no longer needed */}
-      {/* {selectedProduct && (
-        <ProductModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          product={selectedProduct}
-          calculatorLink="/calculateurs"
-          relatedProducts={getRelatedProducts(selectedProduct, selectedGamme)}
-          onProductChange={handleProductChange}
-          currentProductName={selectedProduct.name}
-        />
-      )} */}
 
       <Footer />
     </div>

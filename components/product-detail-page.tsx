@@ -148,6 +148,39 @@ export default function ProductDetailPage({ product }: ProductDetailPageProps) {
                   ))}
                 </div>
               )}
+
+              {/* Related Products */}
+              {relatedProducts.length > 0 && (
+                <div className="mt-16 hidden lg:block">
+                  <h2 className="text-3xl font-bold text-foreground mb-8">Produits similaires</h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+                    {relatedProducts.map((relatedProduct) => (
+                      <Link
+                        key={relatedProduct.slug}
+                        href={`/${relatedProduct.category}/${relatedProduct.slug}`}
+                        className="group"
+                      >
+                        <Card className="overflow-hidden hover:shadow-lg transition-all">
+                          <div className="aspect-square relative overflow-hidden">
+                            <Image
+                              src={relatedProduct.images[0] || "/placeholder.svg"}
+                              alt={relatedProduct.name}
+                              fill
+                              className="object-cover group-hover:scale-105 transition-transform"
+                            />
+                          </div>
+                          <CardContent className="p-4">
+                            <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                              {relatedProduct.name}
+                            </h3>
+                            <p className="text-sm text-muted-foreground mt-1">{relatedProduct.dimensions}</p>
+                          </CardContent>
+                        </Card>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Product Info */}
@@ -245,7 +278,7 @@ export default function ProductDetailPage({ product }: ProductDetailPageProps) {
 
           {/* Related Products */}
           {relatedProducts.length > 0 && (
-            <div className="mt-16">
+            <div className="mt-16 md:hidden">
               <h2 className="text-3xl font-bold text-foreground mb-8">Produits similaires</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {relatedProducts.map((relatedProduct) => (
