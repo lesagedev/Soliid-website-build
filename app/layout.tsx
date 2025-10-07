@@ -1,21 +1,22 @@
 import type React from "react"
-import type {Metadata} from "next"
+import type { Metadata } from "next"
 import Script from "next/script"
+import { Suspense } from "react"
 import "./globals.css"
 import WhatsAppFloat from "@/components/whatsapp-float"
-import {ToastContainer} from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import {SpeedInsights} from '@vercel/speed-insights/next'
-import AnalyticsProvider from '@/components/AnalyticsProvider'
-import { Analytics } from '@vercel/analytics/next';
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import AnalyticsProvider from "@/components/AnalyticsProvider"
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: "Soliid - Préfabrication de Parpaings, Pavés et Bordures",
   description:
-    "Soliid, votre partenaire de confiance pour la préfabrication de parpaings, pavés et bordures. Construire facile avec nos solutions de qualité à Douala et dans tout le Cameroun.",
+    "Soliid, votre partenaire de confiance pour la préfabrication de parpaings, pavés et bordures.",
   keywords:
     "parpaings, pavés, bordures, préfabrication, construction, Cameroun, Douala, construire, matériaux de construction, béton",
-  authors: [{name: "Soliid"}],
+  authors: [{ name: "Soliid" }],
   creator: "Soliid",
   publisher: "Soliid",
   robots: "index, follow",
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     title: "Soliid - Préfabrication de Parpaings, Pavés et Bordures",
     description:
       "Votre partenaire de confiance pour la préfabrication de parpaings et pavés au Cameroun. Construire facile avec nos solutions de qualité.",
-    url: "https://www.soliid-cm.com",
+    url: "https://www.soliid.cm",
     siteName: "Soliid",
     locale: "fr_FR",
     type: "website",
@@ -32,85 +33,88 @@ export const metadata: Metadata = {
         url: "/logo/logo-seo.png",
         width: 1024,
         height: 1024,
-        alt: "Logo Soliid avec M. SOLIID"
+        alt: "Logo Soliid avec M. SOLIID",
       },
       {
         url: "/logo/logo-soliid.png",
         width: 782,
         height: 281,
-        alt: "Logo Soliid"
+        alt: "Logo Soliid",
       },
       {
         url: "/home/parpaing-soliid.png",
         width: 960,
         height: 1280,
-        alt: "Palettes contenant des Parpaings de la marque Soliid"
+        alt: "Palettes contenant des Parpaings de la marque Soliid",
       },
       {
         url: "/home/20190912_155144.jpg",
         width: 3096,
         height: 4128,
-        alt: "Usine de préfabrication de parpaings et pavés Soliid"
+        alt: "Usine de préfabrication de parpaings et pavés Soliid",
       },
       {
         url: "/home/mascot-soliid.png",
         width: 1024,
         height: 1536,
-        alt: "Mascotte Soliid tenant un parpaing"
+        alt: "Mascotte Soliid tenant un parpaing",
       },
       {
         url: "/home/mascot-soliid-paves.png",
         width: 2812,
         height: 4046,
-        alt: "Mascotte Soliid tenant un pavé"
-      }
-    ]
+        alt: "Mascotte Soliid tenant un pavé",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Soliid - Préfabrication de Parpaings et Pavés au Cameroun",
     description: "Votre partenaire de confiance pour la préfabrication de parpaings et pavés au Cameroun.",
-    images: ["/logo/logo-seo.png", '/home/parpaing-soliid.png', '/home/mascot-soliid.png', '/home/mascot-soliid-paves.png'],
-  },
-  verification: {
-    google: "your-google-verification-code",
-  },
-    generator: 'v0.app'
+    images: [
+      "/logo/logo-seo.png",
+      "/home/parpaing-soliid.png",
+      "/home/mascot-soliid.png",
+      "/home/mascot-soliid-paves.png",
+    ],
+  }
 }
 
 export default function RootLayout({
-                                     children,
-                                   }: Readonly<{
+  children,
+}: Readonly<{
   children: React.ReactNode
 }>) {
   return (
     <html lang="fr">
-    <head>
-      <link rel="icon" href="/logo/favicon.ico" type="image/png" sizes="32x32" />
-      <Script src="https://tally.so/widgets/embed.js" strategy="beforeInteractive"/>
-    </head>
-    <body className="font-sans antialiased">
-    {children}
-    <WhatsAppFloat/>
-    <AnalyticsProvider />
-    <ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="light"
-    />
-    <div className="gtranslate_wrapper notranslate"></div>
-    <Script
-      id="gtranslate-settings"
-      strategy="afterInteractive"
-      dangerouslySetInnerHTML={{
-        __html: `
+      <head>
+        <link rel="icon" href="/logo/favicon.ico" type="image/png" sizes="32x32" />
+        <Script src="https://tally.so/widgets/embed.js" strategy="beforeInteractive" />
+      </head>
+      <body className="font-sans antialiased">
+        {children}
+        <WhatsAppFloat />
+        <Suspense fallback={null}>
+          <AnalyticsProvider />
+        </Suspense>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+        <div className="gtranslate_wrapper notranslate"></div>
+        <Script
+          id="gtranslate-settings"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
           window.gtranslateSettings = {
             "default_language": "fr",
             "native_language_names": true,
@@ -122,17 +126,14 @@ export default function RootLayout({
             "float_switcher_open_direction": "bottom"
           };
         `,
-      }}
-    />
-    <Script
-      src="/js/float.js"
-      strategy="afterInteractive"
-    />
-    <Script
-      id="botsonic-chatbot"
-      strategy="afterInteractive"
-      dangerouslySetInnerHTML={{
-        __html: `
+          }}
+        />
+        <Script src="/js/float.js" strategy="afterInteractive" />
+        <Script
+          id="botsonic-chatbot"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
           (function (w, d, s, o, f, js, fjs) {
             w["botsonic_widget"] = o;
             w[o] = w[o] || function () {
@@ -150,11 +151,11 @@ export default function RootLayout({
             token: "59bacca3-ad0f-454e-bda5-70a1d199a0c5",
           });
         `,
-      }}
-    />
-    <Analytics />
-    <SpeedInsights />
-    </body>
+          }}
+        />
+        <Analytics />
+        <SpeedInsights />
+      </body>
     </html>
   )
 }
